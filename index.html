@@ -2,726 +2,444 @@
 <html lang="zh-HK">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StarLight Beauty — 線上預約</title>
+<title>StarLight Beauty · 美於外 · 療於內</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:#fdfaf6; --card:#fff; --text:#3d3535; --sub:#8c7b74;
-  --rose:#d4948a; --rose-dark:#c07a70; --rose-light:#fdf2f3;
-  --gold:#c4a97d; --green:#8fa88a;
-  --blue:#6a9dc7; --blue-light:#eef5fb;
-  --line:#e8e0d8; --shadow:0 2px 12px rgba(0,0,0,0.06); --radius:16px;
+  --gold: #c9a96e;
+  --gold-light: #f5ecd7;
+  --rose: #b76e79;
+  --bg: #fdfaf5;
+  --text: #3d3226;
+  --sub: #8c7b6b;
+  --card: #fff;
+  --shadow: 0 4px 24px rgba(0,0,0,0.06);
 }
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:"Noto Sans HK","Microsoft JhengHei","PingFang HK",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;overflow-x:hidden}
-.site-header{background:linear-gradient(135deg,#f5efe6,#fdf2f3 50%,#e8d5f5);padding:28px 20px 18px;text-align:center;border-bottom:1px solid rgba(232,224,216,.5)}
-.site-header h1{font-size:1.35em;font-weight:700;color:#4a3f3a;letter-spacing:.03em}
-.site-header .tagline{font-size:.78em;color:var(--sub);margin-top:4px}
-.header-badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:10px}
-.header-badges span{font-size:.7em;background:rgba(255,255,255,.75);padding:3px 12px;border-radius:20px;color:#6b5a3e}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-.progress-bar{display:flex;align-items:center;justify-content:center;gap:0;padding:16px 20px 8px;background:var(--bg)}
-.step-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8em;font-weight:600;background:#f0ece8;color:var(--sub);transition:all .3s;flex-shrink:0}
-.step-circle.active{background:var(--rose);color:#fff;box-shadow:0 2px 8px rgba(212,148,138,.4)}
-.step-circle.done{background:var(--green);color:#fff}
-.step-line{width:40px;height:2px;background:#f0ece8;margin:0 4px;transition:background .3s}
-.step-line.done{background:var(--green)}
-.step-label{font-size:.65em;color:var(--sub);text-align:center;margin-top:4px;white-space:nowrap}
-.step-label.active{color:var(--rose);font-weight:600}
-.step-col{display:flex;flex-direction:column;align-items:center}
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 56px 24px 36px;
+  background: linear-gradient(135deg, #f5efe6 0%, #fdf2f3 60%, #e8d5f5 100%);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(201,169,110,0.18) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: -40px;
+  width: 140px; height: 140px;
+  background: radial-gradient(circle, rgba(183,110,121,0.14) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.brand {
+  font-size: 2.4em;
+  font-family: 'Alex Brush', cursive;
+  letter-spacing: 0.06em;
+  color: var(--rose);
+  position: relative;
+  z-index: 1;
+}
+.brand span { color: var(--gold); }
+.tagline {
+  font-size: 1.05em;
+  color: var(--text);
+  margin-top: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  position: relative;
+  z-index: 1;
+}
+.sub-tagline {
+  font-size: 0.82em;
+  color: var(--sub);
+  margin-top: 10px;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+.badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 16px;
+  position: relative;
+  z-index: 1;
+}
+.badges span {
+  font-size: 0.7em;
+  background: rgba(255,255,255,0.85);
+  padding: 5px 14px;
+  border-radius: 20px;
+  color: #6b5a3e;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
 
-.main{max-width:480px;margin:0 auto;padding:0 16px 120px}
-.step-panel{display:none}.step-panel.active{display:block;animation:fadeUp .35s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.section-title{font-size:1.1em;font-weight:700;color:#4a3f3a;margin:20px 0 12px}
+/* CTA */
+.cta-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 13px 26px;
+  border-radius: 28px;
+  font-size: 0.95em;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cta-btn:hover { transform: translateY(-2px); }
+.cta-btn:active { transform: scale(0.98); }
+.cta-primary {
+  background: var(--rose);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(183,110,121,0.35);
+}
+.cta-secondary {
+  background: #fff;
+  color: var(--rose);
+  border: 2px solid var(--rose);
+}
 
-.branch-card{background:var(--card);border:2px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:12px;cursor:pointer;transition:all .2s;position:relative}
-.branch-card:hover{border-color:var(--rose);transform:translateY(-1px);box-shadow:var(--shadow)}
-.branch-card.selected{border-color:var(--rose);background:var(--rose-light)}
-.branch-card .branch-name{font-size:1.1em;font-weight:700;color:#4a3f3a;margin-bottom:6px}
-.branch-card .branch-info{font-size:.8em;color:var(--sub);line-height:1.7}
-.branch-card .branch-tag{position:absolute;top:12px;right:12px;font-size:.65em;padding:2px 10px;border-radius:12px;font-weight:600}
-.branch-tag.popular{background:var(--rose-light);color:var(--rose-dark)}
-.branch-tag.new{background:var(--blue-light);color:var(--blue)}
-.branch-card .check-mark{position:absolute;top:12px;left:12px;width:22px;height:22px;border-radius:50%;background:var(--rose);color:#fff;display:none;align-items:center;justify-content:center;font-size:.7em}
-.branch-card.selected .check-mark{display:flex}
+/* Sections */
+.section {
+  width: 92%;
+  max-width: 520px;
+  margin-top: 32px;
+}
+.section-title {
+  font-size: 1.05em;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-sub {
+  font-size: 0.78em;
+  color: var(--sub);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
 
-.btn-back{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:.82em;font-family:inherit;cursor:pointer;color:var(--sub);margin-bottom:16px;transition:all .2s}
-.btn-back:hover{border-color:var(--rose);color:var(--text)}
+/* Store cards */
+.store-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.store-card {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 22px 20px;
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+.store-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+.store-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 5px;
+  border-radius: 0 5px 5px 0;
+}
+.store-card.tm::before { background: var(--rose); }
+.store-card.kl::before { background: var(--gold); }
+.store-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8em;
+  flex-shrink: 0;
+}
+.store-card.tm .store-icon { background: #fce4e8; }
+.store-card.kl .store-icon { background: #f5ecd7; }
+.store-info { flex: 1; min-width: 0; }
+.store-name {
+  font-size: 1.08em;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.store-desc {
+  font-size: 0.76em;
+  color: var(--sub);
+  line-height: 1.5;
+}
+.store-arrow {
+  font-size: 0.85em;
+  color: #ccc;
+}
 
-.cat-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:8px 0}
-.cat-tab{padding:7px 16px;border-radius:20px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:.78em;font-family:inherit;white-space:nowrap;transition:all .2s;color:var(--sub)}
-.cat-tab:hover{border-color:var(--gold)}
-.cat-tab.active{background:var(--rose);color:#fff;border-color:var(--rose)}
+/* Quick links grid */
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.quick-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 18px 14px;
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid transparent;
+}
+.quick-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+}
+.quick-card .q-icon {
+  font-size: 1.9em;
+  margin-bottom: 8px;
+}
+.quick-card .q-title {
+  font-size: 0.86em;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.quick-card .q-desc {
+  font-size: 0.68em;
+  color: var(--sub);
+  line-height: 1.4;
+}
 
-.service-list{margin-top:8px}
-.service-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:8px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.service-card:hover{border-color:var(--rose)}
-.service-card.selected{border-color:var(--rose);background:var(--rose-light)}
-.svc-left{flex:1}
-.svc-name{font-size:.88em;font-weight:500;color:var(--text);line-height:1.4}
-.svc-tag{font-size:.62em;padding:1px 8px;border-radius:10px;margin-left:6px;font-weight:600;vertical-align:middle}
-.svc-tag.hot{background:#fff3cd;color:#856404}
-.svc-tag.new{background:#ffe0e0;color:#c0392b}
-.svc-tag.crown{background:#e8d5f5;color:#6c3483}
-.svc-right{text-align:right;flex-shrink:0}
-.svc-price{font-size:1em;font-weight:700;color:var(--rose)}
-.svc-orig{font-size:.7em;color:#bbb;text-decoration:line-through}
-.svc-dur{font-size:.68em;color:var(--sub);margin-top:2px}
-.svc-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.65em;flex-shrink:0;transition:all .2s}
-.service-card.selected .svc-check{background:var(--rose);border-color:var(--rose);color:#fff}
+/* Service highlights */
+.highlight-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.highlight-item {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.highlight-item .h-icon {
+  font-size: 1.4em;
+  flex-shrink: 0;
+}
+.highlight-item .h-text {
+  flex: 1;
+}
+.highlight-item .h-title {
+  font-size: 0.9em;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.highlight-item .h-desc {
+  font-size: 0.74em;
+  color: var(--sub);
+  line-height: 1.5;
+}
 
-/* Category Item Card (simple, no price) */
-.cat-item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:10px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px}
-.cat-item:hover{border-color:var(--rose);transform:translateY(-1px)}
-.cat-item.selected{border-color:var(--rose);background:var(--rose-light)}
-.cat-item-icon{font-size:1.6em;flex-shrink:0;width:44px;height:44px;border-radius:12px;background:var(--rose-light);display:flex;align-items:center;justify-content:center}
-.cat-item-name{font-size:.95em;font-weight:600;color:var(--text);flex:1}
-.cat-item-desc{font-size:.75em;color:var(--sub);margin-top:2px}
-.cat-item-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.7em;flex-shrink:0;transition:all .2s}
-.cat-item.selected .cat-item-check{background:var(--rose);border-color:var(--rose);color:#fff}
+/* WhatsApp floating */
+.whatsapp-bar {
+  width: 100%;
+  padding: 16px 20px 20px;
+  margin-top: 36px;
+}
+.whatsapp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #25D366;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 24px;
+  border-radius: 28px;
+  font-weight: 700;
+  font-size: 0.95em;
+  max-width: 420px;
+  margin: 0 auto;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(37,211,102,0.35); }
 
-.promo-card{background:linear-gradient(135deg,#fdf2f3,#faf6ef);border:2px dashed var(--rose);border-radius:var(--radius);padding:20px;text-align:center;margin-bottom:16px;cursor:pointer;transition:all .2s}
-.promo-card:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
-.promo-card.selected{border-style:solid;background:var(--rose-light)}
-.promo-badge{display:inline-block;background:var(--rose);color:#fff;font-size:.7em;padding:3px 14px;border-radius:20px;font-weight:700;margin-bottom:8px;animation:pulse 2s infinite}
-.promo-badge.crown-badge{background:#6c3483;animation:none}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-.promo-name{font-size:1.1em;font-weight:700;color:#4a3f3a}
-.promo-price{font-size:2em;font-weight:800;color:var(--rose);margin:6px 0 2px}
-.promo-orig{font-size:.5em;color:#999;text-decoration:line-through;font-weight:400;margin-left:4px}
-.promo-pkg{font-size:.5em;color:#999;font-weight:400;margin-left:4px}
-.promo-desc{font-size:.8em;color:var(--sub)}
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 24px 20px 36px;
+  font-size: 0.72em;
+  color: #bfb8a8;
+  width: 100%;
+}
+.footer a { color: var(--rose); text-decoration: none; }
 
-.date-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}
-.day-label{text-align:center;font-size:.65em;color:var(--sub);padding:4px 0}
-.date-cell{text-align:center;padding:8px 2px;border-radius:10px;font-size:.82em;cursor:pointer;transition:all .15s;color:var(--text)}
-.date-cell:hover{background:var(--rose-light)}
-.date-cell.today{font-weight:700;color:var(--rose)}
-.date-cell.selected{background:var(--rose);color:#fff;font-weight:600}
-.date-cell.disabled{color:#ddd;cursor:not-allowed}
-.date-cell.empty{cursor:default}
-
-.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-.time-slot{text-align:center;padding:10px 8px;border-radius:10px;border:1px solid var(--line);cursor:pointer;font-size:.85em;font-family:inherit;background:#fff;transition:all .15s;color:var(--text)}
-.time-slot:hover{border-color:var(--rose)}
-.time-slot.selected{background:var(--rose);color:#fff;border-color:var(--rose)}
-.time-slot.busy{background:#f5f0ec;color:#ccc;border-color:#e8e0d8;cursor:not-allowed;text-decoration:line-through;font-size:.75em;position:relative}
-.time-slot.busy::after{content:'已預約';position:absolute;font-size:.55em;color:#c0392b;text-decoration:none;bottom:2px;right:4px}
-.cal-sync-badge{display:inline-flex;align-items:center;gap:4px;font-size:.7em;padding:4px 10px;border-radius:12px;margin-bottom:8px}
-.cal-sync-badge.syncing{background:#fff3cd;color:#856404}
-.cal-sync-badge.synced{background:#d4edda;color:#155724}
-.cal-sync-badge.error{background:#f8d7da;color:#721c24}
-
-.time-loading{text-align:center;padding:36px 20px}
-.time-loading .spinner{width:36px;height:36px;border:3px solid var(--line);border-top-color:var(--rose);border-radius:50%;margin:0 auto 12px;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.time-loading p{font-size:.85em;color:var(--sub)}
-.time-loading p.sub{font-size:.72em;color:#bbb;margin-top:4px}
-.slot-cleared{background:#fff3cd;border-radius:8px;padding:8px 12px;font-size:.78em;color:#856404;margin-bottom:8px;text-align:center}
-
-.form-group{margin-bottom:14px}
-.form-group label{display:block;font-size:.8em;font-weight:600;color:var(--sub);margin-bottom:4px}
-.form-group input,.form-group textarea{width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:10px;font-size:.9em;font-family:inherit;background:#fff;color:var(--text);outline:none}
-.form-group input:focus,.form-group textarea:focus{border-color:var(--rose)}
-.form-group textarea{resize:vertical;min-height:60px}
-
-.summary-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--line);overflow:hidden;margin-bottom:16px}
-.summary-row{display:flex;justify-content:space-between;padding:10px 16px;font-size:.85em;border-bottom:1px solid #f5f0ec}
-.summary-row:last-child{border-bottom:none}
-.summary-row .label{color:var(--sub)}
-.summary-row .value{font-weight:600;color:var(--text);text-align:right;max-width:60%}
-.summary-row.highlight .value{color:var(--rose);font-size:1.1em}
-
-.btn-primary{display:block;width:100%;padding:14px;border:none;border-radius:12px;font-size:1em;font-family:inherit;font-weight:600;cursor:pointer;transition:all .2s;text-align:center}
-.btn-primary.rose{background:var(--rose);color:#fff}
-.btn-primary.rose:hover{background:var(--rose-dark)}
-.btn-primary.green{background:#25D366;color:#fff}
-.btn-primary.green:hover{background:#1fa855}
-
-.site-footer{text-align:center;padding:20px;font-size:.72em;color:#bbb}
-.floating-cta{position:fixed;bottom:0;left:0;right:0;padding:12px 16px;background:rgba(253,250,246,.95);backdrop-filter:blur(8px);border-top:1px solid var(--line);z-index:100}
-.floating-cta .btn-primary{max-width:480px;margin:0 auto}
-
-.month-nav{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
-.month-nav .month-label{font-weight:600;font-size:.95em;color:#4a3f3a}
-.month-nav button{background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:.85em;font-family:inherit;color:var(--text)}
-.month-nav button:hover{border-color:var(--rose)}
-
-.confirm-hero{text-align:center;padding:32px 20px}
-.check-circle{width:64px;height:64px;border-radius:50%;background:var(--green);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:1.8em;margin-bottom:12px}
-.confirm-hero h2{font-size:1.2em;color:#4a3f3a;margin-bottom:4px}
-.confirm-hero p{font-size:.85em;color:var(--sub)}
+/* Responsive */
+@media (max-width: 400px) {
+  .brand { font-size: 2em; }
+  .tagline { font-size: 0.95em; }
+  .cta-btn { padding: 12px 20px; font-size: 0.88em; }
+  .quick-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
-<div class="site-header">
-<h1>StarLight Beauty</h1>
-<p class="tagline">零壓力美容 - 不推銷 - 店主親手服務</p>
-<div class="header-badges">
-<span>不硬銷</span><span>固定店主</span><span>彈性預約</span>
-</div>
-</div>
-
-<div class="progress-bar" id="progressBar">
-<div class="step-col"><div class="step-circle active">1</div><div class="step-label active">選分店</div></div>
-<div class="step-line"></div>
-<div class="step-col"><div class="step-circle">2</div><div class="step-label">選療程</div></div>
-<div class="step-line"></div>
-<div class="step-col"><div class="step-circle">3</div><div class="step-label">揀時間</div></div>
-</div>
-
-<div class="main" id="mainContent">
-
-<!-- STEP 1 -->
-<div class="step-panel active" id="step1">
-<div class="section-title">選擇分店</div>
-
-<div class="branch-card" id="branch-tm" onclick="selBranch('tm')">
-<div class="check-mark">OK</div>
-<span class="branch-tag popular">人氣之選</span>
-<div class="branch-name">屯門店</div>
-<div class="branch-info">屯門工業中心C座（近輕鐵建安站）<br>星期一至日 9AM-10PM（彈性預約）<br>獨有2兆HM深層膠原儀器</div>
+<div class="hero">
+  <div class="brand">✨ Star<span>Light</span> Beauty</div>
+  <div class="tagline">美於外 · 療於內</div>
+  <div class="sub-tagline">
+    零壓力美療 · 不推銷 · 不換人 · 不隱藏收費<br>
+    美療師 Yuki 親手服務 · 朝9晚10 彈性預約
+  </div>
+  <div class="badges">
+    <span>面部護理</span>
+    <span>療癒舒壓</span>
+    <span>儀器療程</span>
+    <span>半永久</span>
+  </div>
+  <div class="cta-row">
+    <a class="cta-btn cta-primary" href="booking.html">📅 立即預約</a>
+    <a class="cta-btn cta-secondary" href="https://wa.me/85260828181">💬 WhatsApp 查詢</a>
+  </div>
 </div>
 
-<div class="branch-card" id="branch-lck" onclick="selBranch('lck')">
-<div class="check-mark">OK</div>
-<span class="branch-tag new">私密空間</span>
-<div class="branch-name">荔枝角店</div>
-<div class="branch-info">荔枝角新光工業大廈（近港鐵站）<br>星期一至日 9AM-10PM（彈性預約）<br>私密空間 · 皇牌髗骶睡眠頭療</div>
+<!-- 分店導航 -->
+<div class="section">
+  <div class="section-title">🏠 選擇分店</div>
+  <div class="section-sub">按你方便嘅地區，睇專屬優惠、價目表同即時預約。</div>
+  <div class="store-cards">
+    <a class="store-card tm" href="tm.html">
+      <div class="store-icon">🏠</div>
+      <div class="store-info">
+        <div class="store-name">屯門店</div>
+        <div class="store-desc">屯門工業中心C座（近輕鐵建安站）<br>獨有 2兆HM 深層膠原儀器 · 新客 $199 體驗</div>
+      </div>
+      <div class="store-arrow">▶</div>
+    </a>
+    <a class="store-card kl" href="lkc.html">
+      <div class="store-icon">🏢</div>
+      <div class="store-info">
+        <div class="store-name">九龍區 · 荔枝角 · 太子</div>
+        <div class="store-desc">荔枝角新光工業大廈 / 太子始創中心<br>皇牌髗骶睡眠頭療 · 新客 $299 體驗</div>
+      </div>
+      <div class="store-arrow">▶</div>
+    </a>
+  </div>
 </div>
 
-<div class="branch-card" id="branch-pe" onclick="selBranch('pe')">
-<div class="check-mark">OK</div>
-<span class="branch-tag new">高CP值</span>
-<div class="branch-name">太子店</div>
-<div class="branch-info">太子始創中心（近太子/旺角東站）<br>星期一至日 9AM-10PM（彈性預約）<br>主打面部護理</div>
-</div>
-</div>
-
-<!-- STEP 2 -->
-<div class="step-panel" id="step2">
-<button class="btn-back" onclick="goStep(1)">返回選分店</button>
-<div class="section-title" id="st2Title">選擇療程</div>
-<div class="cat-tabs" id="ctabs"></div>
-<div id="svcList"></div>
-</div>
-
-<!-- STEP 3 -->
-<div class="step-panel" id="step3">
-<button class="btn-back" onclick="goStep(2)">返回選療程</button>
-<div class="section-title">選擇日期時間</div>
-<div style="font-size:.8em;color:var(--sub);margin-bottom:8px" id="st3Sub"></div>
-<div id="calArea"></div>
-<div class="section-title" style="margin-top:20px">選擇時間</div>
-<div id="tmArea"></div>
-<div class="section-title" style="margin-top:24px">你的資料</div>
-<div class="form-group"><label>姓名 *</label><input type="text" id="custName" placeholder="你的稱呼"></div>
-<div class="form-group"><label>WhatsApp 號碼 *</label><input type="tel" id="custPhone" placeholder="例如 9123 4567"></div>
-<div class="form-group"><label>備註（選填）</label><textarea id="custNotes" placeholder="敏感肌、特別需求..."></textarea></div>
+<!-- 快速連結 -->
+<div class="section">
+  <div class="section-title">✨ 快速連結</div>
+  <div class="quick-grid">
+    <a class="quick-card" href="tm-price.html">
+      <div class="q-icon">💰</div>
+      <div class="q-title">屯門價目表</div>
+      <div class="q-desc">完整療程收費</div>
+    </a>
+    <a class="quick-card" href="lkc-price.html">
+      <div class="q-icon">💎</div>
+      <div class="q-title">九龍價目表</div>
+      <div class="q-desc">荔枝角 · 太子</div>
+    </a>
+    <a class="quick-card" href="combo.html">
+      <div class="q-icon">💎</div>
+      <div class="q-title">星光美療組合</div>
+      <div class="q-desc">$1,280 屯門限定</div>
+    </a>
+    <a class="quick-card" href="summer.html">
+      <div class="q-icon">🔥</div>
+      <div class="q-title">暑期限定優惠</div>
+      <div class="q-desc">PDRN · 通行證</div>
+    </a>
+  </div>
 </div>
 
-<!-- STEP 4 -->
-<div class="step-panel" id="step4">
-<button class="btn-back" onclick="goStep(3)">返回修改</button>
-<div class="section-title">確認預約</div>
-<div class="summary-card" id="sumCard"></div>
-<div style="background:#fffdf0;border-left:3px solid #e6c84d;padding:10px 14px;border-radius:0 8px 8px 0;font-size:.8em;color:#7a6a2e;margin-bottom:16px">提交後會透過 WhatsApp 發送預約資訊，店主會盡快確認。</div>
-<button class="btn-primary green" onclick="doConfirm()">WhatsApp 確認預約</button>
-<p style="text-align:center;font-size:.75em;color:var(--sub);margin-top:12px">按鈕會打開 WhatsApp 自動填入預約資訊</p>
+<!-- 服務亮點 -->
+<div class="section">
+  <div class="section-title">🌿 雙主線服務</div>
+  <div class="highlight-list">
+    <div class="highlight-item">
+      <div class="h-icon">💆</div>
+      <div class="h-text">
+        <div class="h-title">美容主線</div>
+        <div class="h-desc">皇牌人手 SPA Facial、PDRN 三文魚 DNA 再生修復、HM 膠原喚醒、角蛋白睫毛、飄霧眉。</div>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <div class="h-icon">🌸</div>
+      <div class="h-text">
+        <div class="h-title">療癒主線</div>
+        <div class="h-desc">髗骶睡眠頭療、暖宮保養、美胸護理、采耳放鬆、頭肩頸筋膜按摩。</div>
+      </div>
+    </div>
+    <div class="highlight-item">
+      <div class="h-icon">🤝</div>
+      <div class="h-text">
+        <div class="h-title">零壓力承諾</div>
+        <div class="h-desc">不推銷、自由消費、固定美療師親手服務，設有 $5,000 自願儲值計劃。</div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!-- WhatsApp -->
+<div class="whatsapp-bar">
+  <a class="whatsapp-btn" href="https://wa.me/85260828181">
+    💬 WhatsApp 直接聯絡美療師 Yuki
+  </a>
 </div>
 
-<div class="floating-cta" id="fCTA" style="display:none"></div>
-<div class="site-footer">StarLight Beauty 2026 · 零壓力美容 · 不推銷 · 不儲值</div>
-
-<script>
-/* ====== CALENDAR SYNC ====== */
-/* Pre-embedded busy slots from Google Calendar (updated 2026-06-29) */
-/* Format: {"YYYY-MM-DD": [[startMin, endMin, branchKey], ...]} where minutes from midnight HKT
-   branchKey: 'tm'|'lck'|'pe'|'' (empty=unknown)
-   Full-day SABON/SOGO blocks use duration >= 6h heuristic */
-var EMBEDDED_BUSY={"2026-08-10":[[720,1020,""]],"2026-08-14":[[1080,1200,""]],"2026-08-15":[[960,1140,""],[1170,1320,""]],"2026-08-21":[[930,1200,""]],"2026-08-22":[[1170,1320,""]],"2026-08-26":[[0,1440,""]],"2026-08-27":[[570,720,""]],"2026-08-28":[[1080,1140,""]],"2026-08-29":[[0,1440,""]],"2026-08-30":[[0,1440,""]],"2026-09-05":[[1170,1320,""]],"2026-09-12":[[1170,1320,""]],"2026-09-19":[[1170,1320,""]],"2026-09-26":[[1170,1320,""]],"2026-09-29":[[0,1440,""]],"2026-09-30":[[0,1440,""]],"2026-10-03":[[1170,1320,""]],"2026-10-10":[[1170,1320,""]],"2026-10-17":[[1170,1320,""]],"2026-10-24":[[1170,1320,""]],"2026-10-31":[[1170,1320,""]],"2026-11-04":[[990,1050,""]],"2026-11-07":[[1170,1320,""]]};/* v7:20260810 */
-
-var ICS_URLS=[
-'https://calendar.google.com/calendar/ical/yukicrazygirl%40gmail.com/public/basic.ics',
-'https://calendar.google.com/calendar/ical/7f2bffe461c78b6c3700d7e09df36813a56afc126043bc095b8450a251e333f5%40group.calendar.google.com/public/basic.ics'
-];
-var CORS_PROXIES=[
-'https://proxy.cors.sh/'
-];
-var busyData=null; // current busy data object
-var calSyncStatus='idle'; // idle | cached | syncing | synced | error
-var calSyncSource=''; // 'embedded' | 'cache' | 'live'
-
-function initCalSync(){
-if(calSyncStatus==='syncing'||calSyncStatus==='synced')return;
-
-/* 1. Immediately load cached or embedded data as baseline */
-try{
-var cached=localStorage.getItem('sl_busy_cache');
-var cachedTime=localStorage.getItem('sl_busy_time');
-if(cached&&cachedTime){
-busyData=JSON.parse(cached);
-calSyncSource='cache';
-}
-}catch(e){}
-
-if(!busyData){
-busyData=JSON.parse(JSON.stringify(EMBEDDED_BUSY));
-calSyncSource='embedded';
-}
-
-/* 2. Mark as syncing — time slots locked until live data arrives */
-calSyncStatus='syncing';updSyncBadge();
-if(st.sp===3&&st.dt)renderTM();
-
-/* 3. Always try live refresh (even if cache was valid) */
-tryLiveRefresh();
-
-/* 4. Timeout: if sync takes > 8s, fall back to cached data */
-setTimeout(function(){
-if(calSyncStatus==='syncing'){
-calSyncStatus='cached';updSyncBadge();
-if(st.sp===3&&st.dt)renderTM();
-}
-},8000);
-}
-
-function tryLiveRefresh(){
-var proxyIdx=0;
-function tryNextProxy(){
-if(proxyIdx>=CORS_PROXIES.length){
-calSyncStatus=busyData?'cached':'error';
-updSyncBadge();
-if(st.sp===3&&st.dt)renderTM();
-return;
-}
-var proxy=CORS_PROXIES[proxyIdx];
-proxyIdx++;
-var loaded=0,err=0;
-var freshData={};
-ICS_URLS.forEach(function(url){
-var target=(proxy.indexOf('cors.sh')>=0)?(proxy+url):(proxy+encodeURIComponent(url));
-fetch(target)
-.then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.text()})
-.then(function(txt){
-var evts=parseICS(txt);
-for(var i=0;i<evts.length;i++){
-var s=evts[i].start,e=evts[i].end;
-var ds=s.getFullYear()+'-'+String(s.getMonth()+1).padStart(2,'0')+'-'+String(s.getDate()).padStart(2,'0');
-/* Full-day block if event >= 6 hours (SABON/SOGO part-time work day)
-   or summary explicitly contains "SABON" or "SOGO" */
-var durMin=(e-s)/60000; // event duration in minutes
-var isFullDay=durMin>=360 || /sabon|sogo/i.test(evts[i].summary||'');
-if(isFullDay){
-if(!freshData[ds])freshData[ds]=[];
-/* Add full-day block [0,1440] — blocks all 3 stores */
-freshData[ds].push([0,1440,'']);
-continue // skip adding time-based entry, full-day block suffices
-}
-var sm=s.getHours()*60+s.getMinutes(),em=e.getHours()*60+e.getMinutes();
-var br=detectBranch(evts[i].summary,evts[i].location);
-if(!freshData[ds])freshData[ds]=[];
-freshData[ds].push([sm,em,br]);
-}
-loaded++;
-if(loaded+err===ICS_URLS.length){
-if(loaded>0){
-busyData=freshData;
-calSyncStatus='synced';calSyncSource='live';
-try{localStorage.setItem('sl_busy_cache',JSON.stringify(busyData));localStorage.setItem('sl_busy_time',String(Date.now()))}catch(e){}
-updSyncBadge();
-if(st.sp===3&&st.dt)renderTM();
-}else{tryNextProxy()}
-}
-})
-.catch(function(e){console.log('ICS error via proxy '+proxyIdx+':',e);err++;
-if(loaded+err===ICS_URLS.length)tryNextProxy()});
-});
-}
-tryNextProxy();
-}
-
-function parseICS(txt){
-var events=[],lines=txt.split(/\r?\n/),cur=null,prev='';
-for(var i=0;i<lines.length;i++){
-var raw=lines[i];
-/* ICS line folding: line starting with space is continuation */
-if(raw.charAt(0)===' '){prev+=raw.substring(1);continue}
-var line=(prev+raw).trim();prev='';
-if(line==='BEGIN:VEVENT'){cur={}}
-else if(line==='END:VEVENT'&&cur&&cur.start&&cur.end){events.push(cur);cur=null}
-else if(cur){
-if(line.indexOf('DTSTART')===0)cur.start=parseICSDate(line);
-else if(line.indexOf('DTEND')===0)cur.end=parseICSDate(line);
-else if(line.indexOf('SUMMARY')===0)cur.summary=line.substring(line.indexOf(':')+1);
-else if(line.indexOf('LOCATION')===0)cur.location=line.substring(line.indexOf(':')+1);
-}
-}
-return events
-}
-
-function parseICSDate(line){
-var val=line.split(':').pop();
-if(val.length===8){
-return new Date(parseInt(val.substr(0,4)),parseInt(val.substr(4,2))-1,parseInt(val.substr(6,2)))
-}
-val=val.replace('Z','');
-var y=parseInt(val.substr(0,4)),mo=parseInt(val.substr(4,2))-1,d=parseInt(val.substr(6,2));
-var h=parseInt(val.substr(9,2)),mi=parseInt(val.substr(11,2)),s=parseInt(val.substr(13,2)||'0');
-var utc=Date.UTC(y,mo,d,h,mi,s);
-return new Date(utc+8*3600000)
-}
-
-function isSlotBusy(slotDate,slotH,slotM,durMin){
-if(!busyData)return false;
-var ds=slotDate.getFullYear()+'-'+String(slotDate.getMonth()+1).padStart(2,'0')+'-'+String(slotDate.getDate()).padStart(2,'0');
-var slots=busyData[ds];
-if(!slots)return false;
-var sMin=slotH*60+slotM,eMin=sMin+durMin;
-var selBr=st.br;
-for(var i=0;i<slots.length;i++){
-var busyStart=slots[i][0],busyEnd=slots[i][1];
-var busyBr=slots[i][2]||'';
-var buf=getTravelBuffer(selBr,busyBr);
-var bs=busyStart-buf,be=busyEnd+buf;
-if(bs<0)bs=0;if(be>1440)be=1440;
-if(sMin<be&&eMin>bs)return true
-}
-return false
-}
-
-/* Route validation: tm(屯門) cannot be between two non-tm bookings on the same day.
-   Acceptable: tm→X→tm, tm→X, X→tm, X→X→tm
-   Not acceptable: X→tm→X (going back to Tuen Mun then out again wastes travel time) */
-function isRouteValid(selBr,slotH,slotM,durMin,slotDate){
-if(!busyData||!selBr)return true;
-var ds=slotDate.getFullYear()+'-'+String(slotDate.getMonth()+1).padStart(2,'0')+'-'+String(slotDate.getDate()).padStart(2,'0');
-var slots=busyData[ds];
-if(!slots)return true;
-
-/* Collect existing bookings with known branch (skip full-day blocks & unknown) */
-var bk=[];
-for(var i=0;i<slots.length;i++){
-var br=slots[i][2]||'';
-if(!br)continue;
-if(slots[i][0]===0&&slots[i][1]===1440)continue;
-bk.push({s:slots[i][0],b:br})
-}
-if(bk.length===0)return true;
-
-/* Add proposed booking */
-bk.push({s:slotH*60+slotM,b:selBr});
-bk.sort(function(a,b2){return a.s-b2.s});
-
-/* Find first & last non-tm positions */
-var fn=-1,ln=-1;
-for(var i=0;i<bk.length;i++){
-if(bk[i].b!=='tm'){if(fn===-1)fn=i;ln=i}
-}
-if(fn===-1)return true; /* all tm, no issue */
-
-/* If any tm sits between first and last non-tm → invalid route */
-for(var i=fn;i<=ln;i++){if(bk[i].b==='tm')return false}
-return true
-}
-
-function updSyncBadge(){
-var el=document.getElementById('syncBadge');
-if(!el)return;
-var h='';
-if(calSyncStatus==='syncing')h='<span class="cal-sync-badge syncing">⏳ 同步日曆中...</span>';
-else if(calSyncStatus==='synced')h='<span class="cal-sync-badge synced">✅ 即時同步 Google 日曆</span>';
-else if(calSyncStatus==='cached'){
-var src=calSyncSource==='embedded'?'預載數據':'快取數據';
-h='<span class="cal-sync-badge synced">📅 已載入日曆（'+src+'）</span>';
-}
-else if(calSyncStatus==='error')h='<span class="cal-sync-badge error">⚠️ 日曆同步失敗</span>';
-el.innerHTML=h;
-}
-
-/* ====== DATA ====== */
-var BRANCHES={tm:{n:'屯門店'},lck:{n:'荔枝角店'},pe:{n:'太子店'}};
-
-/* 限時優惠 — 保留價格詳情 */
-var PROMO_ITEMS=[
-{id:'p1',nm:'奢華人手 SPA FACIAL',tp:199,op:299,og:680,d:'60分鐘',tg:'hot',tt:'新客首選',ds:'液體黃金玫瑰精華油'},
-{id:'p2',nm:'SPA+頭肩頸雙重放鬆套餐',tp:257,op:357,og:738,d:'90分鐘',tg:'hot',tt:'皇牌套餐',ds:'SPA面部+髗骶手法'},
-{id:'p3',nm:'PDRN 三文魚DNA再生修復',tp:680,op:680,og:1580,d:'約60分鐘',tg:'hot',tt:'快閃優惠',ds:'意大利PDRN · 細胞機無痛導入 · 即時見效 · 三店通用'},
-{id:'p4',nm:'星光美療通行證',tp:2088,op:2088,og:0,d:'3個月有效期',tg:'crown',tt:'4次套餐',ds:'6款療程任選4次 · 每次加送小項目 · 三店通用',_pkg:true}
-];
-
-/* 簡化類別 — 只顯示名稱，唔顯示價錢 */
-var SIMPLE_CATS=[
-{id:'facial',nm:'人手FACIAL',em:'💆',desc:'保濕 · 緊緻 · 美白 · 深層清潔 · 排毒 · 眼部護理',
- items:[
-  {i:'f1',n:'保濕 Facial'},{i:'f2',n:'緊緻 Facial'},{i:'f3',n:'美白 Facial'},
-  {i:'f4',n:'深層清潔 Facial'},{i:'f5',n:'排毒 Facial'},{i:'f6',n:'眼部護理'}
- ]},
-{id:'machine',nm:'儀器療程',em:'🔬',desc:'清潔 · 保濕 · 美白 · 緊緻 · 消炎 · 眼部 · 激光 · HIFU · 黃金微針射頻 · 深層導入',
- items:[
-  {i:'m1',n:'儀器深層清潔'},{i:'m2',n:'儀器保濕導入'},{i:'m3',n:'儀器美白嫩膚'},
-  {i:'m4',n:'儀器緊緻提升'},{i:'m5',n:'儀器消炎修護'},{i:'m6',n:'眼部儀器療程'},
-  {i:'m7',n:'激光美白/嫩膚'},{i:'m8',n:'HIFU 療程'},{i:'m9',n:'黃金微針射頻'},{i:'m10',n:'深層導入療程'}
- ]},
-{ id:'body',nm:'身體療程',em:'🧖',desc:'頭療 · 減脂增肌 · 按摩 · 美胸',
- items:[
-  {i:'b1',n:'髗骶睡眠頭療',bn:'pe'},{i:'b2',n:'減脂增肌',bo:'tm'},{i:'b3',n:'精油按摩'},
-  {i:'b4',n:'經絡按摩'},{i:'b5',n:'艾灸養生'},{i:'b6',n:'暖宮養宮'},
-  {i:'b7',n:'美胸療程'},{i:'b8',n:'全身汗蒸'},{i:'b9',n:'瞓住瘦溶脂'}
- ]},
-{id:'other',nm:'其他療程',em:'✨',desc:'采耳 · 孕睫 · 飄眉/霧眉 · 角蛋白',
- items:[
-  {i:'o1',n:'采耳療程'},{i:'o2',n:'孕睫服務'},{i:'o3',n:'飄眉 / 霧眉'},{i:'o4',n:'角蛋白護理'}
- ]}
-];
-
-var OH={1:[[9,12],[18,22]],2:[[9,22]],3:[[9,22]],4:[[9,22]],5:[[9,22]],6:[[9,18]],0:[[9,22]]};
-/* Last booking start time (24h) by day-of-week
-   Mon(1) Tue(2) Thu(4) Fri(5) Sun(0) → 20:00 (8pm)
-   Wed(3) Sat(6) → 16:00 (4pm) */
-var LAST_BOOKING={0:20,1:20,2:20,3:20,4:20,5:20,6:16};
-var WA='85260828181';
-
-/* Branch-aware travel buffer (minutes)
-   tm(屯門) ↔ lck(荔枝角)/pe(太子) = 60 min
-   lck(荔枝角) ↔ pe(太子) = 30 min
-   Same branch = 0, Unknown = 60 (safe default) */
-function getTravelBuffer(selBr,busyBr){
-if(!selBr||!busyBr)return 60;
-if(selBr===busyBr)return 0;
-var hasTM=selBr==='tm'||busyBr==='tm';
-return hasTM?60:30
-}
-function detectBranch(summary,location){
-var text=(summary||'')+' '+(location||'');
-if(/屯門|tuen/i.test(text))return 'tm';
-if(/荔枝角|lai\s*chi/i.test(text))return 'lck';
-if(/太子|prince/i.test(text))return 'pe';
-return ''
-}
-var st={sp:1,br:null,sv:null,sCat:null,dt:null,tm:null,ac:'promo',cm:new Date().getMonth(),cy:new Date().getFullYear()};
-
-/* ====== UTILS ====== */
-function showP(n){for(var i=1;i<=4;i++){document.getElementById('step'+i).classList.toggle('active',i===n)}}
-function setPG(n){var c=document.querySelectorAll('.step-circle'),l=document.querySelectorAll('.step-label'),ln=document.querySelectorAll('.step-line');
-for(var i=0;i<3;i++){var a=(i+1)===n,d=(i+1)<n;c[i].classList.toggle('active',a);c[i].classList.toggle('done',d);c[i].textContent=d?'OK':i+1;l[i].classList.toggle('active',a);if(ln[i])ln[i].classList.toggle('done',d)}}
-
-/* ====== STEP 1 ====== */
-function selBranch(id){st.br=id;st.sv=null;st.ac='promo';
-['tm','lck','pe'].forEach(function(b){document.getElementById('branch-'+b).classList.toggle('selected',b===id)});
-updCTA()}
-function updCTA(){var c=document.getElementById('fCTA');
-if(st.sp===1&&st.br){c.style.display='block';c.innerHTML='<button class="btn-primary rose" onclick="goStep(2)">下一步 - 選擇療程</button>'}
-else if(st.sp===2&&(st.sv||(st.sCat))){c.style.display='block';c.innerHTML='<button class="btn-primary rose" onclick="goStep(3)">下一步 - 揀時間</button>'}
-else if(st.sp===3&&st.dt&&st.tm&&document.getElementById('custName').value&&document.getElementById('custPhone').value){c.style.display='block';c.innerHTML='<button class="btn-primary rose" onclick="goStep(4)">確認預約</button>'}
-else if(st.sp!==4)c.style.display='none';else c.style.display='none'}
-
-/* ====== STEP 2 ====== */
-function goStep(n){
-if(n===2)renderSt2();if(n===3)renderSt3();if(n===4)renderSt4();
-st.sp=n;showP(n);setPG(n<=3?n:3);updCTA();window.scrollTo({top:0,behavior:'smooth'})
-}
-
-function renderSt2(){
-var bn=BRANCHES[st.br].n;
-document.getElementById('st2Title').textContent='選擇療程 - '+bn;
-
-/* Build category tabs */
-var th='';
-th+='<button class="cat-tab'+(st.ac==='promo'?' active':'')+'" onclick="swCat(\'promo\')">🔥 限時優惠</button>';
-for(var t=0;t<SIMPLE_CATS.length;t++){
- var cx=SIMPLE_CATS[t];
- /* Check if this cat has available items for selected branch */
- var hasItems=false;
- for(var k=0;k<cx.items.length;k++){var it=cx.items[k];if(it.bo&&it.bo!==st.br)continue;if(it.bn&&it.bn===st.br)continue;hasItems=true;break}
- if(hasItems)th+='<button class="cat-tab'+(st.ac===cx.id?' active':'')+'" onclick="swCat(\''+cx.id+'\')">'+cx.em+' '+cx.nm+'</button>'
-}
-document.getElementById('ctabs').innerHTML=th;
-
-/* Render list */
-if(st.ac==='promo'){document.getElementById('svcList').innerHTML=renderPromo()}
- else{document.getElementById('svcList').innerHTML=renderSimpleCat(st.ac)}
-}
-
-function renderPromo(){
-var tm=st.br==='tm';
-var h='<div class="service-list">';
-for(var i=0;i<PROMO_ITEMS.length;i++){
- var it=PROMO_ITEMS[i],p=tm?it.tp:it.op,sl=st.sv&&st.sv.id===it.id;
- var isPkg=it._pkg||false;
- h+='<div class="promo-card'+(sl?' selected':'')+'" onclick="selPromo(\''+it.id+'\')">';
- h+='<div class="promo-badge'+(isPkg?' crown-badge':'')+'">'+it.tt+'</div>';
- h+='<div class="promo-name">'+it.nm+'</div>';
- if(isPkg){
-  h+='<div class="promo-price">$'+p+'<span class="promo-pkg">/ 4次</span></div>'
- }else{
-  h+='<div class="promo-price">$'+p+(it.og>0?'<span class="promo-orig">$'+it.og+'</span>':'')+'</div>'
- }
- h+='<div class="promo-desc">'+it.ds+' · '+it.d+'</div></div>'
-}
-h+='</div>';return h
-}
-
-function renderSimpleCat(cid){
-var cat=null;
-for(var a=0;a<SIMPLE_CATS.length;a++){if(SIMPLE_CATS[a].id===cid){cat=SIMPLE_CATS[a];break}}
-if(!cat)return '<p style="text-align:center;padding:24px;color:var(--sub)">請選擇分類</p>';
-
-var h='<div style="margin-bottom:12px;padding:12px 14px;background:#faf6ef;border-radius:10px;font-size:.78em;color:var(--sub)"><b>'+cat.em+' '+cat.nm+'</b><br>'+cat.desc+'</div>';
-h+='<div class="service-list">';
-
-for(var j=0;j<cat.items.length;j++){
- var it=cat.items[j];
- /* Branch filter */
- if(it.bo&&it.bo!==st.br)continue;
- if(it.bn&&it.bn===st.br)continue;
- var sl=(st.sCat===cid)&&st.sv&&(st.sv.i===it.i);
- h+='<div class="cat-item'+(sl?' selected':'')+'" onclick="selSimpleItem(\''+cid+'\',\''+it.i+'\',\''+(it.n||'')+'\')">';
- h+='<div class="cat-item-icon">'+cat.em+'</div>';
- h+='<div><div class="cat-item-name">'+it.n+'</div></div>';
- h+='<div class="cat-item-check">'+(sl?'OK':'')+'</div></div>'
-}
-h+='</div>';return h
-}
-
-function swCat(cid){st.ac=cid;renderSt2();updCTA()}
-
-function selPromo(id){
-for(var i=0;i<PROMO_ITEMS.length;i++){if(PROMO_ITEMS[i].id===id){st.sv=PROMO_ITEMS[i];break}}
-st.sCat=null;renderSt2();updCTA()
-}
-
-function selSimpleItem(cid,itemId,itemName){
-st.sv={i:itemId,nm:itemName,_simple:true,_catId:cid};st.sCat=cid;
-renderSt2();updCTA()
-}
-
-/* ====== STEP 3 ====== */
-function renderSt3(){
-var sv=st.sv,tm=st.br==='tm',p='',nm='';
-if(sv._simple){
- nm=sv.nm; p='店主確認';
-}else{
- p=tm?(sv.tp||0):(sv.op||0); nm=sv.nm;
-}
-document.getElementById('st3Sub').textContent=BRANCHES[st.br].n+' - '+nm;
-renderCal();renderTM()}
-function renderCal(){var y=st.cy,m=st.cm,today=new Date();today.setHours(0,0,0,0);
-var fd=new Date(y,m,1),ld=new Date(y,m+1,0),sdw=fd.getDay(),dim=ld.getDate();
-var mn=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],dl=['日','一','二','三','四','五','六'];
-var c='';
-for(var d=0;d<7;d++)c+='<div class="day-label">'+dl[d]+'</div>';
-for(var e=0;e<sdw;e++)c+='<div class="date-cell empty"></div>';
-for(var day=1;day<=dim;day++){var td=new Date(y,m,day);td.setHours(0,0,0,0);
-var ip=td<=today,it=td.getTime()===today.getTime(),is=st.dt&&st.dt.getTime()===td.getTime(),cl='date-cell';
-if(ip)cl+=' disabled';else if(is)cl+=' selected';else if(it)cl+=' today';
-var oc=ip?'':'onclick="selDt('+y+','+m+','+day+')"';
-c+='<div class="'+cl+'"'+oc+'>'+day+'</div>'}
-var pm=m===0?11:m-1,py=m===0?y-1:y,cp=new Date(pm,py+1,0)>=today;
-document.getElementById('calArea').innerHTML=
-'<div class="month-nav"><button '+(cp?'onclick="chgM(-1)"':'disabled')+'>◀</button><span class="month-label">'+y+'年 '+mn[m]+'</span><button onclick="chgM(1)">▶</button></div>'+
-'<div class="date-grid">'+c+'</div>'}
-function selDt(y,m,d){st.dt=new Date(y,m,d);st.dt.setHours(0,0,0,0);st.tm=null;renderCal();renderTM();updCTA()}
-function chgM(dir){st.cm+=dir;if(st.cm>11){st.cm=0;st.cy++}if(st.cm<0){st.cm=11;st.cy--}renderCal()}
-function renderTM(){var a=document.getElementById('tmArea');if(!st.dt){a.innerHTML='<p style="font-size:.85em;color:var(--sub);text-align:center;padding:16px">請先選擇日期</p>';return}
-
-/* Loading gate: lock time slots while syncing */
-if(calSyncStatus==='syncing'){
-a.innerHTML='<div class="time-loading"><div class="spinner"></div><p>正在同步最新預約狀態...</p><p class="sub">確保時間準確，請稍等幾秒</p></div>';
-updCTA();return}
-
-var dow=st.dt.getDay(),slots=OH[dow]||[],now=new Date(),isTD=st.dt.toDateString()===now.toDateString(),tos=[],bys=[];
-var lastMin=LAST_BOOKING[dow]*60; // last allowed start time (minutes from midnight)
-for(var s=0;s<slots.length;s++){var r=slots[s];for(var h=r[0];h<r[1];h++)for(var m=0;m<60;m+=30){
-var ts=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
-if(isTD){var st2=new Date(st.dt);st2.setHours(h,m,0,0);if(st2<=new Date(now.getTime()+3600000))continue}
-if(h*60+m>lastMin)continue; // past last booking time
-var busy=isSlotBusy(st.dt,h,m,60);
-var routeBad=!isRouteValid(st.br,h,m,60,st.dt);
-if(busy||routeBad){bys.push(ts)}else{tos.push(ts)}
-}}
-
-/* Conflict detection: if previously selected time is now busy, clear it */
-var prevTm=st.tm;
-if(st.tm&&bys.indexOf(st.tm)>=0){st.tm=null}
-
-var totalAvail=tos.length,totalBusy=bys.length;
-var syncBadge='';
-if(calSyncStatus==='synced')syncBadge='<div id="syncBadge"><span class="cal-sync-badge synced">✅ 即時同步 Google 日曆'+(totalBusy>0?' · '+totalBusy+'個時段已佔用':'')+'</span></div>';
-else if(calSyncStatus==='cached'){var src=calSyncSource==='embedded'?'預載':'快取';syncBadge='<div id="syncBadge"><span class="cal-sync-badge syncing">⚠️ 使用'+src+'數據 · 未必最新</span></div>'}
-else if(calSyncStatus==='error')syncBadge='<div id="syncBadge"><span class="cal-sync-badge error">⚠️ 日曆同步失敗 · 使用預載數據</span></div>';
-if(!syncBadge)syncBadge='<div id="syncBadge"></div>';
-if(tos.length===0&&bys.length===0){a.innerHTML=syncBadge+'<p style="font-size:.85em;color:var(--sub);text-align:center;padding:16px">今日已無可用時段，請揀其他日期</p>';updCTA();return}
-
-/* Show warning if selected time was cleared due to conflict */
-var clearedMsg='';
-if(prevTm&&!st.tm){clearedMsg='<div class="slot-cleared">⚠️ 你選擇的時間剛被預約，請重新選擇</div>'}
-
-var h2=syncBadge+clearedMsg+'<div class="time-grid">';
-for(var t=0;t<tos.length;t++)h2+='<div class="time-slot'+(st.tm===tos[t]?' selected':'')+'" onclick="selTm(\''+tos[t]+'\')">'+tos[t]+'</div>';
-for(var b=0;b<bys.length;b++)h2+='<div class="time-slot busy" title="此時段已有預約">'+bys[b]+'</div>';
-h2+='</div>';
-if(totalBusy>0)h2+='<p style="font-size:.72em;color:var(--sub);text-align:center;margin-top:8px">灰色時段為已預約、轉場緩衝或路線限制（屯門↔太子/荔枝角 60分鐘，太子↔荔枝角 30分鐘）</p><p style="font-size:.68em;color:#bbb;text-align:center;margin-top:4px">路線規則：同日不接受 太子/荔枝角→屯門→太子/荔枝角</p>';
-a.innerHTML=h2;updCTA()}
-function selTm(t){st.tm=t;renderTM();updCTA()}
-
-document.getElementById('custName').addEventListener('input',updCTA);
-document.getElementById('custPhone').addEventListener('input',updCTA);
-
-/* Start calendar sync immediately on page load */
-initCalSync();
-
-/* ====== STEP 4 ====== */
-function renderSt4(){
-var sv=st.sv,tm=st.br==='tm',p='',nm='',dw=['日','一','二','三','四','五','六'];
-if(sv._simple){nm=sv.nm;p='店主確認價格'}
-else if(sv._pkg){nm=sv.nm;p='$'+sv.tp+' / 4次'}
-else{nm=sv.nm;var tr=tm?(sv.tt||0):(sv.ot||0),pp=tm?(sv.tp||0):(sv.op||0); p=tr>0?'$'+tr+' (體驗價)':'$'+pp}
-var ds=st.dt?st.dt.getFullYear()+'/'+(st.dt.getMonth()+1)+'/'+st.dt.getDate()+'('+dw[st.dt.getDay()]+')':'';
-var h='';
-h+='<div class="summary-row"><span class="label">分店</span><span class="value">'+BRANCHES[st.br].n+'</span></div>';
-h+='<div class="summary-row"><span class="label">療程</span><span class="value">'+nm+'</span></div>';
-h+='<div class="summary-row"><span class="label">日期</span><span class="value">'+ds+'</span></div>';
-h+='<div class="summary-row"><span class="label">時間</span><span class="value">'+st.tm+'</span></div>';
-if(!sv._simple)h+='<div class="summary-row highlight"><span class="label">價格</span><span class="value">'+p+'</span></div>';
-else h+='<div class="summary-row highlight" style="background:#fffdf0"><span class="label">價格</span><span class="value" style="color:#7a6a2e;font-size:.9em">'+p+'</span></div>';
-h+='<div class="summary-row"><span class="label">姓名</span><span class="value">'+document.getElementById('custName').value+'</span></div>';
-h+='<div class="summary-row"><span class="label">電話</span><span class="value">'+document.getElementById('custPhone').value+'</span></div>';
-var nt=document.getElementById('custNotes').value;if(nt)h+='<div class="summary-row"><span class="label">備註</span><span class="value">'+nt+'</span></div>';
-document.getElementById('sumCard').innerHTML=h}
-
-function doConfirm(){
-var sv=st.sv,tm=st.br==='tm',nm=sv.nm,p='',dw=['日','一','二','三','四','五','六'];
-if(sv._simple){p='店主確認價格'}
-else if(sv._pkg){p='$'+sv.tp+' / 4次（3個月有效期）'}
-else{var tr=tm?(sv.tt||0):(sv.ot||0),pp=tm?(sv.tp||0):(sv.op||0); p=tr>0?'$'+tr+' (體驗價)':'$'+pp}
-var ds=st.dt?st.dt.getFullYear()+'/'+(st.dt.getMonth()+1)+'/'+st.dt.getDate()+'('+dw[st.dt.getDay()]+')':'';
-var nmm=document.getElementById('custName').value,ph=document.getElementById('custPhone').value,nt=document.getElementById('custNotes').value;
-var msg='StarLight Beauty '+(sv._pkg?'查詢':'預約')+'\n\n分店：'+BRANCHES[st.br].n+'\n療程：'+nm+'\n價格：'+p+'\n日期：'+ds+'\n時間：'+st.tm+'\n\n姓名：'+nmm+'\n電話：'+ph+(nt?'\n備註：'+nt:'')+'\n\n由線上預約系統提交\n\n📌 請於收到後將'+(sv._pkg?'查詢':'預約')+'資料補入 FREETIME';
-window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank');
-
-document.getElementById('fCTA').style.display='none';
-document.getElementById('progressBar').style.display='none';
-var priceRow=!sv._simple?'<div class="summary-row highlight"><span class="label">價格</span><span class="value">'+p+'</span></div>':'<div class="summary-row highlight" style="background:#fffdf0"><span class="label">價格</span><span class="value" style="color:#7a6a2e;font-size:.9em">'+p+'</span></div>';
-document.getElementById('step4').innerHTML=
-'<div class="confirm-hero"><div class="check-circle">✓</div><h2>'+(sv._pkg?'查詢已發送':'預約資訊已發送')+'！</h2><p>WhatsApp 已打開，發送訊息即完成</p></div>'+
-'<div class="summary-card">'+
-'<div class="summary-row"><span class="label">分店</span><span class="value">'+BRANCHES[st.br].n+'</span></div>'+
-'<div class="summary-row"><span class="label">療程</span><span class="value">'+nm+'</span></div>'+
-'<div class="summary-row"><span class="label">日期</span><span class="value">'+ds+'</span></div>'+
-'<div class="summary-row"><span class="label">時間</span><span class="value">'+st.tm+'</span></div>'+
-priceRow+
-'</div>'+
-'<p style="text-align:center;font-size:.8em;color:var(--sub);margin-top:12px">店主會盡快 WhatsApp 回覆確認</p>'+
-'<button class="btn-primary rose" style="margin-top:16px;max-width:280px;margin-left:auto;margin-right:auto" onclick="location.reload()">重新預約</button>'}
-</script>
+<div class="footer">
+  📞 WhatsApp：<a href="https://wa.me/85260828181">+852 6082 8181</a>｜⏰ 朝9晚10 · 彈性預約<br><br>
+  © 2026 StarLight Beauty · 美於外 · 療於內
+</div>
 
 </body>
 </html>

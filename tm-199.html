@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$199 奢華人手SPA FACIAL — StarLight Beauty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdfaf6;
+    --card: #ffffff;
+    --text: #3d3535;
+    --sub: #8c7b74;
+    --rose: #d4948a;
+    --rose-light: #fdf2f3;
+    --gold: #c4a97d;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Sans HK", "Microsoft JhengHei", "PingFang HK", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wrapper { max-width: 600px; width: 100%; padding: 20px 16px 60px; }
+
+  /* Hero card */
+  .hero-card {
+    background: linear-gradient(160deg, #fdf2f3 0%, #faf6ef 40%, #f4f0f8 100%);
+    border-radius: 20px;
+    padding: 36px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(212,148,138,0.15), transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-card .shop-name {
+    font-size: 0.9em; color: var(--sub); letter-spacing: 0.08em; margin-bottom: 6px;
+    font-family: 'Alex Brush', cursive;
+  }
+  .hero-card .badge {
+    display: inline-block;
+    background: var(--rose);
+    color: #fff;
+    font-size: 0.7em;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+  }
+  .hero-card h1 {
+    font-size: 1.6em;
+    color: #4a3f3a;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .hero-card .subtitle {
+    font-size: 0.9em;
+    color: var(--sub);
+    margin-bottom: 16px;
+  }
+  .hero-card .price-tag {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .hero-card .price-tag .currency {
+    font-size: 1.2em;
+    color: var(--rose);
+    font-weight: 600;
+  }
+  .hero-card .price-tag .amount {
+    font-size: 3em;
+    font-weight: 800;
+    color: var(--rose);
+    line-height: 1;
+  }
+  .hero-card .price-tag .original {
+    font-size: 0.9em;
+    color: #bbb;
+    text-decoration: line-through;
+    align-self: flex-end;
+    margin-bottom: 4px;
+  }
+  .hero-card .features {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 12px;
+  }
+  .hero-card .feature {
+    font-size: 0.72em;
+    background: rgba(255,255,255,0.6);
+    padding: 4px 12px;
+    border-radius: 14px;
+    color: #6b5a3e;
+  }
+
+  /* Add-on card */
+  .addon-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-top: 14px;
+    border: 2px dashed var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+  }
+  .addon-card .plus {
+    font-size: 1.6em;
+    font-weight: 800;
+    color: var(--gold);
+    min-width: 44px;
+    text-align: center;
+  }
+  .addon-card .addon-body { flex: 1; }
+  .addon-card .addon-title {
+    font-weight: 600;
+    font-size: 0.95em;
+  }
+  .addon-card .addon-desc {
+    font-size: 0.78em;
+    color: var(--sub);
+    margin-top: 2px;
+  }
+  .addon-card .addon-price {
+    font-weight: 800;
+    color: var(--gold);
+    font-size: 1.3em;
+    white-space: nowrap;
+  }
+
+  /* What's included */
+  .section-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+  }
+  .section-card h3 {
+    font-size: 1.05em;
+    color: #4a3f3a;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .checklist li {
+    font-size: 0.88em;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: #555;
+  }
+  .checklist li .check {
+    color: var(--rose);
+    font-weight: 700;
+    font-size: 1.1em;
+    flex-shrink: 0;
+  }
+
+  /* Promise */
+  .promise-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .promise-chip {
+    flex: 1;
+    min-width: 100px;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 14px 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .promise-chip .emoji { font-size: 1.5em; display: block; margin-bottom: 4px; }
+  .promise-chip .label { font-size: 0.72em; color: #4a3f3a; font-weight: 600; }
+
+  /* CTA */
+  .cta-btn {
+    display: block;
+    background: var(--rose);
+    color: #fff;
+    text-align: center;
+    padding: 16px;
+    border-radius: 14px;
+    font-size: 1.05em;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 18px;
+    box-shadow: 0 4px 16px rgba(212,148,138,0.3);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212,148,138,0.4);
+  }
+  .cta-sub {
+    text-align: center;
+    font-size: 0.72em;
+    color: #bbb;
+    margin-top: 8px;
+  }
+
+  /* Store list */
+  .store-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .store-item {
+    font-size: 0.82em;
+    color: var(--sub);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .store-item .pin { color: var(--rose); }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero-card">
+    <div class="shop-name">✦ StarLight Beauty ✦</div>
+    <div class="badge">🔥 首次到店專享</div>
+    <h1>奢華人手 SPA FACIAL</h1>
+    <p class="subtitle">液體黃金玫瑰精華油 · 全人手按摩</p>
+    <div class="price-tag">
+      <span class="currency">$</span>
+      <span class="amount">199</span>
+      <span class="original">原價 $680</span>
+    </div>
+    <p style="font-size:0.8em;color:var(--sub);margin-top:6px;">療程約60分鐘 · 預留90分鐘</p>
+    <div class="features">
+      <span class="feature">🌹 玫瑰精華油</span>
+      <span class="feature">💆‍♀️ 100%人手</span>
+      <span class="feature">🛡️ 不推銷</span>
+      <span class="feature">✨ 首次專享</span>
+    </div>
+  </div>
+
+  <!-- ADD-ON -->
+  <div class="addon-card">
+    <div class="plus">+</div>
+    <div class="addon-body">
+      <div class="addon-title">頭肩頸筋膜按摩</div>
+      <div class="addon-desc">髗骶睡眠頭療 · 筋膜手法 · 深層放鬆</div>
+    </div>
+    <div class="addon-price">$58</div>
+  </div>
+  <p style="text-align:center;font-size:0.8em;color:var(--gold);margin-top:4px;">💎 套餐價 <strong>$257</strong> — SPA + 頭頸雙重放鬆</p>
+
+  <!-- WHAT'S INCLUDED -->
+  <div class="section-card">
+    <h3>✨ 療程內容</h3>
+    <ul class="checklist">
+      <li><span class="check">✓</span> 個人皮膚諮詢分析</li>
+      <li><span class="check">✓</span> 雙重潔面 + 溫和Peeling</li>
+      <li><span class="check">✓</span> 針清 + 修眉</li>
+      <li><span class="check">✓</span> 🌟 液體黃金玫瑰精華油 · 全人手淋巴按摩</li>
+      <li><span class="check">✓</span> 保濕面膜</li>
+      <li><span class="check">✓</span> 護膚品塗抹 + 日常保養建議</li>
+    </ul>
+  </div>
+
+  <!-- WHY US -->
+  <div class="section-card">
+    <h3>💡 為什麼選擇 StarLight Beauty？</h3>
+    <div class="promise-row">
+      <div class="promise-chip">
+        <span class="emoji">🛡️</span>
+        <span class="label">100% 不硬銷</span>
+      </div>
+      <div class="promise-chip">
+        <span class="emoji">💆‍♀️</span>
+        <span class="label">店主親手做</span>
+      </div>
+      <div class="promise-chip">
+        <span class="emoji">⏰</span>
+        <span class="label">朝9晚10</span>
+      </div>
+      <div class="promise-chip">
+        <span class="emoji">💰</span>
+        <span class="label">自由消費</span>
+      </div>
+    </div>
+    <p style="font-size:0.78em;color:var(--sub);margin-top:12px;">
+      我開呢間店嘅原因好簡單——我自己都好唔鍾意被推銷、被逼買配套 😂<br>
+      所以承諾：永遠唔會有人追住你預約。來唔來、買唔買，都冇壓力。
+    </p>
+  </div>
+
+  <!-- UPGRADE CROSS-SELL -->
+  <div class="section-card" style="border:2px solid var(--gold);background:linear-gradient(135deg,#faf6ef,#fdf2f3);">
+    <h3>🌟 做完 SPA Facial 想再升級？<span style="font-size:0.7em;color:var(--rose);">（推介俾注重抗衰老嘅你）</span></h3>
+    <div style="background:#fff;border-radius:12px;padding:16px;margin-top:12px;">
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <span style="font-size:1.1em;font-weight:700;color:#4a3f3a;">2兆 HM 深層膠原喚醒療程</span>
+        <span style="font-size:0.72em;background:#fff3e0;color:#e65100;padding:2px 8px;border-radius:10px;font-weight:700;">🆕 新儀器</span>
+      </div>
+      <p style="font-size:0.82em;color:var(--sub);margin-top:6px;">
+        2兆HM深層膠原打印技術 · 提拉槍+膠原槍+膠原熨斗+提拉滾輪<br>
+        一次療程，喚醒底層膠原，改善鬆弛、細紋、暗沉
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
+        <span style="font-size:0.82em;background:var(--rose-light);color:var(--rose);padding:4px 12px;border-radius:10px;font-weight:600;">1個頭 $580</span>
+        <span style="font-size:0.82em;background:var(--gold-light);color:#6b5a3e;padding:4px 12px;border-radius:10px;font-weight:700;">2個頭 $680 🔥推薦</span>
+        <span style="font-size:0.82em;background:var(--green-light);color:#2d5a27;padding:4px 12px;border-radius:10px;font-weight:600;">3個頭 $780</span>
+      </div>
+      <p style="font-size:0.75em;color:var(--sub);margin-top:8px;">
+        💡升級 SPA Facial 客加配 深層膠原療程，可享 <strong style="color:var(--rose);">組合優惠價</strong>，快啲 WhatsApp 查詢啦！ 👇
+      </p>
+    </div>
+  </div>
+
+  <!-- STORES -->
+  <div class="section-card">
+    <h3>📍 優惠限定 · 屯門店</h3>
+    <div class="store-list">
+      <div class="store-item"><span class="pin">📍</span> <strong>屯門</strong> — 屯門工業中心C座（近輕鐵建安站）</div>
+    </div>
+    <p style="font-size:0.78em;color:var(--sub);margin-top:10px;">⚠️ $199 優惠只適用於屯門店，荔枝角及太子店正價收費</p>
+  </div>
+
+  <!-- CTA -->
+  <a href="booking.html" class="cta-btn" style="background:#27ae60;box-shadow:0 4px 16px rgba(39,174,96,0.3);">📅 網上即時預約系統</a>
+  <a href="https://wa.me/85260828181" class="cta-btn">📲 WhatsApp 預約</a>
+  <a href="https://chat.whatsapp.com/ITTB2VrVvOF7Pkcko4ONRn" class="cta-btn" style="background:#128c7e;box-shadow:0 4px 16px rgba(18,140,126,0.3);">👥 加入屯門 WhatsApp 社群</a>
+  <p class="cta-sub">24小時自助預約 · 即時確認 · 一經預約當日只接你一位</p>
+
+  <p style="text-align:center;font-size:0.72em;color:#ccc;margin-top:20px;">
+    首次到店專享 · 每人限用一次 · StarLight Beauty © 2026
+  </p>
+
+</div>
+</body>
+</html>

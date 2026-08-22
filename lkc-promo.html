@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StarLight Beauty 荔枝角·太子 · 專屬優惠推廣</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #6a9dc7;
+    --blue-light: #eef5fb;
+    --gold: #c9a96e;
+    --gold-light: #f5ecd7;
+    --rose: #b76e79;
+    --bg: #fdfaf5;
+    --text: #3d3226;
+    --sub: #8c7b6b;
+    --card: #fff;
+    --shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    background: linear-gradient(135deg, #eef5fb 0%, #f5efe6 100%);
+  }
+  .brand {
+    font-size: 1.6em;
+    font-family: 'Alex Brush', cursive;
+    letter-spacing: 0.08em;
+    color: var(--blue);
+  }
+  .brand span { color: var(--gold); }
+  .tagline { font-size: 0.82em; color: var(--sub); margin-top: 4px; }
+  .subtitle { font-size: 0.85em; color: var(--blue); margin-top: 6px; font-weight: 600; }
+  .store-badge {
+    display: inline-block;
+    background: var(--blue);
+    color: #fff;
+    font-size: 0.75em;
+    padding: 4px 16px;
+    border-radius: 20px;
+    margin-top: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  /* Back button */
+  .back-link {
+    display: inline-block;
+    margin: 20px auto 0;
+    padding: 10px 24px;
+    background: var(--card);
+    border: 1px solid var(--blue);
+    border-radius: 24px;
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .back-link:hover { background: var(--blue); color: #fff; }
+
+  /* Gallery */
+  .gallery-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 16px 60px;
+  }
+  .gallery-title {
+    text-align: center;
+    font-size: 1.4em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .gallery-subtitle {
+    text-align: center;
+    font-size: 0.85em;
+    color: var(--sub);
+    margin-bottom: 28px;
+  }
+  .promo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .promo-card {
+    background: var(--card);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .promo-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  }
+  .promo-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 30px 20px 40px;
+    font-size: 0.72em;
+    color: #bfb8a8;
+    background: var(--card);
+    margin-top: 40px;
+  }
+  .footer a { color: var(--blue); text-decoration: none; }
+
+  @media (max-width: 500px) {
+    .promo-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">✨ Star<span>Light</span> Beauty</div>
+  <div class="tagline">零壓力美容 · 不推銷 · 店主親手</div>
+  <div class="subtitle">🎁 專屬優惠推廣</div>
+  <div class="store-badge">🏢 荔枝角新光工業大廈 · 太子始創中心</div>
+  <div style="margin-top:16px;">
+    <a href="lkc.html" class="back-link">← 返回導航頁</a>
+  </div>
+</div>
+
+<div class="gallery-container">
+  <div class="gallery-title">🎁 最新優惠推廣</div>
+  <div class="gallery-subtitle">荔枝角·太子店專屬優惠 · 長按圖片可儲存分享</div>
+  
+  <div class="promo-grid">
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p01_keratin_lash.jpg" alt="角蛋白翹睫" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p02_pregnancy_lash.jpg" alt="孕睫術" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p03_misty_brow.jpg" alt="霧眉" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p04_rose_moisture.jpg" alt="玫瑰保濕面部 $298" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p05_new_customer_1088.jpg" alt="7-8次療程體驗價 $1088/10次" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p06_baby_face_needle.jpg" alt="嬰兒針" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p07_inimini_micro.jpg" alt="INIMINI 超極微針" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p08_peel_to_grow.jpg" alt="Peel to Grow" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p09_smts_info.jpg" alt="SMTS 療程介紹" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p10_smts_price.jpg" alt="SMTS 療程價目" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p11_nadpdrn_repair.jpg" alt="NAD+ & PDRN 極緻修復" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p12_exosome_repair.jpg" alt="外泌體修復 Exosomes" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p13_sakura_facial.jpg" alt="櫻花 SPA Facial" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p14_nmn_antiaging.jpg" alt="NMN 逆齡抗衰老" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p16_buy2get1free.jpg" alt="買2送1" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p17_oxygen_bubble.jpg" alt="氧氣泡泡清潔 + 免費肩頸按摩" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p18_dalton_detox.jpg" alt="Dalton 排毒療程" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p19_eye_treatment.jpg" alt="眼週護理" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p20_stamp_rewards.jpg" alt="印戳獎賞 Stamp Rewards" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p22_new_customer_888.jpg" alt="2026 新客體驗優惠 $888/3次" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p25_topup_sharing.jpg" alt="充值分享 SMTS 等" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p26_topup_dice.jpg" alt="充值抽獎" loading="lazy">
+    </div>
+    <div class="promo-card" style="position:relative;">
+      <img src="promo-images/p28_bestie_group.jpg" alt="閨密同行優惠" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  📞 WhatsApp 預約：<a href="https://wa.me/85260828181">+852 6082 8181</a><br>
+  ⏰ 營業時間：朝9晚10 · 彈性預約<br><br>
+  📍 荔枝角新光工業大廈（近港鐵站）<br>
+  📍 太子始創中心（近太子/旺角東站）
+</div>
+
+</body>
+</html>
