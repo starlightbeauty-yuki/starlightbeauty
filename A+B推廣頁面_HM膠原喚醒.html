@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2兆 HM 深層膠原喚醒療程 — 原價四折限定 · StarLight Beauty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdfaf6;
+    --card: #ffffff;
+    --text: #3d3535;
+    --sub: #8c7b74;
+    --rose: #d4948a;
+    --rose-light: #fdf2f3;
+    --gold: #c4a97d;
+    --gold-light: #faf6ef;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Sans HK", "Microsoft JhengHei", "PingFang HK", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .wrapper { max-width: 600px; width: 100%; padding: 20px 16px 60px; }
+
+  /* Hero */
+  .hero-card {
+    background: linear-gradient(160deg, #fdf2f3 0%, #faf6ef 40%, #f4f0f8 100%);
+    border-radius: 20px;
+    padding: 36px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(196,169,125,0.2), transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-card .badge {
+    display: inline-block;
+    background: var(--gold);
+    color: #fff;
+    font-size: 0.7em;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+  }
+  .hero-card h1 {
+    font-size: 1.5em;
+    color: #4a3f3a;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .hero-card .subtitle {
+    font-size: 0.85em;
+    color: var(--sub);
+    margin-bottom: 4px;
+  }
+  .hero-card .machine-tag {
+    font-size: 0.78em;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .hero-card .price-tag {
+    margin-top: 16px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+  }
+  .hero-card .price-tag .amount {
+    font-size: 2.8em;
+    font-weight: 800;
+    color: var(--rose);
+    line-height: 1;
+  }
+  .hero-card .price-tag .original {
+    font-size: 0.9em;
+    color: #bbb;
+    text-decoration: line-through;
+  }
+  .hero-card .discount-note {
+    font-size: 0.82em;
+    color: var(--sub);
+    margin-top: 4px;
+  }
+
+  /* Section card */
+  .section-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+  }
+  .section-card h3 {
+    font-size: 1.05em;
+    color: #4a3f3a;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* A option cards */
+  .option-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .option-card {
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .option-card:hover { border-color: var(--rose); box-shadow: 0 2px 12px rgba(212,148,138,0.15); }
+  .option-card .option-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .option-card .option-name {
+    font-weight: 700;
+    font-size: 0.95em;
+    color: #4a3f3a;
+  }
+  .option-card .option-badge {
+    font-size: 0.68em;
+    background: var(--tag-hot);
+    color: var(--tag-hot-text);
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .option-card .option-desc {
+    font-size: 0.8em;
+    color: var(--sub);
+    margin-bottom: 8px;
+  }
+  .option-card .option-price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .option-card .price-original {
+    font-size: 0.85em;
+    color: #bbb;
+    text-decoration: line-through;
+  }
+  .option-card .price-promo {
+    font-size: 1.3em;
+    font-weight: 800;
+    color: var(--rose);
+  }
+  .option-card .price-note {
+    font-size: 0.72em;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* B coupon */
+  .coupon-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .coupon-card {
+    background: var(--gold-light);
+    border: 2px dashed var(--gold);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .coupon-card .coupon-icon {
+    font-size: 1.8em;
+    min-width: 44px;
+    text-align: center;
+  }
+  .coupon-card .coupon-body { flex: 1; }
+  .coupon-card .coupon-name {
+    font-weight: 700;
+    font-size: 0.9em;
+    color: #4a3f3a;
+  }
+  .coupon-card .coupon-desc {
+    font-size: 0.75em;
+    color: var(--sub);
+    margin-top: 2px;
+  }
+  .coupon-card .coupon-price {
+    text-align: right;
+    min-width: 80px;
+  }
+  .coupon-card .coupon-price .promo {
+    font-weight: 800;
+    font-size: 1.1em;
+    color: var(--gold);
+    display: block;
+  }
+  .coupon-card .coupon-price .original {
+    font-size: 0.72em;
+    color: #bbb;
+    text-decoration: line-through;
+  }
+
+  /* How it works */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .step .step-num {
+    width: 32px;
+    height: 32px;
+    background: var(--rose);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85em;
+    flex-shrink: 0;
+  }
+  .step .step-text {
+    font-size: 0.88em;
+    color: #555;
+    padding-top: 4px;
+  }
+  .step .step-text strong { color: #4a3f3a; }
+
+  /* CTA */
+  .cta-btn {
+    display: block;
+    background: var(--rose);
+    color: #fff;
+    text-align: center;
+    padding: 16px;
+    border-radius: 14px;
+    font-size: 1.05em;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 18px;
+    box-shadow: 0 4px 16px rgba(212,148,138,0.3);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212,148,138,0.4);
+  }
+
+  /* Promise */
+  .promise-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .promise-chip {
+    flex: 1;
+    min-width: 100px;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 14px 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .promise-chip .emoji { font-size: 1.5em; display: block; margin-bottom: 4px; }
+  .promise-chip .label { font-size: 0.72em; color: #4a3f3a; font-weight: 600; }
+
+  .note-box {
+    background: #fffdf0;
+    border-left: 3px solid #e6c84d;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.82em;
+    color: #7a6a2e;
+    margin-top: 14px;
+  }
+
+  .divider {
+    text-align: center;
+    margin: 24px 0 18px;
+    position: relative;
+  }
+  .divider::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: 50%;
+    height: 1px; background: var(--line);
+  }
+  .divider span {
+    position: relative;
+    background: var(--bg);
+    padding: 0 16px;
+    font-size: 0.85em;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero-card">
+    <div class="badge">🆕 新儀器首發 · 原價四折</div>
+    <h1>2兆 HM 深層膠原<br>喚醒療程</h1>
+    <p class="subtitle">2兆HM深層膠原打印技術</p>
+    <p class="machine-tag">⚡ 提拉槍 · 膠原槍 · 膠原熨斗 · 提拉滾輪</p>
+    <div class="price-tag">
+      <span class="amount">$272</span>
+      <span class="original">原價 $680</span>
+    </div>
+    <p class="discount-note">🔥 原價四折 · 只限首次體驗 · 每人限用一次</p>
+  </div>
+
+  <!-- A OPTIONS -->
+  <div class="section-card">
+    <h3>✨ A. 主優惠療程（三選一，原價四折）</h3>
+    <div class="option-cards">
+
+      <div class="option-card" style="border-color:var(--rose);">
+        <div class="option-header">
+          <span class="option-name">2兆 HM 深層膠原喚醒療程（2個機頭）</span>
+          <span class="option-badge">🔥 最受歡迎</span>
+        </div>
+        <div class="option-desc">
+          2兆HM深層膠原打印技術，喚醒底層膠原，改善鬆弛、細紋<br>
+          約20分鐘 · 效果顯著 · 不刺激
+        </div>
+        <div class="option-price">
+          <span class="price-original">原價 $680</span>
+          <span class="price-promo">$272</span>
+          <span class="price-note">（四折）</span>
+        </div>
+      </div>
+
+      <div class="option-card">
+        <div class="option-header">
+          <span class="option-name">藍銅修護保濕療程</span>
+        </div>
+        <div class="option-desc">
+          藍銅胜肽深層修護，即時保濕鎖水，適合乾燥、缺水、敏感肌<br>
+          約60分鐘 · 全人手按摩 + 超波導入
+        </div>
+        <div class="option-price">
+          <span class="price-original">原價 $660</span>
+          <span class="price-promo">$264</span>
+          <span class="price-note">（四折）</span>
+        </div>
+        <div style="margin-top:10px;padding:10px 12px;background:#faf6ef;border-radius:10px;border:1px dashed var(--gold);">
+          <span style="font-size:0.75em;color:#6b5a3e;font-weight:600;">⚡ 可升級加配：</span>
+          <span style="font-size:0.75em;color:var(--sub);">+$180 細胞機導入（效果加倍，更深層滲透）</span>
+        </div>
+      </div>
+
+      <div class="option-card">
+        <div class="option-header">
+          <span class="option-name">NMN 逆齡賦活療程</span>
+        </div>
+        <div class="option-desc">
+          NMN抗衰成分，激活細胞活力，逆轉肌齡，回復彈性光澤<br>
+          約60分鐘 · 全人手按摩 + 超波導入
+        </div>
+        <div class="option-price">
+          <span class="price-original">原價 $560</span>
+          <span class="price-promo">$224</span>
+          <span class="price-note">（四折）</span>
+        </div>
+        <div style="margin-top:10px;padding:10px 12px;background:#faf6ef;border-radius:10px;border:1px dashed var(--gold);">
+          <span style="font-size:0.75em;color:#6b5a3e;font-weight:600;">⚡ 可升級加配：</span>
+          <span style="font-size:0.75em;color:var(--sub);">+$180 細胞機導入（效果加倍，更深層滲透）</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="divider"><span>🎁 完成 A 療程後 · 加送 B 回頭券</span></div>
+
+  <!-- B COUPONS -->
+  <div class="section-card">
+    <h3>🎁 B. 回頭優惠券（三選一，下次預約使用）</h3>
+    <p style="font-size:0.82em;color:var(--sub);margin-bottom:12px;">
+      完成 A 療程後，獲贈以下其中一款優惠券，下次預約時可以使用 💕
+    </p>
+    <div class="coupon-cards">
+      <div class="coupon-card">
+        <div class="coupon-icon">💆‍♀️</div>
+        <div class="coupon-body">
+          <div class="coupon-name">香薰 Facial 優惠券</div>
+          <div class="coupon-desc">全人手香薰精油護理，深層放鬆</div>
+        </div>
+        <div class="coupon-price">
+          <span class="promo">$299</span>
+          <span class="original">$820</span>
+        </div>
+      </div>
+      <div class="coupon-card">
+        <div class="coupon-icon">🛌</div>
+        <div class="coupon-body">
+          <div class="coupon-name">髗骶睡眠頭療 優惠券</div>
+          <div class="coupon-desc">筋膜手法 + 深層頭部按摩，睡一覺咁醒</div>
+        </div>
+        <div class="coupon-price">
+          <span class="promo">$299</span>
+          <span class="original">$780</span>
+        </div>
+      </div>
+      <div class="coupon-card">
+        <div class="coupon-icon">👂</div>
+        <div class="coupon-body">
+          <div class="coupon-name">耳目舒爽 SPA 采耳 優惠券</div>
+          <div class="coupon-desc">耳燭+頭部放鬆，清理+舒壓二合一</div>
+        </div>
+        <div class="coupon-price">
+          <span class="promo">$160</span>
+          <span class="original">$460</span>
+        </div>
+      </div>
+    </div>
+    <div class="note-box">
+      📅 B 優惠券有效期：3個月<br>
+      ✅ 可以轉贈俾朋友使用<br>
+      ✅ 不限星期幾，隨時預約
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section-card">
+    <h3>📋 點樣參加？</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">WhatsApp 預約，話我知你想選 A 療程邊個 + B 券想要邊張</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">嚟到 <strong>屯門店</strong>，享受你嘅 A 療程（約20-90分鐘，視乎項目）</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">完成後，我就俾你 B 優惠券，下次預約可以用 💕</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY US -->
+  <div class="section-card">
+    <h3>💡 為什麼選擇 StarLight Beauty？</h3>
+    <div class="promise-row">
+      <div class="promise-chip">
+        <span class="emoji">🛡️</span>
+        <span class="label">100% 不硬銷</span>
+      </div>
+      <div class="promise-chip">
+        <span class="emoji">💆‍♀️</span>
+        <span class="label">店主親手做</span>
+      </div>
+      <div class="promise-chip">
+        <span class="emoji">⏰</span>
+        <span class="label">朝9晚10</span>
+      </div>
+      <div class="promise-chip">
+        <span class="emoji">📍</span>
+        <span class="label">屯門限定</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <a href="https://wa.me/85260828181" class="cta-btn">📲 WhatsApp 立即預約</a>
+  <p style="text-align:center;font-size:0.72em;color:#ccc;margin-top:8px;">
+    📍 屯門工業中心C座（近輕鐵建安站）<br>
+    首次體驗專享 · 每人限用一次 · StarLight Beauty © 2026
+  </p>
+
+</div>
+</body>
+</html>

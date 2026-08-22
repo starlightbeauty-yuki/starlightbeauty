@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StarLight Beauty — 暑期限定優惠</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;background:#FFF5F8;color:#333;line-height:1.8}
+.wrap{max-width:480px;margin:0 auto;background:#fff;min-height:100vh;overflow-x:hidden}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#FBEAF0 0%,#EEEDFE 100%);padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(212,83,126,0.08)}
+.hero::after{content:"";position:absolute;bottom:-30px;left:-20px;width:100px;height:100px;border-radius:50%;background:rgba(127,119,221,0.08)}
+.hero h1{font-size:24px;color:#993556;position:relative;z-index:1;margin-bottom:6px}
+.hero .tag{font-size:13px;color:#888;position:relative;z-index:1}
+.hero .badge{display:inline-block;background:#D4537E;color:#fff;font-size:12px;padding:4px 14px;border-radius:20px;margin-top:10px;position:relative;z-index:1}
+
+/* PDRN Section */
+.pdrn{padding:32px 24px}
+.section-label{font-size:12px;color:#D4537E;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.pdrn h2{font-size:20px;color:#333;margin-bottom:16px}
+.pdrn .desc{font-size:14px;color:#666;margin-bottom:20px;line-height:2}
+
+.price-box{background:linear-gradient(135deg,#FBEAF0,#F4C0D1);border-radius:16px;padding:24px;text-align:center;margin-bottom:24px}
+.price-box .orig{font-size:16px;color:#999;text-decoration:line-through;margin-bottom:4px}
+.price-box .now{font-size:36px;font-weight:700;color:#D4537E;line-height:1.2}
+.price-box .now small{font-size:14px;font-weight:400}
+.price-box .save{font-size:13px;color:#72243E;margin-top:6px}
+.price-box .quota{display:inline-block;background:#fff;color:#D4537E;font-size:13px;font-weight:600;padding:6px 16px;border-radius:20px;margin-top:12px}
+
+/* Features */
+.features{margin-bottom:24px}
+.feat-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid #f5f5f5}
+.feat-item:last-child{border-bottom:none}
+.feat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.feat-icon.f1{background:#FBEAF0}
+.feat-icon.f2{background:#EEEDFE}
+.feat-icon.f3{background:#E1F5EE}
+.feat-icon.f4{background:#FAEEDA}
+.feat-text h4{font-size:14px;color:#333;margin-bottom:2px}
+.feat-text p{font-size:12px;color:#888}
+
+/* Divider */
+.divider{height:12px;background:#FFF5F8}
+
+/* Package Section */
+.pkg{padding:32px 24px;background:#EEEDFE}
+.pkg h2{font-size:20px;color:#3C3489;margin-bottom:16px}
+.pkg .desc{font-size:14px;color:#666;margin-bottom:20px;line-height:2}
+
+.pkg-price{background:#fff;border:2px solid #AFA9EC;border-radius:16px;padding:24px;text-align:center;margin-bottom:20px}
+.pkg-price .amount{font-size:36px;font-weight:700;color:#3C3489;line-height:1.2}
+.pkg-price .amount small{font-size:14px;font-weight:400}
+.pkg-price .per{font-size:13px;color:#534AB7;margin-top:4px}
+.pkg-price .bonus{display:inline-block;background:#EEEDFE;color:#3C3489;font-size:12px;padding:4px 12px;border-radius:20px;margin-top:10px}
+
+/* Treatment list */
+.treat-list{margin-bottom:20px}
+.treat-item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#fff;border-radius:10px;margin-bottom:8px}
+.treat-num{width:28px;height:28px;border-radius:50%;background:#EEEDFE;color:#3C3489;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
+.treat-name{flex:1;font-size:14px;color:#333;margin:0 12px}
+.treat-val{font-size:13px;color:#888}
+
+/* Rules */
+.rules{background:#fff;border-radius:12px;padding:16px;margin-bottom:20px}
+.rules h4{font-size:13px;color:#666;margin-bottom:8px}
+.rules ul{list-style:none;padding:0}
+.rules li{font-size:12px;color:#888;padding:3px 0;padding-left:16px;position:relative}
+.rules li::before{content:"·";position:absolute;left:4px;color:#AFA9EC;font-weight:700}
+
+/* CTA */
+.cta-section{padding:32px 24px;text-align:center}
+.cta-btn{display:block;width:100%;max-width:320px;margin:0 auto 12px;padding:16px 24px;border-radius:30px;font-size:16px;font-weight:600;text-decoration:none;text-align:center;transition:transform 0.2s}
+.cta-btn.wa{background:#25D366;color:#fff}
+.cta-btn.dm{background:#D4537E;color:#fff}
+.cta-note{font-size:12px;color:#999;margin-top:8px}
+
+/* Stores */
+.stores{padding:24px;background:#FFF5F8;text-align:center}
+.stores h4{font-size:13px;color:#888;margin-bottom:12px}
+.store-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.store-tag{background:#fff;border:1px solid #ED93B1;border-radius:20px;padding:6px 14px;font-size:12px;color:#993556}
+
+.footer{text-align:center;padding:20px;font-size:11px;color:#ccc}
+.footer a{color:#D4537E;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>StarLight Beauty</h1>
+    <p class="tag">美療師 Yuki · 美於外 · 療於內</p>
+    <span class="badge">暑期限定 · 三店通用</span>
+  </div>
+
+  <!-- PDRN Section -->
+  <div class="pdrn">
+    <div class="section-label">星賞初體驗</div>
+    <h2>三文魚DNA再生修復護理</h2>
+    <p class="desc">
+      意大利 Placentex PDRN 精華，採用細胞機無痛導入技術，
+      將DNA修復因子直達皮膚底層。刺激膠原蛋白增生，
+      修復受損細胞，做完即見保水、亮白、毛孔收細。
+    </p>
+
+    <div class="price-box">
+      <div class="orig">原價 $1,580</div>
+      <div class="now">$680<small> / 次</small></div>
+      <div class="save">節省 $900 · 57% OFF</div>
+      <div class="quota">⚠️ 限定 20 個名額</div>
+    </div>
+
+    <div class="features">
+      <div class="feat-item">
+        <div class="feat-icon f1">🧬</div>
+        <div class="feat-text">
+          <h4>意大利進口 PDRN</h4>
+          <p>三文魚DNA提取，歐盟認證成分，韓日熱賣十幾年</p>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon f2">⚡</div>
+        <div class="feat-text">
+          <h4>細胞機無痛導入</h4>
+          <p>非注射式電泳導入，吸收率比塗抹高10倍，無痛無創</p>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon f3">✨</div>
+        <div class="feat-text">
+          <h4>即時見效</h4>
+          <p>做完皮膚保水度提升、毛孔收細、膚色亮白</p>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-icon f4">🌿</div>
+        <div class="feat-text">
+          <h4>敏感肌適用</h4>
+          <p>PDRN本身具抗敏修復功效，特別適合受損肌膚</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Package Section -->
+  <div class="pkg">
+    <div class="section-label" style="color:#534AB7">星光美療通行證</div>
+    <h2>護理套餐 $2,088 / 4次</h2>
+    <p class="desc">
+      6款療程任選4次，有效期3個月。
+      靈活配搭，根據你嘅皮膚狀況度身訂造。
+      買即送小項目1次！
+    </p>
+
+    <div class="pkg-price">
+      <div class="amount">$2,088<small> / 4次</small></div>
+      <div class="per">平均每次只需 $522</div>
+      <div class="bonus">🎁 每次加送：耳燭/肚燭 / 頭部舒緩按摩 / 肩頸筋膜 / 保濕手膜（任選1）</div>
+    </div>
+
+    <div class="treat-list">
+      <div class="treat-item">
+        <div class="treat-num">1</div>
+        <div class="treat-name">三文魚DNA再生修復護理（PDRN）</div>
+        <div class="treat-val">$1,580</div>
+      </div>
+      <div class="treat-item">
+        <div class="treat-num">2</div>
+        <div class="treat-name">皇牌奢華人手SPA</div>
+        <div class="treat-val">$780</div>
+      </div>
+      <div class="treat-item">
+        <div class="treat-num">3</div>
+        <div class="treat-name">膠原緊緻全面療程</div>
+        <div class="treat-val">$680</div>
+      </div>
+      <div class="treat-item">
+        <div class="treat-num">4</div>
+        <div class="treat-name">法國膠原深層導入護理</div>
+        <div class="treat-val">$680</div>
+      </div>
+      <div class="treat-item">
+        <div class="treat-num">5</div>
+        <div class="treat-name">韓國玻尿酸水光護理</div>
+        <div class="treat-val">$1,380</div>
+      </div>
+      <div class="treat-item">
+        <div class="treat-num">6</div>
+        <div class="treat-name">植物肉毒維C去皺煥白護理</div>
+        <div class="treat-val">$1,180</div>
+      </div>
+    </div>
+
+    <div class="rules">
+      <h4>套餐規則</h4>
+      <ul>
+        <li>有效期3個月，由使用套餐日起計</li>
+        <li>6款療程任選4次，每款最多揀1次</li>
+        <li>每次療程加送小項目1次（耳燭/肚燭/頭部舒緩按摩/肩頸筋膜/保濕手膜 任選1）</li>
+        <li>贈送小項目需同日使用</li>
+        <li>三店通用：屯門 / 荔枝角 / 太子</li>
+        <li>不可轉讓他人</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <a href="https://wa.me/85260828181?text=我想預約PDRN三文魚DNA護理" class="cta-btn wa">💬 WhatsApp 預約</a>
+    <a href="#" class="cta-btn dm">📩 DM 預約</a>
+    <p class="cta-note">名額有限，先到先得</p>
+  </div>
+
+  <!-- Stores -->
+  <div class="stores">
+    <h4>三店適用</h4>
+    <div class="store-tags">
+      <span class="store-tag">屯門工業中心C座</span>
+      <span class="store-tag">荔枝角新光工業大廈</span>
+      <span class="store-tag">太子始創中心</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    StarLight Beauty · 美療師 Yuki · 美於外 · 療於內<br>
+    不推銷 · 自由消費 · 不換人 · 固定店主親手服務<br>
+    營業時間：朝9晚10 · 彈性預約
+  </div>
+
+</div>
+</body>
+</html>

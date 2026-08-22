@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星光美療組合 — $1,280 單次體驗 · StarLight Beauty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdfaf6;
+    --card: #ffffff;
+    --text: #3d3535;
+    --sub: #8c7b74;
+    --rose: #d4948a;
+    --rose-light: #fdf2f3;
+    --gold: #c4a97d;
+    --gold-light: #faf6ef;
+    --line: #eee5dc;
+    --tag-hot: #ffe3e3;
+    --tag-hot-text: #c0392b;
+    --green-light: #e8f5e9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Sans HK", "Microsoft JhengHei", "PingFang HK", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .wrapper { max-width: 600px; width: 100%; padding: 20px 16px 60px; }
+
+  /* Hero */
+  .hero-card {
+    background: linear-gradient(160deg, #fdf2f3 0%, #faf6ef 40%, #f4f0f8 100%);
+    border-radius: 20px;
+    padding: 36px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(196,169,125,0.2), transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-card .shop-name {
+    font-size: 0.9em; color: var(--sub); letter-spacing: 0.08em; margin-bottom: 6px;
+    font-family: 'Alex Brush', cursive;
+  }
+  .hero-card .badge-row { display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin-bottom: 14px; }
+  .hero-card .badge {
+    display: inline-block;
+    background: var(--rose);
+    color: #fff;
+    font-size: 0.7em;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .hero-card .badge.gold { background: var(--gold); }
+  .hero-card h1 {
+    font-size: 1.8em;
+    color: #4a3f3a;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .hero-card .subtitle {
+    font-size: 0.9em;
+    color: var(--sub);
+    margin-bottom: 4px;
+  }
+  .hero-card .machine-tag {
+    font-size: 0.8em;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .hero-card .price-tag {
+    margin-top: 16px;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .hero-card .price-tag .currency {
+    font-size: 1.2em;
+    color: var(--rose);
+    font-weight: 600;
+  }
+  .hero-card .price-tag .amount {
+    font-size: 3.2em;
+    font-weight: 800;
+    color: var(--rose);
+    line-height: 1;
+  }
+  .hero-card .price-tag .unit {
+    font-size: 0.9em;
+    color: var(--sub);
+    align-self: flex-end;
+    margin-bottom: 6px;
+  }
+  .hero-card .discount-note {
+    font-size: 0.85em;
+    color: var(--sub);
+    margin-top: 6px;
+  }
+  .hero-card .features {
+    display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 14px;
+  }
+  .hero-card .feature {
+    font-size: 0.72em;
+    background: rgba(255,255,255,0.65);
+    padding: 4px 12px;
+    border-radius: 14px;
+    color: #6b5a3e;
+  }
+
+  /* Section card */
+  .section-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+  }
+  .section-card h3 {
+    font-size: 1.05em;
+    color: #4a3f3a;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-card .section-sub {
+    font-size: 0.78em;
+    color: var(--sub);
+    margin-bottom: 14px;
+  }
+
+  /* Checklist (fixed items) */
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .checklist li {
+    font-size: 0.88em;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: #555;
+  }
+  .checklist li .check { color: var(--rose); font-weight: 700; font-size: 1.1em; flex-shrink: 0; }
+  .checklist li .item-price { color: var(--gold); font-weight: 700; margin-left: auto; white-space: nowrap; }
+
+  /* Option cards */
+  .option-cards { display: flex; flex-direction: column; gap: 12px; }
+  .option-card {
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .option-card:hover { border-color: var(--rose); box-shadow: 0 2px 12px rgba(212,148,138,0.15); }
+  .option-card .option-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .option-card .option-name { font-weight: 700; font-size: 0.95em; color: #4a3f3a; }
+  .option-card .option-badge {
+    font-size: 0.66em;
+    background: var(--tag-hot);
+    color: var(--tag-hot-text);
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .option-card .option-badge.gold { background: var(--gold-light); color: #8b6914; }
+  .option-card .option-desc { font-size: 0.8em; color: var(--sub); margin-bottom: 8px; line-height: 1.5; }
+  .option-card .option-price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .option-card .price-original { font-size: 0.85em; color: #bbb; text-decoration: line-through; }
+  .option-card .price-note { font-size: 0.75em; color: var(--gold); font-weight: 700; }
+
+  /* Value comparison */
+  .value-cards { display: flex; flex-direction: column; gap: 10px; }
+  .value-card {
+    background: var(--gold-light);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #efe2c8;
+  }
+  .value-card .vc-label { font-weight: 700; font-size: 0.9em; color: #4a3f3a; min-width: 64px; }
+  .value-card .vc-body { flex: 1; font-size: 0.74em; color: var(--sub); line-height: 1.4; }
+  .value-card .vc-price { text-align: right; min-width: 96px; }
+  .value-card .vc-price .orig { font-size: 0.72em; color: #bbb; text-decoration: line-through; display:block; }
+  .value-card .vc-price .combo { font-weight: 800; font-size: 1.05em; color: var(--rose); }
+  .value-card .vc-price .discount { font-size: 0.68em; color: var(--gold); font-weight: 700; }
+
+  /* Steps */
+  .steps { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+  .step { display: flex; gap: 12px; align-items: flex-start; }
+  .step .step-num {
+    width: 32px; height: 32px;
+    background: var(--rose);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85em; flex-shrink: 0;
+  }
+  .step .step-text { font-size: 0.85em; color: #555; padding-top: 4px; line-height: 1.5; }
+  .step .step-text strong { color: #4a3f3a; }
+
+  /* Combo upsell (5次套票) */
+  .upsell-card {
+    border: 2px solid var(--gold);
+    background: linear-gradient(135deg,#faf6ef,#fdf2f3);
+    border-radius: 16px;
+    padding: 22px 20px;
+    margin-top: 14px;
+  }
+  .upsell-card h3 { font-size: 1.22em; color: #4a3f3a; margin-bottom: 10px; display:flex; align-items:center; gap:8px; }
+  .upsell-card .price-row { display:flex; gap:10px; flex-wrap:wrap; margin: 12px 0; }
+  .upsell-card .price-pill {
+    font-size: 1.02em;
+    background: #fff;
+    color: #4a3f3a;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    border: 1px solid #efe2c8;
+  }
+  .upsell-card .price-pill.hot { background: var(--rose); color:#fff; border:none; font-weight:800; font-size:1.15em; box-shadow:0 3px 12px rgba(212,148,138,0.35); }
+  .upsell-card .gift-row {
+    display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;
+  }
+  .upsell-card .gift {
+    font-size:0.95em; background: var(--green-light); color:#2d5a27;
+    padding:8px 14px; border-radius:10px; font-weight:700;
+  }
+
+  /* Promise */
+  .promise-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .promise-chip {
+    flex: 1; min-width: 100px;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 14px 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .promise-chip .emoji { font-size: 1.5em; display: block; margin-bottom: 4px; }
+  .promise-chip .label { font-size: 0.72em; color: #4a3f3a; font-weight: 600; }
+
+  /* Note box */
+  .note-box {
+    background: #fffdf0;
+    border-left: 3px solid #e6c84d;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.82em;
+    color: #7a6a2e;
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  /* CTA */
+  .cta-btn {
+    display: block;
+    background: var(--rose);
+    color: #fff;
+    text-align: center;
+    padding: 16px;
+    border-radius: 14px;
+    font-size: 1.05em;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 18px;
+    box-shadow: 0 4px 16px rgba(212,148,138,0.3);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,148,138,0.4); }
+  .cta-sub { text-align: center; font-size: 0.72em; color: #bbb; margin-top: 8px; }
+
+  /* Store */
+  .store-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .store-item { font-size: 0.82em; color: var(--sub); display: flex; align-items: center; gap: 6px; }
+  .store-item .pin { color: var(--rose); }
+
+  .divider { text-align: center; margin: 24px 0 18px; position: relative; }
+  .divider::before { content: ''; position: absolute; left:0; right:0; top:50%; height:1px; background: var(--line); }
+  .divider span {
+    position: relative; background: var(--bg); padding: 0 16px;
+    font-size: 0.85em; color: var(--gold); font-weight: 700; letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero-card">
+    <div class="shop-name">✦ StarLight Beauty ✦</div>
+    <div class="badge-row">
+      <span class="badge">🔥 Meta 網上熱推</span>
+      <span class="badge gold">📍 屯門限定 · 熱銷</span>
+    </div>
+    <h1>星光美療組合</h1>
+    <p class="subtitle">一次過 · 面部 + 儀器 + 療癒 全方位呵護</p>
+    <p class="machine-tag">美於外 · 療於內 ｜ 美療師 Yuki 親手服務</p>
+    <div class="price-tag">
+      <span class="currency">$</span>
+      <span class="amount">1,280</span>
+      <span class="unit">單次體驗</span>
+    </div>
+    <p class="discount-note">原價高達 $2,818 ｜ 約 4.5 折 ｜ 約 2 小時完成</p>
+    <div class="features">
+      <span class="feature">💎 12 項療程任揀</span>
+      <span class="feature">🙌 美療師親手</span>
+      <span class="feature">🛡️ 不推銷</span>
+      <span class="feature">⏰ 朝9晚10</span>
+    </div>
+  </div>
+
+  <!-- 固定包含 -->
+  <div class="section-card">
+    <h3>✅ 固定包含（必定有，唔使額外揀）</h3>
+    <ul class="checklist">
+      <li><span class="check">✓</span> Aqua Peel 深層清潔 — 替代傳統去角質，深層清潔毛孔<span class="item-price">原價 $480</span></li>
+      <li><span class="check">✓</span> LED 光療 — 敷面膜時同步進行，零額外時間<span class="item-price">原價 $199</span></li>
+      <li><span class="check">✓</span> 針清 + 修眉 — 按皮膚狀況處理，不另收費<span class="item-price">已包</span></li>
+    </ul>
+  </div>
+
+  <!-- A: 人手面部 4選1 -->
+  <div class="section-card">
+    <h3>✨ A. 人手面部療程（4 選 1）</h3>
+    <div class="option-cards">
+      <div class="option-card">
+        <div class="option-header"><span class="option-name">A. 皇牌人手 SPA 療程</span></div>
+        <div class="option-desc">獨家人手按臉手法，皇牌項目，最穩陣嘅入門之選</div>
+        <div class="option-price"><span class="price-original">單項原價 $480</span><span class="price-note">✅ 已包入組合</span></div>
+      </div>
+      <div class="option-card" style="border-color:var(--rose);">
+        <div class="option-header"><span class="option-name">B. 2兆 HM 膠原喚醒</span><span class="option-badge">🔥 人氣</span></div>
+        <div class="option-desc">深層膠原打印，提拉緊緻</div>
+        <div class="option-price"><span class="price-original">單項原價 $680</span><span class="price-note">✅ 已包入組合</span></div>
+      </div>
+      <div class="option-card">
+        <div class="option-header"><span class="option-name">C. 香薰精油全面護理</span><span class="option-badge gold">💎 最高原價</span></div>
+        <div class="option-desc">獨家香薰複方精油配方，4款選擇，全面護理，放鬆感最強</div>
+        <div class="option-price"><span class="price-original">單項原價 $820</span><span class="price-note">✅ 已包入組合</span></div>
+      </div>
+      <div class="option-card">
+        <div class="option-header"><span class="option-name">D. 祛黃提亮療程</span></div>
+        <div class="option-desc">精華配合人手按臉，提亮膚色，性價比高</div>
+        <div class="option-price"><span class="price-original">單項原價 $520</span><span class="price-note">✅ 已包入組合</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B: 儀器 4選1 -->
+  <div class="section-card">
+    <h3>⚡ B. 儀器療程（4 選 1）</h3>
+    <div class="option-cards">
+      <div class="option-card" style="border-color:var(--rose);">
+        <div class="option-header"><span class="option-name">A. HIFU（4.0, 3.5, 1.5）</span><span class="option-badge">💎 最高原價</span></div>
+        <div class="option-desc">緊緻輪廓皇牌儀器，塑造動人曲線</div>
+        <div class="option-price"><span class="price-original">單項原價 $1,200</span><span class="price-note">✅ 已包入組合</span></div>
+      </div>
+      <div class="option-card">
+        <div class="option-header"><span class="option-name">B. 彩光全面嫩膚</span></div>
+        <div class="option-desc">光學療程，均勻膚色，獨立進行</div>
+        <div class="option-price"><span class="price-original">單項原價 $580</span><span class="price-note">✅ 已包入組合</span></div>
+      </div>
+      <div class="option-card">
+        <div class="option-header"><span class="option-name">C. 膠原注塑槍療程</span></div>
+        <div class="option-desc">微晶注滲+射頻+LED</div>
+        <div class="option-price"><span class="price-original">單項原價 $580</span><span class="price-note">✅ 已包入組合</span></div>
+      </div>
+      <div class="option-card">
+        <div class="option-header"><span class="option-name">D. 細胞機導入</span></div>
+        <div class="option-desc">精華導入，滲透更深</div>
+        <div class="option-price"><span class="price-original">單項原價 $320</span><span class="price-note">✅ 已包入組合</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C: 身心療癒 4選1 -->
+  <div class="section-card">
+    <h3>🌿 C. 身心療癒（4 選 1）</h3>
+    <p class="section-sub">約 20 分鐘，與敷面膜 + LED 光療同步進行，零額外時間 ｜ 以下揀 1 項，已包入 $1,280 組合</p>
+    <div class="option-cards">
+      <div class="option-card" style="border-color:var(--rose);">
+        <div class="option-header"><span class="option-name">A. 髗骶睡眠頭療（20min）</span><span class="option-badge">👑 皇牌</span></div>
+        <div class="option-desc">深層放鬆，改善睡眠，店內皇牌療癒項目</div>
+        <div class="option-price"><span class="price-original">單項原價 $318</span><span class="price-note">✅ 已包入組合</span></div>
+      </div>
+      <div class="option-card">
+        <div class="option-header"><span class="option-name">B. 暖宮養宮療程（20min）</span></div>
+        <div class="option-desc">暖宮保養，女性調理，面膜同步進行</div>
+        <div class="option-price"><span class="price-original">單項原價 $250</span><span class="price-note">✅ 已包入組合</span></div>
+      </div>
+      <div class="option-card">
+        <div class="option-header"><span class="option-name">C. 草本養護精油按摩（20min）</span></div>
+        <div class="option-desc">肩頸放鬆，精油舒壓</div>
+        <div class="option-price"><span class="price-original">單項原價 $250</span><span class="price-note">✅ 已包入組合</span></div>
+      </div>
+      <div class="option-card">
+        <div class="option-header"><span class="option-name">D. 采耳 小舒爽 SPA（20min）</span></div>
+        <div class="option-desc">耳部放鬆＋專業采耳，深層舒壓</div>
+        <div class="option-price"><span class="price-original">單項原價 $260</span><span class="price-note">✅ 已包入組合</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 價值對比 -->
+  <div class="section-card">
+    <h3>💰 點揀都抵 — 價值對比</h3>
+    <p class="section-sub">固定項目（Aqua Peel $480）+ A+B+C 各揀 1 項，原價對比如下，全部統一 <strong style="color:var(--rose);">$1,280</strong></p>
+    <div class="value-cards">
+      <div class="value-card">
+        <span class="vc-label">最平組合</span>
+        <div class="vc-body">皇牌SPA + 細胞機 + 采耳</div>
+        <div class="vc-price"><span class="orig">原價 $1,540</span><span class="combo">$1,280</span><span class="discount">8.3折</span></div>
+      </div>
+      <div class="value-card">
+        <span class="vc-label">中等組合</span>
+        <div class="vc-body">祛黃提亮 + 膠原槍 + 草本按摩</div>
+        <div class="vc-price"><span class="orig">原價 $1,830</span><span class="combo">$1,280</span><span class="discount">7折</span></div>
+      </div>
+      <div class="value-card" style="border:2px solid var(--rose);">
+        <span class="vc-label">最貴組合</span>
+        <div class="vc-body">香薰精油 + HIFU + 髗骶頭療</div>
+        <div class="vc-price"><span class="orig">原價 $2,818</span><span class="combo">$1,280</span><span class="discount">4.5折</span></div>
+      </div>
+    </div>
+    <p class="section-sub" style="margin-top:10px;margin-bottom:0;">＊ 以上價值以屯門店更新後價目表計算，本療程為屯門店限定熱銷</p>
+  </div>
+
+  <!-- 時間流程 -->
+  <div class="section-card">
+    <h3>⏱️ 約 2 小時完成</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Aqua Peel 深層清潔</strong></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>針清 + 修眉</strong></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>人手面部療程</strong></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>儀器療程</strong></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-text"><strong>敷面膜 + LED 光療</strong></div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-text"><strong>身心療癒項目</strong></div></div>
+    </div>
+  </div>
+
+  <!-- 5次套票 -->
+  <div class="upsell-card">
+    <h3>🎁 鍾意想再做？5 次套票更抵</h3>
+    <div class="price-row">
+      <span class="price-pill">單次推廣價 $1,280／次</span>
+      <span class="price-pill hot">5 次套票 $5,500（平均每程 $1,100）</span>
+    </div>
+    <p style="font-size:0.98em;color:var(--text);font-weight:600;">購買 5 次套票，每次額外加送：</p>
+    <div class="gift-row">
+      <span class="gift">💆‍♀️ 美白緊緻頸膜</span>
+      <span class="gift">🤲 滋潤手膜</span>
+    </div>
+    <p style="font-size:0.75em;color:var(--sub);margin-top:10px;">＊ 套票由首次使用日起計 6 個月內有效 ｜ 加送項目敷面膜時同步進行，不佔額外時間</p>
+  </div>
+
+  <!-- WHY US -->
+  <div class="section-card">
+    <h3>💡 為什麼選擇 StarLight Beauty？</h3>
+    <div class="promise-row">
+      <div class="promise-chip"><span class="emoji">🛡️</span><span class="label">100% 不硬銷</span></div>
+      <div class="promise-chip"><span class="emoji">💆‍♀️</span><span class="label">店主親手做</span></div>
+      <div class="promise-chip"><span class="emoji">⏰</span><span class="label">朝9晚10</span></div>
+      <div class="promise-chip"><span class="emoji">💰</span><span class="label">自由消費</span></div>
+    </div>
+    <p style="font-size:0.78em;color:var(--sub);margin-top:12px;">
+      我開呢間店嘅原因好簡單——我自己都好唔鍾意被推銷、被逼買配套 😂<br>
+      所以承諾：永遠唔會有人追住你預約。來唔來、買唔買，都冇壓力。
+    </p>
+  </div>
+
+  <!-- STORES -->
+  <div class="section-card">
+    <h3>📍 屯門限定 · 專享熱銷療程</h3>
+    <div class="store-list">
+      <div class="store-item"><span class="pin">🏠</span> <strong>屯門</strong> — 屯門工業中心C座（近輕鐵建安站）</div>
+    </div>
+    <p style="font-size:0.78em;color:var(--sub);margin-top:10px;">本療程為屯門店限定熱銷，預約時備註「星光美療組合」即可 💕</p>
+  </div>
+
+  <!-- CTA -->
+  <a href="https://bit.ly/3Tzx5Ye" class="cta-btn" style="background:#27ae60;box-shadow:0 4px 16px rgba(39,174,96,0.3);">📅 網上即時預約系統</a>
+  <a href="https://wa.me/85260828181" class="cta-btn">📲 WhatsApp 預約（6082 8181）</a>
+  <a href="https://chat.whatsapp.com/ITTB2VrVvOF7Pkcko4ONRn" class="cta-btn" style="background:#128c7e;box-shadow:0 4px 16px rgba(18,140,126,0.3);">👥 加入屯門 WhatsApp 社群</a>
+  <p class="cta-sub">24小時自助預約 · 即時確認 · 一經預約當日只接你一位</p>
+
+  <p style="text-align:center;font-size:0.72em;color:#ccc;margin-top:20px;">
+    屯門限定 · 每人可享推廣體驗價 · StarLight Beauty © 2026
+  </p>
+
+</div>
+</body>
+</html>

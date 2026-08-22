@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>StarLight Beauty — 線上預約</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fdfaf6;
+  --card: #ffffff;
+  --text: #3d3535;
+  --sub: #8c7b74;
+  --rose: #d4948a;
+  --rose-dark: #c07a70;
+  --rose-light: #fdf2f3;
+  --gold: #c4a97d;
+  --gold-light: #faf6ef;
+  --green: #8fa88a;
+  --green-light: #f4f8f2;
+  --blue: #6a9dc7;
+  --blue-light: #eef5fb;
+  --line: #e8e0d8;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --radius: 16px;
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body {
+  font-family: "Noto Sans HK","Microsoft JhengHei","PingFang HK",sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height:1.6;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ─── Header ─── */
+.site-header {
+  background: linear-gradient(135deg, #f5efe6 0%, #fdf2f3 50%, #e8d5f5 100%);
+  padding: 32px 20px 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(232,224,216,0.5);
+}
+.site-header h1 {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: #4a3f3a;
+  letter-spacing: 0.03em;
+}
+.site-header .tagline {
+  font-size: 0.78em;
+  color: var(--sub);
+  margin-top: 4px;
+}
+.header-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+.header-badges span {
+  font-size: 0.7em;
+  background: rgba(255,255,255,0.75);
+  padding: 3px 12px;
+  border-radius: 20px;
+  color: #6b5a3e;
+}
+
+/* ─── Progress Bar ─── */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 16px 20px 8px;
+  background: var(--bg);
+}
+.progress-step {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8em;
+  font-weight: 600;
+  background: #f0ece8;
+  color: var(--sub);
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.step-circle.active {
+  background: var(--rose);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(212,148,138,0.4);
+}
+.step-circle.done {
+  background: var(--green);
+  color: #fff;
+}
+.step-line {
+  width: 40px;
+  height: 2px;
+  background: #f0ece8;
+  margin: 0 4px;
+  transition: background 0.3s;
+}
+.step-line.done { background: var(--green); }
+.step-label {
+  font-size: 0.65em;
+  color: var(--sub);
+  text-align: center;
+  margin-top: 4px;
+  white-space: nowrap;
+}
+.step-label.active { color: var(--rose); font-weight: 600; }
+.step-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ─── Main Container ─── */
+.main { max-width: 480px; margin: 0 auto; padding: 0 16px 100px; }
+
+/* ─── Step Panels ─── */
+.step-panel { display: none; animation: fadeUp 0.35s ease; }
+.step-panel.active { display: block; }
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* ─── Section Titles ─── */
+.section-title {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #4a3f3a;
+  margin: 20px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ─── Branch Cards ─── */
+.branch-card {
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.branch-card:hover { border-color: var(--rose); transform: translateY(-1px); box-shadow: var(--shadow); }
+.branch-card.selected { border-color: var(--rose); background: var(--rose-light); }
+.branch-card .branch-name {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #4a3f3a;
+  margin-bottom: 6px;
+}
+.branch-card .branch-info {
+  font-size: 0.8em;
+  color: var(--sub);
+  line-height: 1.7;
+}
+.branch-card .branch-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 0.65em;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+.branch-card .branch-tag.popular {
+  background: var(--rose-light);
+  color: var(--rose-dark);
+}
+.branch-card .branch-tag.new {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+.branch-card .check-mark {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--rose);
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+}
+.branch-card.selected .check-mark { display: flex; }
+
+/* ─── Category Tabs ─── */
+.cat-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 8px 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.cat-tabs::-webkit-scrollbar { display: none; }
+.cat-tab {
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.78em;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: all 0.2s;
+  color: var(--sub);
+}
+.cat-tab:hover { border-color: var(--gold); }
+.cat-tab.active { background: var(--rose); color: #fff; border-color: var(--rose); }
+
+/* ─── Service Cards ─── */
+.service-list { margin-top: 8px; }
+.service-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.service-card:hover { border-color: var(--rose); }
+.service-card.selected { border-color: var(--rose); background: var(--rose-light); }
+.service-card .svc-left { flex: 1; }
+.service-card .svc-name {
+  font-size: 0.88em;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.4;
+}
+.service-card .svc-tag {
+  font-size: 0.62em;
+  padding: 1px 8px;
+  border-radius: 10px;
+  margin-left: 6px;
+  font-weight: 600;
+  vertical-align: middle;
+}
+.svc-tag.hot { background: #fff3cd; color: #856404; }
+.svc-tag.new { background: #ffe0e0; color: #c0392b; }
+.svc-tag.crown { background: #e8d5f5; color: #6c3483; }
+.service-card .svc-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+.service-card .svc-price {
+  font-size: 1em;
+  font-weight: 700;
+  color: var(--rose);
+}
+.service-card .svc-orig {
+  font-size: 0.7em;
+  color: #bbb;
+  text-decoration: line-through;
+}
+.service-card .svc-dur {
+  font-size: 0.68em;
+  color: var(--sub);
+  margin-top: 2px;
+}
+.service-card .svc-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65em;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.service-card.selected .svc-check {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: #fff;
+}
+
+/* ─── Promo Banner ─── */
+.promo-card {
+  background: linear-gradient(135deg, #fdf2f3, #faf6ef);
+  border: 2px dashed var(--rose);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.promo-card:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+.promo-card.selected { border-style: solid; background: var(--rose-light); }
+.promo-card .promo-badge {
+  display: inline-block;
+  background: var(--rose);
+  color: #fff;
+  font-size: 0.7em;
+  padding: 3px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+.promo-card .promo-name { font-size: 1.1em; font-weight: 700; color: #4a3f3a; }
+.promo-card .promo-price { font-size: 2em; font-weight: 800; color: var(--rose); margin: 6px 0 2px; }
+.promo-card .promo-orig { font-size: 0.5em; color: #999; text-decoration: line-through; font-weight: 400; margin-left: 4px; }
+.promo-card .promo-desc { font-size: 0.8em; color: var(--sub); }
+
+/* ─── Date Picker ─── */
+.date-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-top: 8px;
+}
+.date-grid .day-label {
+  text-align: center;
+  font-size: 0.65em;
+  color: var(--sub);
+  padding: 4px 0;
+}
+.date-cell {
+  text-align: center;
+  padding: 8px 2px;
+  border-radius: 10px;
+  font-size: 0.82em;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.date-cell:hover { background: var(--rose-light); }
+.date-cell.today { font-weight: 700; color: var(--rose); }
+.date-cell.selected { background: var(--rose); color: #fff; font-weight: 600; }
+.date-cell.disabled { color: #ddd; cursor: not-allowed; }
+.date-cell.empty { cursor: default; }
+
+/* ─── Time Slots ─── */
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+.time-slot {
+  text-align: center;
+  padding: 10px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  font-size: 0.85em;
+  font-family: inherit;
+  background: #fff;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.time-slot:hover { border-color: var(--rose); }
+.time-slot.selected { background: var(--rose); color: #fff; border-color: var(--rose); }
+.time-slot.disabled { color: #ccc; cursor: not-allowed; background: #fafafa; }
+
+/* ─── Form ─── */
+.form-group {
+  margin-bottom: 14px;
+}
+.form-group label {
+  display: block;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--sub);
+  margin-bottom: 4px;
+}
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 0.9em;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--rose);
+}
+.form-group textarea { resize: vertical; min-height: 60px; }
+
+/* ─── Summary ─── */
+.summary-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  font-size: 0.85em;
+  border-bottom: 1px solid #f5f0ec;
+}
+.summary-row:last-child { border-bottom: none; }
+.summary-row .label { color: var(--sub); }
+.summary-row .value { font-weight: 600; color: var(--text); text-align: right; max-width: 60%; }
+.summary-row.highlight .value { color: var(--rose); font-size: 1.1em; }
+
+/* ─── Buttons ─── */
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1em;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.btn-primary.rose {
+  background: var(--rose);
+  color: #fff;
+}
+.btn-primary.rose:hover { background: var(--rose-dark); }
+.btn-primary.green {
+  background: #25D366;
+  color: #fff;
+}
+.btn-primary.green:hover { background: #1fa855; }
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  font-size: 0.82em;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--sub);
+  margin-bottom: 16px;
+  transition: all 0.2s;
+}
+.btn-back:hover { border-color: var(--rose); color: var(--text); }
+
+/* ─── Footer ─── */
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.72em;
+  color: #bbb;
+}
+
+/* ─── Floating CTA ─── */
+.floating-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 16px;
+  background: rgba(253,250,246,0.95);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--line);
+  z-index: 100;
+}
+.floating-cta .btn-primary { max-width: 480px; margin: 0 auto; }
+
+/* ─── Month Nav ─── */
+.month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+.month-nav .month-label {
+  font-weight: 600;
+  font-size: 0.95em;
+  color: #4a3f3a;
+}
+.month-nav button {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-family: inherit;
+  color: var(--text);
+  transition: all 0.2s;
+}
+.month-nav button:hover { border-color: var(--rose); }
+
+/* ─── Confirmation Screen ─── */
+.confirm-hero {
+  text-align: center;
+  padding: 32px 20px;
+}
+.confirm-hero .check-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8em;
+  margin-bottom: 12px;
+}
+.confirm-hero h2 {
+  font-size: 1.2em;
+  color: #4a3f3a;
+  margin-bottom: 4px;
+}
+.confirm-hero p {
+  font-size: 0.85em;
+  color: var(--sub);
+}
+
+/* ─── Responsive ─── */
+@media (min-width: 481px) {
+  .main { padding: 0 24px 100px; }
+  .site-header { padding: 24px 20px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="site-header">
+  <h1>✨ StarLight Beauty</h1>
+  <p class="tagline">零壓力美容 · 不推銷 · 店主親手服務</p>
+  <div class="header-badges">
+    <span>🛡️ 不硬銷</span>
+    <span>💆‍♀️ 固定店主</span>
+    <span>⏰ 彈性預約</span>
+  </div>
+</div>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Main Content -->
+<div class="main" id="mainContent">
+  <!-- Step panels injected by JS -->
+</div>
+
+<!-- Floating CTA -->
+<div class="floating-cta" id="floatingCTA" style="display:none;"></div>
+
+<!-- Footer -->
+<div class="site-footer">StarLight Beauty © 2026 · 零壓力美容 · 不推銷 · 不儲值</div>
+
+<script>
+// ═══════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════
+
+const BRANCHES = [
+  {
+    id: 'tm',
+    name: '屯門店',
+    addr: '屯門工業中心C座（近輕鐵建安站）',
+    tag: 'popular',
+    tagText: '🔥 人氣之選',
+    hours: '星期一至日 9AM-10PM（彈性預約）',
+    note: '獨有2兆HM深層膠原儀器'
+  },
+  {
+    id: 'lck',
+    name: '荔枝角店',
+    addr: '荔枝角新光工業大廈（近港鐵站）',
+    tag: 'new',
+    tagText: '🆕 私密空間',
+    hours: '星期一至日 9AM-10PM（彈性預約）',
+    note: '獨有髗骶睡眠頭療'
+  },
+  {
+    id: 'pe',
+    name: '太子店',
+    addr: '太子始創中心（近太子/旺角東站）',
+    tag: 'new',
+    tagText: '🆕 高CP值',
+    hours: '星期一至日 9AM-10PM（彈性預約）',
+    note: '主打面部護理'
+  }
+];
+
+// Services data - 屯門價格 / 荔枝角太子價格
+const CATEGORIES = [
+  {
+    id: 'combo',
+    name: '💎 皇牌組合',
+    emoji: '💎',
+    items: [
+      { id:'p3', name:'星光美療組合 · 單次體驗', tmTrial:1280, tmPrice:1280, orig:2818, dur:'120min', branchOnly:'tm', tag:'hot', tagText:'🔥 熱銷', desc:'深層清潔+針清修眉+LED + 人手面護/儀器/身心療癒 各4選1（約2小時）' }
+    ]
+  },
+  {
+    id: 'promo',
+    name: '🔥 新客優惠',
+    emoji: '🔥',
+    items: [
+      { id:'p1', name:'奢華人手 SPA FACIAL', tmPrice:199, otherPrice:299, orig:680, dur:'60min', tag:'hot', tagText:'新客首選', desc:'液體黃金玫瑰精華油 · 全人手按摩' },
+      { id:'p2', name:'SPA + 頭肩頸雙重放鬆套餐', tmPrice:257, otherPrice:357, orig:738, dur:'90min', tag:'hot', tagText:'皇牌套餐', desc:'SPA面部 + 髗骶手法頭肩頸按摩' }
+    ]
+  },
+  {
+    id: 'basic',
+    name: '💆‍♀️ 人手護理',
+    emoji: '💆‍♀️',
+    items: [
+      { id:'b1', name:'皇牌人手SPA療程', tmTrial:150, otherTrial:252, tmPrice:480, otherPrice:630, dur:'60min' },
+      { id:'b2', name:'檜木面雕排毒療程', tmTrial:168, otherTrial:284, tmPrice:560, otherPrice:710, dur:'60min' },
+      { id:'b3', name:'排毒去水腫療程', tmTrial:192, otherTrial:316, tmPrice:640, otherPrice:790, dur:'60min' },
+      { id:'b4', name:'香薰精油全面護理療程', tmTrial:246, otherTrial:388, tmPrice:820, otherPrice:970, dur:'75min' },
+      { id:'b5', name:'Aqua Peel 深層清潔療程', tmTrial:150, otherTrial:252, tmPrice:480, otherPrice:630, dur:'45min' },
+      { id:'b6', name:'Aqua Peel 控油收毛孔療程', tmTrial:228, otherTrial:288, tmPrice:570, otherPrice:720, dur:'45min' },
+      { id:'b7', name:'學生面部護理療程 🎓', tmPrice:178, otherPrice:328, dur:'45min', noTrial:true },
+      { id:'b8', name:'祛黃提亮療程', tmTrial:156, otherTrial:268, tmPrice:520, otherPrice:670, dur:'60min' },
+      { id:'b9', name:'抗衰緊緻療程', tmTrial:156, otherTrial:268, tmPrice:520, otherPrice:670, dur:'60min' },
+      { id:'b10', name:'百草純露注氧療程', tmTrial:192, otherTrial:316, tmPrice:640, otherPrice:790, dur:'60min' },
+      { id:'b11', name:'韓國Medi-Peel玫瑰療程', tmTrial:168, otherTrial:284, tmPrice:560, otherPrice:710, dur:'60min' }
+    ]
+  },
+  {
+    id: 'target',
+    name: '🎯 針對性護理',
+    emoji: '🎯',
+    items: [
+      { id:'t1', name:'抗敏保濕修護療程', tmTrial:243, otherTrial:384, tmPrice:810, otherPrice:960, dur:'75min' },
+      { id:'t2', name:'舒敏修護療程', tmTrial:243, otherTrial:384, tmPrice:810, otherPrice:960, dur:'75min' },
+      { id:'t3', name:'NMN 逆齡賦活療程', tmTrial:168, otherTrial:284, tmPrice:560, otherPrice:710, dur:'60min' },
+      { id:'t4', name:'SMTS 幹細胞嬰兒水晶針療程', tmTrial:246, otherTrial:388, tmPrice:820, otherPrice:970, dur:'75min' },
+      { id:'t5', name:'Peel to Grow 打燈師療程', tmTrial:246, otherTrial:388, tmPrice:820, otherPrice:970, dur:'75min' },
+      { id:'t6', name:'InFine 黃金線雕逆齡針療程', tmTrial:246, otherTrial:388, tmPrice:820, otherPrice:970, dur:'75min' },
+      { id:'t7', name:'Sliswiss 無痛矽針煥膚療程', tmTrial:162, otherTrial:276, tmPrice:540, otherPrice:690, dur:'60min' },
+      { id:'t8', name:'Sliswiss NMN抗衰療程', tmTrial:162, otherTrial:276, tmPrice:540, otherPrice:690, dur:'60min' },
+      { id:'t9', name:'Sliswiss NMN眼部抗衰療程', tmTrial:150, otherTrial:228, tmPrice:420, otherPrice:570, dur:'45min' },
+      { id:'t10', name:'玻尿酸保濕水光槍療程', tmTrial:216, otherTrial:348, tmPrice:720, otherPrice:870, dur:'60min' }
+    ]
+  },
+  {
+    id: 'lift',
+    name: '📈 儀器提升',
+    emoji: '📈',
+    items: [
+      { id:'l1', name:'2兆HM深層膠原喚醒（1機頭）', tmTrial:232, tmPrice:580, dur:'30min', branchOnly:'tm', tag:'new', tagText:'屯門限定' },
+      { id:'l2', name:'2兆HM深層膠原喚醒（2機頭）', tmTrial:272, tmPrice:680, dur:'45min', branchOnly:'tm', tag:'hot', tagText:'🔥推薦' },
+      { id:'l3', name:'2兆HM深層膠原喚醒（3機頭）', tmTrial:312, tmPrice:780, dur:'60min', branchOnly:'tm' },
+      { id:'l4', name:'膠原槍面部療程', tmTrial:187, otherTrial:247, tmPrice:468, otherPrice:618, dur:'45min' },
+      { id:'l5', name:'膠原槍眼部療程', tmTrial:150, otherTrial:203, tmPrice:358, otherPrice:508, dur:'30min' },
+      { id:'l6', name:'膠原槍頸部療程', tmTrial:150, otherTrial:179, tmPrice:298, otherPrice:448, dur:'30min' },
+      { id:'l7', name:'無針埋線', tmTrial:352, otherTrial:392, tmPrice:880, otherPrice:980, dur:'60min' },
+      { id:'l8', name:'HIFU 4頭療程', tmTrial:480, otherTrial:540, tmPrice:1200, otherPrice:1350, dur:'60min' },
+      { id:'l9', name:'HIFU 7頭療程', tmTrial:720, otherTrial:780, tmPrice:1800, otherPrice:1950, dur:'90min' }
+    ]
+  },
+  {
+    id: 'optical',
+    name: '💡 光學療程',
+    emoji: '💡',
+    items: [
+      { id:'o1', name:'1064黑碳娃娃激光美白祛印', tmTrial:324, otherTrial:384, tmPrice:810, otherPrice:960, dur:'45min' },
+      { id:'o2', name:'激光全面嫩膚療程', tmTrial:400, otherTrial:460, tmPrice:1000, otherPrice:1150, dur:'45min' },
+      { id:'o3', name:'激光全面祛斑療程', tmTrial:480, otherTrial:540, tmPrice:1200, otherPrice:1350, dur:'60min' },
+      { id:'o4', name:'彩光全面嫩膚療程', tmTrial:232, otherTrial:292, tmPrice:580, otherPrice:730, dur:'30min' },
+      { id:'o5', name:'背部美白護理療程', tmTrial:232, otherTrial:292, tmPrice:580, otherPrice:730, dur:'30min' }
+    ]
+  },
+  {
+    id: 'body',
+    name: '🧖‍♀️ 身體護理',
+    emoji: '🧖‍♀️',
+    items: [
+      { id:'bd1', name:'草本養護精油按摩', tmPrice:498, otherPrice:648, dur:'45min' },
+      { id:'bd2', name:'沙棘排毒排酸精油按摩', tmPrice:448, otherPrice:598, dur:'45min' },
+      { id:'bd3', name:'植粹酵活精油按摩', tmPrice:588, otherPrice:738, dur:'45min' },
+      { id:'bd4', name:'磁叉經絡按摩', tmPrice:398, otherPrice:548, dur:'30min' },
+      { id:'bd5', name:'艾灸經絡按摩', tmPrice:398, otherPrice:548, dur:'30min' },
+      { id:'bd6', name:'暖宮養宮療程', tmPrice:698, otherPrice:848, dur:'45min' },
+      { id:'bd7', name:'髗骶睡眠頭療', tmTrial:380, otherTrial:312, tmPrice:780, otherPrice:780, dur:'60min', tag:'crown', tagText:'皇牌', branchOnlyNot:'pe' },
+      { id:'bd8', name:'全身汗蒸', tmPrice:280, otherPrice:430, dur:'30min' },
+      { id:'bd9', name:'瞓住瘦溶脂療程', tmPrice:299, otherPrice:449, dur:'30min' },
+      { id:'bd10', name:'減脂增肌', tmTrial:150, tmPrice:398, dur:'30min', branchOnly:'tm' }
+    ]
+  }
+];
+
+// Operating hours per day
+const OP_HOURS = {
+  1: [{s:9,e:12},{s:18,e:22}],   // Mon
+  2: [{s:9,e:22}],                 // Tue
+  3: [{s:9,e:11},{s:14,e:18}],     // Wed
+  4: [{s:9,e:22}],                 // Thu
+  5: [{s:9,e:22}],                 // Fri
+  6: [{s:9,e:18}],                 // Sat
+  0: [{s:9,e:22}]                  // Sun
+};
+
+const WHATSAPP_NUMBER = '85251669212'; // StarLight Beauty WhatsApp
+
+// ═══════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════
+let state = {
+  step: 1,
+  branch: null,
+  service: null,
+  date: null,
+  time: null,
+  name: '',
+  phone: '',
+  notes: '',
+  currentMonth: new Date().getMonth(),
+  currentYear: new Date().getFullYear()
+};
+
+// ═══════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════
+
+function render() {
+  renderProgress();
+  renderStep();
+  renderFloatingCTA();
+}
+
+function renderProgress() {
+  const labels = ['選分店','選療程','揀時間'];
+  const bar = document.getElementById('progressBar');
+  bar.innerHTML = labels.map((l, i) => {
+    const n = i + 1;
+    const isActive = n === state.step;
+    const isDone = n < state.step;
+    return `
+      ${i > 0 ? `<div class="step-line ${isDone ? 'done' : ''}"></div>` : ''}
+      <div class="step-col">
+        <div class="step-circle ${isActive ? 'active' : ''} ${isDone ? 'done' : ''}">${isDone ? '✓' : n}</div>
+        <div class="step-label ${isActive ? 'active' : ''}">${l}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderStep() {
+  const main = document.getElementById('mainContent');
+  switch(state.step) {
+    case 1: main.innerHTML = renderStep1(); break;
+    case 2: main.innerHTML = renderStep2(); break;
+    case 3: main.innerHTML = renderStep3(); break;
+    case 4: main.innerHTML = renderStep4(); break;
+  }
+}
+
+function renderStep1() {
+  return `
+    <div class="step-panel active">
+      <div class="section-title">📍 選擇分店</div>
+      ${BRANCHES.map(b => `
+        <div class="branch-card ${state.branch === b.id ? 'selected' : ''}" onclick="selectBranch('${b.id}')">
+          <div class="check-mark">✓</div>
+          <span class="branch-tag ${b.tag}">${b.tagText}</span>
+          <div class="branch-name">${b.name}</div>
+          <div class="branch-info">
+            📍 ${b.addr}<br>
+            ⏰ ${b.hours}<br>
+            ${b.note ? `✨ ${b.note}` : ''}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderStep2() {
+  const branch = state.branch;
+  const isTM = branch === 'tm';
+  const branchName = BRANCHES.find(b => b.id === branch)?.name || '';
+
+  // Filter categories based on branch
+  const filteredCats = CATEGORIES.map(cat => {
+    const filteredItems = cat.items.filter(item => {
+      if (item.branchOnly && item.branchOnly !== branch) return false;
+      if (item.branchOnlyNot && item.branchOnlyNot === branch) return false;
+      return true;
+    });
+    return { ...cat, items: filteredItems };
+  }).filter(cat => cat.items.length > 0);
+
+  // Default active tab
+  const activeCat = state._activeCat || filteredCats[0]?.id || 'promo';
+
+  let catContent = '';
+  const activeCatData = filteredCats.find(c => c.id === activeCat);
+  if (activeCatData) {
+    catContent = renderServiceCards(activeCatData, isTM);
+  }
+
+  return `
+    <div class="step-panel active">
+      <button class="btn-back" onclick="goStep(1)">← 返回選分店</button>
+      <div class="section-title">💆 選擇療程 <span style="font-size:0.7em;color:var(--sub);font-weight:400;">${branchName}</span></div>
+      <div class="cat-tabs">
+        ${filteredCats.map(c => `
+          <button class="cat-tab ${activeCat === c.id ? 'active' : ''}" onclick="switchCat('${c.id}')">${c.emoji} ${c.name.replace(/^[^\s]+\s/,'')}</button>
+        `).join('')}
+      </div>
+      ${catContent}
+    </div>
+  `;
+}
+
+function renderServiceCards(cat, isTM) {
+  if (cat.id === 'promo') {
+    return `<div class="service-list">${cat.items.map(item => {
+      const price = isTM ? item.tmPrice : item.otherPrice;
+      const selected = state.service?.id === item.id;
+      return `
+        <div class="promo-card ${selected ? 'selected' : ''}" onclick="selectService('${item.id}')">
+          <div class="promo-badge">${item.tagText}</div>
+          <div class="promo-name">${item.name}</div>
+          <div class="promo-price">$${price}<span class="promo-orig">$${item.orig}</span></div>
+          <div class="promo-desc">${item.desc} · 約${item.dur}</div>
+        </div>
+      `;
+    }).join('')}</div>`;
+  }
+
+  return `<div class="service-list">${cat.items.map(item => {
+    const price = isTM ? (item.tmPrice || 0) : (item.otherPrice || 0);
+    const trial = isTM ? (item.tmTrial || 0) : (item.otherTrial || 0);
+    const hasTrial = trial > 0 && !item.noTrial;
+    const selected = state.service?.id === item.id;
+    const tagHTML = item.tag ? `<span class="svc-tag ${item.tag}">${item.tagText}</span>` : '';
+
+    return `
+      <div class="service-card ${selected ? 'selected' : ''}" onclick="selectService('${item.id}')">
+        <div class="svc-left">
+          <div class="svc-name">${item.name}${tagHTML}</div>
+          <div class="svc-dur">⏱ 約${item.dur}</div>
+        </div>
+        <div class="svc-right">
+          ${hasTrial ? `
+            <div class="svc-price">$${trial} <span style="font-size:0.65em;font-weight:400;color:var(--sub);">體驗價</span></div>
+            <div class="svc-orig">正價 $${price}</div>
+          ` : `
+            <div class="svc-price" style="color:#4a3f3a;">$${price}</div>
+          `}
+        </div>
+        <div class="svc-check">${selected ? '✓' : ''}</div>
+      </div>
+    `;
+  }).join('')}</div>`;
+}
+
+function renderStep3() {
+  const branchName = BRANCHES.find(b => b.id === state.branch)?.name || '';
+  const svcName = state.service?.name || '';
+  const isTM = state.branch === 'tm';
+  const price = state.service ? (isTM ? (state.service.tmTrial || state.service.tmPrice || state.service.tmPrice) : (state.service.otherTrial || state.service.otherPrice || state.service.otherPrice)) : 0;
+
+  // Calendar
+  const calHTML = renderCalendar();
+
+  // Time slots
+  const timeHTML = state.date ? renderTimeSlots() : '<p style="font-size:0.85em;color:var(--sub);text-align:center;padding:16px;">請先選擇日期 ☝️</p>';
+
+  return `
+    <div class="step-panel active">
+      <button class="btn-back" onclick="goStep(2)">← 返回選療程</button>
+      <div class="section-title">📅 選擇日期時間</div>
+      <div style="font-size:0.8em;color:var(--sub);margin-bottom:8px;">
+        ${branchName} · ${svcName} · $${price}
+      </div>
+      ${calHTML}
+      <div class="section-title" style="margin-top:20px;">⏰ 選擇時間</div>
+      ${timeHTML}
+      <div class="section-title" style="margin-top:24px;">📝 你的資料</div>
+      <div class="form-group">
+        <label>姓名 *</label>
+        <input type="text" id="custName" placeholder="你的稱呼" value="${state.name}" oninput="state.name=this.value">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp 號碼 *</label>
+        <input type="tel" id="custPhone" placeholder="例如 9123 4567" value="${state.phone}" oninput="state.phone=this.value">
+      </div>
+      <div class="form-group">
+        <label>備註（選填）</label>
+        <textarea id="custNotes" placeholder="例如：敏感肌、特別需求..." oninput="state.notes=this.value">${state.notes}</textarea>
+      </div>
+    </div>
+  `;
+}
+
+function renderCalendar() {
+  const year = state.currentYear;
+  const month = state.currentMonth;
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const startDow = firstDay.getDay(); // 0=Sun
+  const daysInMonth = lastDay.getDate();
+
+  const monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  const dayLabels = ['日','一','二','三','四','五','六'];
+
+  let cells = '';
+  // Day labels
+  dayLabels.forEach(d => { cells += `<div class="day-label">${d}</div>`; });
+  // Empty cells before first day
+  for (let i = 0; i < startDow; i++) { cells += '<div class="date-cell empty"></div>'; }
+  // Days
+  for (let d = 1; d <= daysInMonth; d++) {
+    const thisDate = new Date(year, month, d);
+    thisDate.setHours(0,0,0,0);
+    const dow = thisDate.getDay();
+    const isPast = thisDate < today;
+    const isToday = thisDate.getTime() === today.getTime();
+    const isSelected = state.date && state.date.getTime() === thisDate.getTime();
+    const cls = [
+      'date-cell',
+      isPast ? 'disabled' : '',
+      isToday ? 'today' : '',
+      isSelected ? 'selected' : ''
+    ].filter(Boolean).join(' ');
+    cells += `<div class="${cls}" ${!isPast ? `onclick="selectDate(${year},${month},${d})"` : ''}>${d}</div>`;
+  }
+
+  const prevMonth = month === 0 ? 11 : month - 1;
+  const prevYear = month === 0 ? year - 1 : year;
+  const canPrev = new Date(prevYear, prevMonth + 1, 0) >= today;
+
+  return `
+    <div class="month-nav">
+      <button ${canPrev ? `onclick="changeMonth(-1)"` : 'disabled style="opacity:0.3;cursor:not-allowed;"`}>◀</button>
+      <span class="month-label">${year}年 ${monthNames[month]}</span>
+      <button onclick="changeMonth(1)">▶</button>
+    </div>
+    <div class="date-grid">${cells}</div>
+  `;
+}
+
+function renderTimeSlots() {
+  const date = state.date;
+  const dow = date.getDay();
+  const slots = OP_HOURS[dow] || [];
+  const now = new Date();
+  const isToday = date.toDateString() === now.toDateString();
+
+  let timeOptions = [];
+  slots.forEach(range => {
+    for (let h = range.s; h < range.e; h++) {
+      for (let m = 0; m < 60; m += 30) {
+        const tStr = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+        if (isToday) {
+          const slotTime = new Date(date);
+          slotTime.setHours(h, m, 0, 0);
+          if (slotTime <= new Date(now.getTime() + 60*60*1000)) continue; // skip past & <1hr ahead
+        }
+        timeOptions.push(tStr);
+      }
+    }
+  });
+
+  if (timeOptions.length === 0) {
+    return '<p style="font-size:0.85em;color:var(--sub);text-align:center;padding:16px;">今日已無可用時段，請選擇其他日期</p>';
+  }
+
+  return `<div class="time-grid">${timeOptions.map(t => `
+    <div class="time-slot ${state.time === t ? 'selected' : ''}" onclick="selectTime('${t}')">${t}</div>
+  `).join('')}</div>`;
+}
+
+function renderStep4() {
+  const branchName = BRANCHES.find(b => b.id === state.branch)?.name || '';
+  const isTM = state.branch === 'tm';
+  const svc = state.service;
+  const price = svc ? (isTM ? (svc.tmTrial || svc.tmPrice) : (svc.otherTrial || svc.otherPrice)) : 0;
+  const dateStr = state.date ? `${state.date.getFullYear()}/${state.date.getMonth()+1}/${state.date.getDate()} (${['日','一','二','三','四','五','六'][state.date.getDay()]})` : '';
+  const hasTrial = isTM ? !!svc.tmTrial : !!svc.otherTrial;
+  const priceLabel = hasTrial ? '體驗價' : '價格';
+
+  return `
+    <div class="step-panel active">
+      <button class="btn-back" onclick="goStep(3)">← 返回修改</button>
+      <div class="section-title">✅ 確認預約</div>
+      <div class="summary-card">
+        <div class="summary-row"><span class="label">分店</span><span class="value">${branchName}</span></div>
+        <div class="summary-row"><span class="label">療程</span><span class="value">${svc?.name}</span></div>
+        <div class="summary-row"><span class="label">日期</span><span class="value">${dateStr}</span></div>
+        <div class="summary-row"><span class="label">時間</span><span class="value">${state.time}</span></div>
+        <div class="summary-row highlight"><span class="label">${priceLabel}</span><span class="value">$${price}</span></div>
+        <div class="summary-row"><span class="label">姓名</span><span class="value">${state.name}</span></div>
+        <div class="summary-row"><span class="label">電話</span><span class="value">${state.phone}</span></div>
+        ${state.notes ? `<div class="summary-row"><span class="label">備註</span><span class="value">${state.notes}</span></div>` : ''}
+      </div>
+      <div style="background:#fffdf0;border-left:3px solid #e6c84d;padding:10px 14px;border-radius:0 8px 8px 0;font-size:0.8em;color:#7a6a2e;margin-bottom:16px;">
+        💡 提交後會透過 WhatsApp 發送預約資訊，店主會盡快確認預約。
+      </div>
+      <button class="btn-primary green" onclick="confirmBooking()">📲 WhatsApp 確認預約</button>
+      <p style="text-align:center;font-size:0.75em;color:var(--sub);margin-top:12px;">按鈕會打開 WhatsApp 並自動填入預約資訊</p>
+    </div>
+  `;
+}
+
+function renderFloatingCTA() {
+  const cta = document.getElementById('floatingCTA');
+  if (state.step === 1 && state.branch) {
+    cta.style.display = 'block';
+    cta.innerHTML = `<button class="btn-primary rose" onclick="goStep(2)">下一步 → 選擇療程</button>`;
+  } else if (state.step === 2 && state.service) {
+    cta.style.display = 'block';
+    cta.innerHTML = `<button class="btn-primary rose" onclick="goStep(3)">下一步 → 揀時間</button>`;
+  } else if (state.step === 3 && state.date && state.time && state.name && state.phone) {
+    cta.style.display = 'block';
+    cta.innerHTML = `<button class="btn-primary rose" onclick="goStep(4)">確認預約 →</button>`;
+  } else {
+    cta.style.display = 'none';
+  }
+}
+
+// ═══════════════════════════════════════
+// ACTIONS
+// ═══════════════════════════════════════
+
+function selectBranch(id) {
+  state.branch = id;
+  state.service = null;
+  state._activeCat = 'promo';
+  render();
+}
+
+function switchCat(catId) {
+  state._activeCat = catId;
+  render();
+}
+
+function selectService(id) {
+  // Find service across all categories
+  for (const cat of CATEGORIES) {
+    const item = cat.items.find(i => i.id === id);
+    if (item) { state.service = item; break; }
+  }
+  render();
+}
+
+function selectDate(y, m, d) {
+  state.date = new Date(y, m, d);
+  state.date.setHours(0,0,0,0);
+  state.time = null;
+  render();
+}
+
+function selectTime(t) {
+  state.time = t;
+  render();
+}
+
+function changeMonth(dir) {
+  state.currentMonth += dir;
+  if (state.currentMonth > 11) { state.currentMonth = 0; state.currentYear++; }
+  if (state.currentMonth < 0) { state.currentMonth = 11; state.currentYear--; }
+  render();
+}
+
+function goStep(n) {
+  state.step = n;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function confirmBooking() {
+  const branchName = BRANCHES.find(b => b.id === state.branch)?.name || '';
+  const isTM = state.branch === 'tm';
+  const svc = state.service;
+  const price = svc ? (isTM ? (svc.tmTrial || svc.tmPrice) : (svc.otherTrial || svc.otherPrice)) : 0;
+  const hasTrial = isTM ? !!svc.tmTrial : !!svc.otherTrial;
+  const dateStr = state.date ? `${state.date.getFullYear()}/${state.date.getMonth()+1}/${state.date.getDate()} (${['日','一','二','三','四','五','六'][state.date.getDay()]})` : '';
+  
+  const msg = `🌟 StarLight Beauty 預約
+
+📍 分店：${branchName}
+💆 療程：${svc?.name}
+💰 ${hasTrial ? '體驗價' : '價格'}：$${price}
+📅 日期：${dateStr}
+⏰ 時間：${state.time}
+
+👤 姓名：${state.name}
+📱 電話：${state.phone}
+${state.notes ? `📝 備註：${state.notes}` : ''}
+
+由線上預約系統提交 ✨`;
+
+  const encoded = encodeURIComponent(msg);
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
+  window.open(url, '_blank');
+
+  // Show confirmation screen
+  const main = document.getElementById('mainContent');
+  document.getElementById('floatingCTA').style.display = 'none';
+  document.getElementById('progressBar').innerHTML = '';
+  main.innerHTML = `
+    <div class="confirm-hero">
+      <div class="check-circle">✓</div>
+      <h2>預約資訊已發送！</h2>
+      <p>WhatsApp 已打開，發送訊息即可完成預約</p>
+    </div>
+    <div class="summary-card">
+      <div class="summary-row"><span class="label">分店</span><span class="value">${branchName}</span></div>
+      <div class="summary-row"><span class="label">療程</span><span class="value">${svc?.name}</span></div>
+      <div class="summary-row"><span class="label">日期</span><span class="value">${dateStr}</span></div>
+      <div class="summary-row"><span class="label">時間</span><span class="value">${state.time}</span></div>
+    </div>
+    <p style="text-align:center;font-size:0.8em;color:var(--sub);margin-top:12px;">店主會盡快 WhatsApp 回覆確認 🤍</p>
+    <button class="btn-primary rose" style="margin-top:16px;" onclick="resetBooking()">重新預約</button>
+  `;
+}
+
+function resetBooking() {
+  state = {
+    step: 1,
+    branch: null,
+    service: null,
+    date: null,
+    time: null,
+    name: '',
+    phone: '',
+    notes: '',
+    currentMonth: new Date().getMonth(),
+    currentYear: new Date().getFullYear()
+  };
+  render();
+}
+
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+render();
+</script>
+
+</body>
+</html>

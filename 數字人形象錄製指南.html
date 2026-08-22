@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StarLight Beauty — 數字人形象錄製指南</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif; background: #FFF5F8; color: #333; line-height: 1.8; }
+.container { max-width: 700px; margin: 0 auto; padding: 20px; }
+h1 { text-align: center; font-size: 22px; color: #D4537E; margin: 20px 0 5px; }
+.subtitle { text-align: center; font-size: 14px; color: #888; margin-bottom: 30px; }
+
+.section { background: white; border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.section-title { font-size: 17px; font-weight: 600; color: #993556; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.section-title .icon { font-size: 20px; }
+
+/* Setup checklist */
+.checklist { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.check-item { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 8px; font-size: 14px; }
+.check-item.do { background: #E1F5EE; color: #085041; }
+.check-item.dont { background: #FAECE7; color: #712B13; }
+.check-item .mark { font-weight: 700; font-size: 16px; }
+
+/* Script segments */
+.segment { border-radius: 12px; padding: 18px; margin-bottom: 14px; position: relative; }
+.segment .time-badge { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 8px; }
+.segment .seg-title { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+.segment .script-text { font-size: 15px; line-height: 2; padding: 14px; background: rgba(255,255,255,0.6); border-radius: 8px; margin-bottom: 10px; }
+.segment .action-cue { font-size: 13px; display: flex; flex-wrap: wrap; gap: 8px; }
+.segment .action-cue span { padding: 4px 10px; border-radius: 6px; font-size: 12px; }
+
+.seg-1 { background: #FBEAF0; } .seg-1 .time-badge { background: #D4537E; color: white; } .seg-1 .seg-title { color: #993556; } .seg-1 .action-cue span { background: #F4C0D1; color: #72243E; }
+.seg-2 { background: #E6F1FB; } .seg-2 .time-badge { background: #378ADD; color: white; } .seg-2 .seg-title { color: #0C447C; } .seg-2 .action-cue span { background: #B5D4F4; color: #0C447C; }
+.seg-3 { background: #EAF3DE; } .seg-3 .time-badge { background: #639922; color: white; } .seg-3 .seg-title { color: #27500A; } .seg-3 .action-cue span { background: #C0DD97; color: #27500A; }
+.seg-4 { background: #FAEEDA; } .seg-4 .time-badge { background: #EF9F27; color: white; } .seg-4 .seg-title { color: #633806; } .seg-4 .action-cue span { background: #FAC775; color: #633806; }
+.seg-5 { background: #EEEDFE; } .seg-5 .time-badge { background: #7F77DD; color: white; } .seg-5 .seg-title { color: #3C3489; } .seg-5 .action-cue span { background: #CECBF6; color: #3C3489; }
+.seg-6 { background: #FAECE7; } .seg-6 .time-badge { background: #D85A30; color: white; } .seg-6 .seg-title { color: #712B13; } .seg-6 .action-cue span { background: #F5C4B3; color: #712B13; }
+
+/* Tips */
+.tips-list { list-style: none; }
+.tips-list li { padding: 10px 0 10px 28px; position: relative; font-size: 14px; border-bottom: 1px solid #f0f0f0; }
+.tips-list li:last-child { border-bottom: none; }
+.tips-list li:before { content: ""; position: absolute; left: 0; top: 14px; width: 16px; height: 16px; border-radius: 50%; background: #D4537E; }
+.tips-list li:after { content: ""; position: absolute; left: 5px; top: 19px; width: 6px; height: 6px; border-radius: 50%; background: white; }
+
+/* Post-recording steps */
+.steps { counter-reset: step; }
+.step { padding: 14px 14px 14px 52px; position: relative; margin-bottom: 10px; background: #FBEAF0; border-radius: 10px; }
+.step:before { counter-increment: step; content: counter(step); position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; background: #D4537E; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; }
+.step-title { font-size: 14px; font-weight: 600; color: #993556; }
+.step-desc { font-size: 13px; color: #666; margin-top: 3px; }
+
+.footer { text-align: center; padding: 20px; font-size: 12px; color: #aaa; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>StarLight Beauty</h1>
+  <p class="subtitle">數字人形象錄製指南 — 剪映專業版 SVIP</p>
+
+  <!-- Setup -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📷</span> 錄製環境設定</div>
+    <div class="checklist">
+      <div class="check-item do"><span class="mark">✓</span> 素顏或淡妝</div>
+      <div class="check-item do"><span class="mark">✓</span> 紮起頭髮，露出耳朵</div>
+      <div class="check-item do"><span class="mark">✓</span> 正面對鏡頭，頭部居中</div>
+      <div class="check-item do"><span class="mark">✓</span> 兩側 45° 補光燈</div>
+      <div class="check-item do"><span class="mark">✓</span> 純色背景（白/淺色牆）</div>
+      <div class="check-item do"><span class="mark">✓</span> 手機/相機用腳架固定</div>
+      <div class="check-item do"><span class="mark">✓</span> 鏡頭與眼平齊，距離 50-60cm</div>
+      <div class="check-item do"><span class="mark">✓</span> 錄影 1080p 或以上</div>
+      <div class="check-item dont"><span class="mark">✗</span> 唔好戴眼鏡</div>
+      <div class="check-item dont"><span class="mark">✗</span> 唔好戴帽/口罩/耳機</div>
+      <div class="check-item dont"><span class="mark">✗</span> 唔好有頭髮遮面</div>
+      <div class="check-item dont"><span class="mark">✗</span> 唔好背光（窗喺背後）</div>
+    </div>
+  </div>
+
+  <!-- Full Script -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🎤</span> 完整 3 分鐘講稿</div>
+    <p style="font-size:13px;color:#888;margin-bottom:16px;">一次過錄完，唔好中途停。自然講，唔好背稿，食螺絲冇所謂，表情到位最重要。</p>
+
+    <!-- Seg 1 -->
+    <div class="segment seg-1">
+      <span class="time-badge">0:00 - 0:30</span>
+      <div class="seg-title">第1段：自我介紹</div>
+      <div class="script-text">
+        「大家好，我係 Yuki，StarLight Beauty 嘅店主。我喺屯門、荔枝角同太子開咗三間美容養生館，做咗好多年美容。我最鍾意就係見到客人做完療程之後，個個都靚靚開心咁走，呢個就係我堅持嘅動力。」
+      </div>
+      <div class="action-cue">
+        <span>😊 自然微笑</span>
+        <span>正面對鏡頭</span>
+        <span>語速適中</span>
+        <span>放鬆自然</span>
+      </div>
+    </div>
+
+    <!-- Seg 2 -->
+    <div class="segment seg-2">
+      <span class="time-badge">0:30 - 1:00</span>
+      <div class="seg-title">第2段：服務介紹</div>
+      <div class="script-text">
+        「我哋主要做生活美容同養生舒緩，包括面部護理、采耳、角蛋白、美胸、暖宮、化妝、飄霧眉，仲有皇牌人手 SPA 療程。每一個療程都係我親手做，唔會換人，唔會推銷，亦都唔會有隱藏收費。你嚟到就係為咗放鬆。」
+      </div>
+      <div class="action-cue">
+        <span>😐 認真表情</span>
+        <span>講重點時輕微點頭</span>
+        <span>「唔推銷」加重語氣</span>
+      </div>
+    </div>
+
+    <!-- Seg 3 -->
+    <div class="segment seg-3">
+      <span class="time-badge">1:00 - 1:30</span>
+      <div class="seg-title">第3段：理念分享</div>
+      <div class="script-text">
+        「好多客人同我講，以前去美容院好大壓力，成日被人推銷，又唔知邊個幫自己做。所以我就開咗 StarLight，想做一個真正零壓力嘅地方。你嚟到，就係為咗放鬆，為咗令自己靚啲、舒服啲，其他嘢你唔使擔心，交俾我就得。」
+      </div>
+      <div class="action-cue">
+        <span>🥰 溫暖真誠</span>
+        <span>講「零壓力」時微微點頭</span>
+        <span>語氣柔和</span>
+        <span>眼神堅定</span>
+      </div>
+    </div>
+
+    <!-- Seg 4 -->
+    <div class="segment seg-4">
+      <span class="time-badge">1:30 - 2:00</span>
+      <div class="seg-title">第4段：開心分享</div>
+      <div class="script-text">
+        「最開心嘅時候，就係見到客人第一次嚟，可能好緊張、好戒備，但做完之後同我講：『嘩，原來真係唔推銷嘅！』嗰種被信任嘅感覺，真係好滿足。我好鍾意我嘅工作，每日都可以幫到人靚啲、開心啲，呢個就係我嘅使命。」
+      </div>
+      <div class="action-cue">
+        <span>😄 開心笑容</span>
+        <span>語氣活潑</span>
+        <span>輕微左右轉頭</span>
+        <span>講「好滿足」時眼神發光</span>
+      </div>
+    </div>
+
+    <!-- Seg 5 -->
+    <div class="segment seg-5">
+      <span class="time-badge">2:00 - 2:30</span>
+      <div class="seg-title">第5段：專業講解</div>
+      <div class="script-text">
+        「講到皮膚護理，其實最重要嘅唔係用幾貴嘅產品，而係了解你自己嘅膚質。每個人嘅皮膚都唔同，敏感肌有敏感肌嘅做法，油性肌有油性肌嘅護理方式。我會根據你嘅皮膚狀況，度身訂造最啱你嘅療程方案。」
+      </div>
+      <div class="action-cue">
+        <span>🧐 認真專業</span>
+        <span>適當停頓（每句之間停 0.5 秒）</span>
+        <span>輕微點頭</span>
+        <span>語速稍慢</span>
+      </div>
+    </div>
+
+    <!-- Seg 6 -->
+    <div class="segment seg-6">
+      <span class="time-badge">2:30 - 3:00</span>
+      <div class="seg-title">第6段：收尾 + 預告</div>
+      <div class="script-text">
+        「如果你有興趣了解多啲，歡迎隨時 DM 我，或者直接 WhatsApp 預約。我喺屯門、荔枝角同太子都有店，朝九晚十，彈性預約。期待見到你，記住，靚係由內到外嘅，我陪你一齊慢慢靚落去。多謝大家支持，拜拜！」
+      </div>
+      <div class="action-cue">
+        <span>😊 溫暖微笑</span>
+        <span>講「拜拜」時輕輕揮手</span>
+        <span>語氣親切</span>
+        <span>最後保持微笑 2 秒</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tips -->
+  <div class="section">
+    <div class="section-title"><span class="icon">💡</span> 錄製小貼士</div>
+    <ul class="tips-list">
+      <li><strong>一次過錄完</strong> — 剪映要連續影片做克隆素材，中間唔好停</li>
+      <li><strong>唔好背稿</strong> — 自然講，食螺絲冇所謂，表情到位最緊要</li>
+      <li><strong>錄多 2-3 take</strong> — 揀最好嗰條，克隆後冇得重來</li>
+      <li><strong>表情要誇張少少</strong> — 數字人會將表情弱化，錄嘅時候表情大啲，出嚟先自然</li>
+      <li><strong>頭部要有動</strong> — 唔好全程不動，輕微左右轉、點頭，克隆出嚟先唔會生硬</li>
+      <li><strong>望鏡頭講嘢</strong> — 唔好望屏幕，望鏡頭先有眼神交流嘅效果</li>
+      <li><strong>收音清晰</strong> — 喺安靜房間錄，剪映會用你嘅聲音做唇形同步參考</li>
+      <li><strong>著素色衫</strong> — 唔好著花紋太多嘅衫，純色最好</li>
+    </ul>
+  </div>
+
+  <!-- Post recording -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🎬</span> 錄完之後點做</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-title">打開剪映專業版</div>
+        <div class="step-desc">素材庫 → 數字人 → 形象定制 → 上傳影片</div>
+      </div>
+      <div class="step">
+        <div class="step-title">等待克隆完成</div>
+        <div class="step-desc">大約需要 1 小時，完成後會收到通知</div>
+      </div>
+      <div class="step">
+        <div class="step-title">測試生成</div>
+        <div class="step-desc">寫一段短文案 → 揀粵語音色 → 生成 10 秒測試片</div>
+      </div>
+      <div class="step">
+        <div class="step-title">正式出片</div>
+        <div class="step-desc">寫好 Reel 文案 → 生成數字人片 → 加字幕/BGM/過場 → 導出</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    StarLight Beauty × 小暖 🌿 — 數字人形象錄製指南<br>
+    2026-07-08
+  </div>
+</div>
+</body>
+</html>
