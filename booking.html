@@ -740,7 +740,7 @@ const WHATSAPP_NUMBER = '85251669212'; // StarLight Beauty WhatsApp
 // ═══════════════════════════════════════
 // CALENDAR SYNC (方案 C: GAS proxy + schedule.json fallback)
 // ═══════════════════════════════════════
-const GAS_URL = ''; // ★ 貼上你部署嘅 Google Apps Script Web App URL（Deploy 後 copy 過嚟）
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbzS0PATza6lS9m_UWNAKU82FspPTN00IzXlbUg58NrA_B5ouNy12mCAveKQerc0PZlxgA/exec'; // ★ GAS Web App URL（即時讀 Google Calendar）
 const SCHEDULE_JSON = 'schedule.json'; // 倉庫內 fallback cache（同 booking.html 同一層）
 let busyData = {};        // { "YYYY-MM-DD": [[startMin, endMin, branchKey], ...] }
 let calSyncStatus = 'idle'; // idle | cached | syncing | synced | error
