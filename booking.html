@@ -738,6 +738,96 @@ const OP_HOURS = {
 const WHATSAPP_NUMBER = '85251669212'; // StarLight Beauty WhatsApp
 
 // ═══════════════════════════════════════
+// CALENDAR SYNC (方案 C: GAS proxy + schedule.json fallback)
+// ═══════════════════════════════════════
+const GAS_URL = ''; // ★ 貼上你部署嘅 Google Apps Script Web App URL（Deploy 後 copy 過嚟）
+const SCHEDULE_JSON = 'schedule.json'; // 倉庫內 fallback cache（同 booking.html 同一層）
+let busyData = {};        // { "YYYY-MM-DD": [[startMin, endMin, branchKey], ...] }
+let calSyncStatus = 'idle'; // idle | cached | syncing | synced | error
+
+function getTravelBuffer(selBr, busyBr) {
+  if (!selBr || !busyBr) return 60;
+  if (selBr === busyBr) return 0;
+  var hasTM = (selBr === 'tm' || busyBr === 'tm');
+  return hasTM ? 60 : 30;
+}
+function detectBranch(summary, location) {
+  var text = (summary || '') + ' ' + (location || '');
+  if (/屯門|tuen/i.test(text)) return 'tm';
+  if (/荔枝角|lai\s*chi/i.test(text)) return 'lck';
+  if (/太子|prince/i.test(text)) return 'pe';
+  return '';
+}
+function isSlotBusy(slotDate, slotH, slotM, durMin) {
+  if (!busyData) return false;
+  var ds = slotDate.getFullYear() + '-' + String(slotDate.getMonth()+1).padStart(2,'0') + '-' + String(slotDate.getDate()).padStart(2,'0');
+  var slots = busyData[ds];
+  if (!slots) return false;
+  var sMin = slotH*60 + slotM, eMin = sMin + durMin;
+  var selBr = state.branch;
+  for (var i = 0; i < slots.length; i++) {
+    var bs0 = slots[i][0], be0 = slots[i][1];
+    var bBr = slots[i][2] || '';
+    var isPriv = slots[i][3]; // 私人行程（紅色 Yuki Lam 日曆）→ 已自包通勤，唔加 travel buffer
+    var buf = isPriv ? 0 : getTravelBuffer(selBr, bBr);
+    var bs = bs0 - buf; if (bs < 0) bs = 0;
+    var be = be0 + buf; if (be > 1440) be = 1440;
+    if (sMin < be && eMin > bs) return true;
+  }
+  return false;
+}
+function renderSyncBadge() {
+  var el = document.getElementById('syncBadge');
+  if (!el) return;
+  if (calSyncStatus === 'syncing') el.innerHTML = '⏳ 同步日曆中…';
+  else if (calSyncStatus === 'synced') el.innerHTML = '✅ 即時同步 Google 日曆';
+  else if (calSyncStatus === 'cached') el.innerHTML = '📅 已載入日曆（快取）';
+  else if (calSyncStatus === 'error') el.innerHTML = '⚠️ 日曆同步失敗（用預載）';
+  el.style.cssText = 'font-size:0.72em;color:#8a7d75;margin:2px 0 12px;text-align:right;';
+}
+function loadFallback() {
+  fetch(SCHEDULE_JSON + '?t=' + Date.now())
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(function(d){
+      if (d && d.busy) {
+        busyData = d.busy;
+        if (calSyncStatus !== 'synced') { calSyncStatus = 'cached'; renderSyncBadge(); if (state.step === 3 && state.date) renderStep3(); }
+      }
+    })
+    .catch(function(e){ console.log('schedule.json load failed:', e); });
+}
+function fetchGASCAL() {
+  if (!GAS_URL) return; // 未設定 live source → 用 fallback
+  fetch(GAS_URL + (GAS_URL.indexOf('?') >= 0 ? '&' : '?') + 'cb=' + Date.now())
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(function(d){
+      if (d && d.busy && Object.keys(d.busy).length) {
+        busyData = d.busy; calSyncStatus = 'synced'; renderSyncBadge();
+        if (state.step === 3 && state.date) renderStep3();
+      } else { throw new Error('empty busy'); }
+    })
+    .catch(function(e){
+      console.log('GAS fetch failed:', e);
+      calSyncStatus = (busyData && Object.keys(busyData).length) ? 'cached' : 'error';
+      renderSyncBadge();
+      if (state.step === 3 && state.date) renderStep3();
+    });
+}
+function initCalSync() {
+  if (calSyncStatus === 'syncing' || calSyncStatus === 'synced') return;
+  loadFallback();
+  calSyncStatus = 'syncing'; renderSyncBadge();
+  fetchGASCAL();
+  setTimeout(function() {
+    if (calSyncStatus === 'syncing') {
+      calSyncStatus = (busyData && Object.keys(busyData).length) ? 'cached' : 'error';
+      renderSyncBadge();
+      if (state.step === 3 && state.date) renderStep3();
+    }
+  }, 8000);
+}
+
+// ═══════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════
 let state = {
@@ -785,7 +875,7 @@ function renderStep() {
   switch(state.step) {
     case 1: main.innerHTML = renderStep1(); break;
     case 2: main.innerHTML = renderStep2(); break;
-    case 3: main.innerHTML = renderStep3(); break;
+    case 3: main.innerHTML = renderStep3(); renderSyncBadge(); break;
     case 4: main.innerHTML = renderStep4(); break;
   }
 }
@@ -912,6 +1002,7 @@ function renderStep3() {
       </div>
       ${calHTML}
       <div class="section-title" style="margin-top:20px;">⏰ 選擇時間</div>
+      <div id="syncBadge"></div>
       ${timeHTML}
       <div class="section-title" style="margin-top:24px;">📝 你的資料</div>
       <div class="form-group">
@@ -996,7 +1087,8 @@ function renderTimeSlots() {
           slotTime.setHours(h, m, 0, 0);
           if (slotTime <= new Date(now.getTime() + 60*60*1000)) continue; // skip past & <1hr ahead
         }
-        timeOptions.push(tStr);
+        const busy = isSlotBusy(date, h, m, 60);
+        timeOptions.push({ t: tStr, busy: busy });
       }
     }
   });
@@ -1005,8 +1097,8 @@ function renderTimeSlots() {
     return '<p style="font-size:0.85em;color:var(--sub);text-align:center;padding:16px;">今日已無可用時段，請選擇其他日期</p>';
   }
 
-  return `<div class="time-grid">${timeOptions.map(t => `
-    <div class="time-slot ${state.time === t ? 'selected' : ''}" onclick="selectTime('${t}')">${t}</div>
+  return `<div class="time-grid">${timeOptions.map(o => `
+    <div class="time-slot ${state.time === o.t ? 'selected' : ''} ${o.busy ? 'disabled' : ''}" ${o.busy ? '' : `onclick="selectTime('${o.t}')"`}>${o.t}</div>
   `).join('')}</div>`;
 }
 
@@ -1175,6 +1267,7 @@ function resetBooking() {
 // INIT
 // ═══════════════════════════════════════
 render();
+initCalSync();
 </script>
 
 </body>
