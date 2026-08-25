@@ -724,16 +724,19 @@ const CATEGORIES = [
   }
 ];
 
-// Operating hours per day
+// Operating hours per day (shop open window)
 const OP_HOURS = {
-  1: [{s:9,e:22}],                 // Mon
-  2: [{s:9,e:22}],                 // Tue
-  3: [{s:9,e:11},{s:14,e:18}],     // Wed
-  4: [{s:9,e:22}],                 // Thu
-  5: [{s:9,e:22}],                 // Fri
-  6: [{s:9,e:18}],                 // Sat
-  0: [{s:9,e:22}]                  // Sun
+  1: [{s:9,e:22}],   // Mon  9:00–22:00
+  2: [{s:9,e:22}],   // Tue  9:00–22:00
+  3: [{s:9,e:18}],   // Wed  9:00–18:00
+  4: [{s:9,e:22}],   // Thu  9:00–22:00
+  5: [{s:9,e:22}],   // Fri  9:00–22:00
+  6: [{s:9,e:18}],   // Sat  9:00–18:00
+  0: [{s:9,e:22}]    // Sun  9:00–22:00
 };
+
+// Last booking start time per day (latest slot a customer may begin)
+const LAST_BOOKING = { 1:20, 2:20, 3:16, 4:20, 5:20, 6:16, 0:20 }; // hour; Wed/Sat 16:00, others 20:00
 
 const WHATSAPP_NUMBER = '85251669212'; // StarLight Beauty WhatsApp
 
@@ -1076,12 +1079,14 @@ function renderTimeSlots() {
   const slots = OP_HOURS[dow] || [];
   const now = new Date();
   const isToday = date.toDateString() === now.toDateString();
+  const lastBookMin = (LAST_BOOKING[dow] || 22) * 60; // 最後可開始預約的分鐘數
 
   let timeOptions = [];
   slots.forEach(range => {
     for (let h = range.s; h < range.e; h++) {
       for (let m = 0; m < 60; m += 30) {
         const tStr = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+        if (h*60 + m > lastBookMin) continue; // 超過最後預約時刻就唔出
         if (isToday) {
           const slotTime = new Date(date);
           slotTime.setHours(h, m, 0, 0);
