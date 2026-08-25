@@ -971,7 +971,7 @@ function renderCalendar() {
 
   return `
     <div class="month-nav">
-      <button ${canPrev ? `onclick="changeMonth(-1)"` : 'disabled style="opacity:0.3;cursor:not-allowed;"`}>◀</button>
+      <button ${canPrev ? 'onclick="changeMonth(-1)"' : 'disabled style="opacity:0.3;cursor:not-allowed;"'}>◀</button>
       <span class="month-label">${year}年 ${monthNames[month]}</span>
       <button onclick="changeMonth(1)">▶</button>
     </div>
