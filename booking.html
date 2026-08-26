@@ -738,6 +738,8 @@ const OP_HOURS = {
 // Last booking start time per day (latest slot a customer may begin)
 const LAST_BOOKING = { 1:20, 2:20, 3:16, 4:20, 5:20, 6:16, 0:20 }; // hour; Wed/Sat 16:00, others 20:00
 
+const SAME_DAY_BOOKING = false; // 是否接受即日預約：false = 不接受（今日不可約），true = 接受
+
 const WHATSAPP_NUMBER = '85251669212'; // StarLight Beauty WhatsApp
 
 // ═══════════════════════════════════════
@@ -1004,6 +1006,7 @@ function renderStep3() {
         ${branchName} · ${svcName} · $${price}
       </div>
       ${calHTML}
+      <div style="font-size:0.78em;color:var(--sub);text-align:center;margin-top:6px;">* 本店不接受即日預約，請選擇明日或以後 📅</div>
       <div class="section-title" style="margin-top:20px;">⏰ 選擇時間</div>
       <div id="syncBadge"></div>
       ${timeHTML}
@@ -1049,14 +1052,15 @@ function renderCalendar() {
     const dow = thisDate.getDay();
     const isPast = thisDate < today;
     const isToday = thisDate.getTime() === today.getTime();
+    const isBlocked = isPast || (isToday && !SAME_DAY_BOOKING); // 不接受即日預約 → 今日同過去一樣灰咗
     const isSelected = state.date && state.date.getTime() === thisDate.getTime();
     const cls = [
       'date-cell',
-      isPast ? 'disabled' : '',
+      isBlocked ? 'disabled' : '',
       isToday ? 'today' : '',
       isSelected ? 'selected' : ''
     ].filter(Boolean).join(' ');
-    cells += `<div class="${cls}" ${!isPast ? `onclick="selectDate(${year},${month},${d})"` : ''}>${d}</div>`;
+    cells += `<div class="${cls}" ${!isBlocked ? `onclick="selectDate(${year},${month},${d})"` : ''}>${d}</div>`;
   }
 
   const prevMonth = month === 0 ? 11 : month - 1;
@@ -1081,17 +1085,17 @@ function renderTimeSlots() {
   const isToday = date.toDateString() === now.toDateString();
   const lastBookMin = (LAST_BOOKING[dow] || 22) * 60; // 最後可開始預約的分鐘數
 
+  // 不接受即日預約：就算 somehow 揀咗今日，都彈提示唔俾約
+  if (isToday && !SAME_DAY_BOOKING) {
+    return '<p style="font-size:0.9em;color:#c0392b;text-align:center;padding:16px;line-height:1.6;">本店不接受即日預約 🚫<br>請選擇明日或以後的日期 ☝️</p>';
+  }
+
   let timeOptions = [];
   slots.forEach(range => {
     for (let h = range.s; h < range.e; h++) {
       for (let m = 0; m < 60; m += 30) {
         const tStr = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
         if (h*60 + m > lastBookMin) continue; // 超過最後預約時刻就唔出
-        if (isToday) {
-          const slotTime = new Date(date);
-          slotTime.setHours(h, m, 0, 0);
-          if (slotTime <= new Date(now.getTime() + 60*60*1000)) continue; // skip past & <1hr ahead
-        }
         const busy = isSlotBusy(date, h, m, 60);
         timeOptions.push({ t: tStr, busy: busy });
       }
