@@ -606,24 +606,15 @@ const BRANCHES = [
   {
     id: 'lck',
     name: '荔枝角店',
-    addr: '荔枝角新光工業大廈（近港鐵站）',
+    addr: '荔枝角青山道497號時來工業大厦5樓12室（近荔枝角站）',
     tag: 'new',
     tagText: '🆕 私密空間',
     hours: '星期一至日 9AM-10PM（彈性預約）',
     note: '獨有髗骶睡眠頭療'
-  },
-  {
-    id: 'pe',
-    name: '太子店',
-    addr: '太子始創中心（近太子/旺角東站）',
-    tag: 'new',
-    tagText: '🆕 高CP值',
-    hours: '星期一至日 9AM-10PM（彈性預約）',
-    note: '主打面部護理'
   }
 ];
 
-// Services data - 屯門價格 / 荔枝角太子價格
+// Services data - 屯門價格 / 荔枝角價格
 const CATEGORIES = [
   {
     id: 'combo',
@@ -716,7 +707,7 @@ const CATEGORIES = [
       { id:'bd4', name:'磁叉經絡按摩', tmPrice:398, otherPrice:548, dur:'30min' },
       { id:'bd5', name:'艾灸經絡按摩', tmPrice:398, otherPrice:548, dur:'30min' },
       { id:'bd6', name:'暖宮養宮療程', tmPrice:698, otherPrice:848, dur:'45min' },
-      { id:'bd7', name:'髗骶睡眠頭療', tmTrial:380, otherTrial:312, tmPrice:780, otherPrice:780, dur:'60min', tag:'crown', tagText:'皇牌', branchOnlyNot:'pe' },
+      { id:'bd7', name:'髗骶睡眠頭療', tmTrial:380, otherTrial:312, tmPrice:780, otherPrice:780, dur:'60min', tag:'crown', tagText:'皇牌' },
       { id:'bd8', name:'全身汗蒸', tmPrice:280, otherPrice:430, dur:'30min' },
       { id:'bd9', name:'瞓住瘦溶脂療程', tmPrice:299, otherPrice:449, dur:'30min' },
       { id:'bd10', name:'減脂增肌', tmTrial:150, tmPrice:398, dur:'30min', branchOnly:'tm' }
@@ -740,7 +731,7 @@ const LAST_BOOKING = { 1:20, 2:20, 3:16, 4:20, 5:20, 6:16, 0:20 }; // hour; Wed/
 
 const SAME_DAY_BOOKING = false; // 是否接受即日預約：false = 不接受（今日不可約），true = 接受
 
-const WHATSAPP_NUMBER = '85251669212'; // StarLight Beauty WhatsApp
+const WHATSAPP_NUMBER = '85260828181'; // StarLight Beauty WhatsApp
 
 // ═══════════════════════════════════════
 // CALENDAR SYNC (方案 C: GAS proxy + schedule.json fallback)
@@ -760,7 +751,7 @@ function detectBranch(summary, location) {
   var text = (summary || '') + ' ' + (location || '');
   if (/屯門|tuen/i.test(text)) return 'tm';
   if (/荔枝角|lai\s*chi/i.test(text)) return 'lck';
-  if (/太子|prince/i.test(text)) return 'pe';
+  if (/太子|prince/i.test(text)) return 'lck'; // 太子已停，統一歸入荔枝角
   return '';
 }
 function isSlotBusy(slotDate, slotH, slotM, durMin) {

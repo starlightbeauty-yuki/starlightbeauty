@@ -320,6 +320,39 @@ body {
 }
 .footer a { color: var(--rose); text-decoration: none; }
 
+/* 開張茶會橫幅 */
+.opening-banner {
+  background: linear-gradient(135deg, #3C3489 0%, #534AB7 55%, #7F77DD 100%);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: #fff;
+  box-shadow: 0 6px 28px rgba(60,52,137,0.35);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: openingPulse 2.4s ease-in-out infinite;
+}
+.opening-banner:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(60,52,137,0.5); }
+.opening-banner:active { transform: scale(0.98); }
+@keyframes openingPulse {
+  0%, 100% { box-shadow: 0 6px 28px rgba(60,52,137,0.35); }
+  50% { box-shadow: 0 6px 38px rgba(60,52,137,0.6); }
+}
+.opening-banner .s-icon { font-size: 2.2em; flex-shrink: 0; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); }
+.opening-banner .s-info { flex: 1; min-width: 0; }
+.opening-banner .s-title { font-size: 1.15em; font-weight: 800; letter-spacing: 0.3px; }
+.opening-banner .s-desc { font-size: 0.82em; opacity: 0.95; margin-top: 3px; line-height: 1.5; }
+.opening-banner .s-badge {
+  background: #FAC775; color: #412402; font-size: 0.68em; font-weight: 800;
+  padding: 3px 9px; border-radius: 20px; flex-shrink: 0;
+}
+.opening-banner .s-arrow { font-size: 1.1em; opacity: 0.85; flex-shrink: 0; }
+
 /* Responsive */
 @media (max-width: 400px) {
   .brand { font-size: 2em; }
@@ -350,6 +383,17 @@ body {
   </div>
 </div>
 
+<!-- 開張茶會邀請橫幅 -->
+<a class="opening-banner" href="lkc-opening.html" target="_blank">
+  <div class="s-badge">🎉 9月20日</div>
+  <div class="s-icon">🫖</div>
+  <div class="s-info">
+    <div class="s-title">荔枝角新工作室 · 開張茶會</div>
+    <div class="s-desc">青山道497號時來工業大厦5樓12室<br>9月20日（日）下午2:00–5:00 · 免費入場 · 備茶點</div>
+  </div>
+  <div class="s-arrow">▶</div>
+</a>
+
 <!-- 分店導航 -->
 <div class="section">
   <div class="section-title">🏠 選擇分店</div>
@@ -366,8 +410,8 @@ body {
     <a class="store-card kl" href="lkc.html">
       <div class="store-icon">🏢</div>
       <div class="store-info">
-        <div class="store-name">九龍區 · 荔枝角 · 太子</div>
-        <div class="store-desc">荔枝角新光工業大廈 / 太子始創中心<br>皇牌髗骶睡眠頭療 · 新客 $299 體驗</div>
+        <div class="store-name">九龍區 · 荔枝角</div>
+        <div class="store-desc">荔枝角青山道497號時來工業大厦5樓12室<br>皇牌髗骶睡眠頭療 · 新客 $299 體驗</div>
       </div>
       <div class="store-arrow">▶</div>
     </a>
@@ -386,7 +430,7 @@ body {
     <a class="quick-card" href="lkc-price.html">
       <div class="q-icon">💎</div>
       <div class="q-title">九龍價目表</div>
-      <div class="q-desc">荔枝角 · 太子</div>
+      <div class="q-desc">荔枝角</div>
     </a>
     <a class="quick-card" href="combo.html">
       <div class="q-icon">💎</div>
