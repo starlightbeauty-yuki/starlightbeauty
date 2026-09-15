@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>擴張優惠 · 買 4 送 1 — StarLight Beauty</title>
+<meta name="description" content="StarLight Beauty 荔枝角療癒工作室開張紀念：5 次面部療程 $2,088（買 4 送 1），平均每次 $418，再送 1 次奢華人手 SPA FACIAL。屯門、荔枝角兩店適用。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f6f8;
+    --card: #ffffff;
+    --text: #2c3e50;
+    --sub: #7f8c8d;
+    --rose: #b76e79;
+    --rose-light: #fbe9ee;
+    --gold: #d4a017;
+    --blue: #2471a3;
+    --blue-light: #eef5fb;
+    --green: #6b8e6b;
+    --green-light: #f1f7ef;
+  }
+  * { margin:0; padding:0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Sans HK", "Microsoft JhengHei", "PingFang HK", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.75;
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+  }
+  .wrapper { max-width: 620px; width:100%; padding: 18px 16px 110px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #eef5fb 0%, #f7f2ee 55%, #fbe9ee 100%);
+    border-radius: 20px; padding: 34px 22px 28px; text-align: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .badge-top {
+    display:inline-block; background: var(--rose); color:#fff; font-size:12px;
+    font-weight:700; letter-spacing:2px; padding:5px 14px; border-radius:20px;
+  }
+  .hero h1 { font-size: 30px; font-weight: 900; margin: 14px 0 4px; letter-spacing:1px; color:#1c3550; }
+  .hero .sub { font-size: 14px; color: var(--sub); margin-bottom: 18px; }
+  .price-box { margin: 6px 0 6px; }
+  .price { font-size: 52px; font-weight: 900; color: var(--rose); line-height: 1; }
+  .price-note { font-size: 15px; color: var(--text); font-weight: 700; margin-top: 8px; }
+  .price-note em { font-style: normal; color: var(--rose); }
+  .save {
+    display:inline-block; margin-top:12px; background:#fff; border:1.5px dashed var(--rose);
+    color: var(--rose); font-size: 13px; font-weight:700; padding:7px 16px; border-radius:12px;
+  }
+  .gift {
+    margin-top: 18px; background:#fff; border-radius:14px; padding:14px 16px;
+    font-size: 15px; font-weight:700; color:#1c3550;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .gift span { color: var(--rose); }
+
+  /* Section */
+  .card { background: var(--card); border-radius: 16px; padding: 20px 18px; margin-top: 14px;
+          box-shadow: 0 2px 14px rgba(0,0,0,0.05); }
+  .card h2 { font-size: 19px; font-weight: 800; color:#1c3550; margin-bottom: 12px;
+             display:flex; align-items:center; gap:8px; }
+  .card h2 .ico { font-size: 22px; }
+  ul.list { list-style:none; }
+  ul.list li { padding: 9px 0 9px 26px; position: relative; border-bottom: 1px dashed #eee; font-size: 15px; }
+  ul.list li:last-child { border-bottom: none; }
+  ul.list li::before {
+    content:'✓'; position:absolute; left:0; top:9px; color: var(--green); font-weight:900; font-size:15px;
+  }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:4px; }
+  .chip { background: var(--blue-light); color: var(--blue); font-size: 13.5px; font-weight:700;
+          padding:8px 14px; border-radius:20px; }
+  .card.green { background: var(--green-light); }
+  .card.green ul.list li::before { content:'＋'; color: var(--green); }
+
+  .math { background:#fffaf3; border:1.5px solid #f0e0c0; border-radius:14px; padding:16px 18px; margin-top:14px; }
+  .math table { width:100%; border-collapse:collapse; font-size:14.5px; }
+  .math td { padding:6px 0; }
+  .math td:last-child { text-align:right; font-weight:700; }
+  .math tr.hi td { color: var(--rose); font-weight:800; font-size:16px; border-top:1px dashed #e0d0b0; padding-top:10px; }
+
+  /* Stores */
+  .stores { display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
+  .store { flex:1 1 240px; background:#fff; border-radius:14px; padding:16px 16px;
+           box-shadow:0 2px 14px rgba(0,0,0,0.05); }
+  .store h3 { font-size:16px; font-weight:800; color:#1c3550; margin-bottom:8px; }
+  .store p { font-size:13.5px; color: var(--sub); line-height:1.7; }
+
+  .terms { font-size:12.5px; color:#95a5a6; line-height:1.8; margin-top:16px; }
+
+  /* Sticky CTA */
+  .cta-bar {
+    position: fixed; left:0; right:0; bottom:0; background:#fff;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.10); padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    display:flex; align-items:center; justify-content:center; gap:12px; z-index:50;
+  }
+  .cta-bar .info { font-size:12.5px; color: var(--sub); line-height:1.4; }
+  .cta-bar .info b { display:block; font-size:15px; color:#1c3550; }
+  .btn {
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    background:#25D366; color:#fff; text-decoration:none; font-size:17px; font-weight:800;
+    padding:14px 26px; border-radius:30px; white-space:nowrap;
+  }
+  .btn.blue { background: var(--blue); }
+  .foot { text-align:center; font-size:12px; color:#a9b0b3; margin-top:20px; letter-spacing:1px; }
+
+  @media (max-width: 420px) {
+    .hero h1 { font-size: 25px; }
+    .price { font-size: 44px; }
+    .cta-bar .info { display:none; }
+    .btn { width:100%; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="hero">
+    <div class="badge-top">荔枝角療癒工作室 · 開張紀念</div>
+    <h1>擴張優惠 · 買 4 送 1</h1>
+    <div class="sub">5 次面部療程套票 · 屯門、荔枝角兩店適用</div>
+    <div class="price-box">
+      <div class="price">$2,088</div>
+      <div class="price-note">5 次療程（買 4 送 1）· 平均每次 <em>$418</em></div>
+      <div class="save">對比單次正價 $520–$680，慳 20–39%</div>
+    </div>
+    <div class="gift">🎁 再送 <span>1 次奢華人手 SPA FACIAL</span></div>
+  </div>
+
+  <div class="card green">
+    <h2><span class="ico">✅</span>每次固定送呢 4 項</h2>
+    <ul class="list">
+      <li>AQUA PEEL 深層清潔</li>
+      <li>LED 光療</li>
+      <li>肩頸按摩</li>
+      <li>眼部及面部祛水腫刮沙</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="ico">➕</span>每次再選送 1 項（5 選 1）</h2>
+    <div class="chips">
+      <span class="chip">注氧槍</span>
+      <span class="chip">射頻提升（眼／面／頸）</span>
+      <span class="chip">冰錘</span>
+      <span class="chip">魔法泡泡潔面</span>
+      <span class="chip">聲波導入</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="ico">🎯</span>可選療程（7 款）</h2>
+    <div class="chips">
+      <span class="chip">控油收毛孔療程</span>
+      <span class="chip">膠原深層導入護理</span>
+      <span class="chip">NMN 雕逆齡療程</span>
+      <span class="chip">泡芙嫩膚療程</span>
+      <span class="chip">祛黃提亮療程</span>
+      <span class="chip">抗衰緊緻療程</span>
+      <span class="chip">藍銅修護保濕療程</span>
+    </div>
+    <p style="font-size:13px;color:var(--sub);margin-top:12px;">
+      💡 每次可按當時皮膚狀態揀唔同療程，唔使一開始決定晒。</p>
+  </div>
+
+  <div class="math">
+    <table>
+      <tr><td>套票價</td><td>$2,088</td></tr>
+      <tr><td>療程次數</td><td>5 次（買 4 送 1）</td></tr>
+      <tr><td>送多 1 次</td><td>奢華人手 SPA FACIAL</td></tr>
+      <tr class="hi"><td>平均每次</td><td>$418</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2><span class="ico">🌿</span>點解套票抵？</h2>
+    <ul class="list">
+      <li>平均每次 $418，比單次正價平 20–39%</li>
+      <li>每次再送 4 項固定護理 ＋ 1 項自選，價值远超單次療程</li>
+      <li>5 次可慢慢做，按皮膚狀態彈性安排</li>
+      <li>兩店都用得，邊度方便去邊度</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="ico">📍</span>兩店資料</h2>
+    <div class="stores">
+      <div class="store">
+        <h3>🏠 屯門店</h3>
+        <p>屯門工業中心 C 座<br>近輕鐵建安站</p>
+      </div>
+      <div class="store">
+        <h3>🌿 荔枝角療癒工作室</h3>
+        <p>荔枝角青山道 497 號<br>時來工業大厦 5 樓 12 室<br>荔枝角站 C 出口步行 3 分鐘</p>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--sub);margin-top:12px;">
+      營業時間：朝 9 晚 10 · 彈性預約 · 恕不接受即日預約
+    </p>
+  </div>
+
+  <div class="terms">
+    📌 條款：套票優惠名額有限；每次療程約 75–90 分鐘；可選療程以兩店實際供應為準；
+    送嘅 SPA FACIAL 需於套票有效期內使用。如有爭議，StarLight Beauty 保留最終決定權。
+  </div>
+
+  <div class="foot">StarLight Beauty · 美於外 · 療於內</div>
+</div>
+
+<div class="cta-bar">
+  <div class="info">
+    <b>擴張優惠 $2,088 / 5 次</b>
+    平均每次 $418
+  </div>
+  <a class="btn" href="https://wa.me/85260828181?text=%E4%BD%A0%E5%A5%BD%20Yuki%EF%BC%81%E6%88%91%E6%83%B3%E7%9E%AD%E4%B8%8B%E3%80%8C%E6%93%B4%E5%BC%B5%E5%84%AA%E6%83%A0%C2%B7%E8%B2%B7%204%20%E9%80%81%201%E3%80%8D%EF%BC%88%242%2C088%2F5%E6%AC%A1%EF%BC%89%E7%9A%84%E8%A9%B3%E6%83%85%20%E2%98%BA" target="_blank" rel="noopener">
+    💬 WhatsApp 查詢
+  </a>
+</div>
+
+</body>
+</html>
