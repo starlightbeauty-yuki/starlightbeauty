@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星光自選格 · Pick-Your-Own Grid — StarLight Beauty</title>
+<meta name="description" content="StarLight Beauty 星光自選格：四大類各揀 1 樣 ＝ 1 次療程。輕盈版 $1,988／20 格（5 次），長情版 $3,588／40 格送 4 格（11 次）。屯門、荔枝角兩店通用。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f6f8;
+    --card: #ffffff;
+    --text: #2c3e50;
+    --sub: #7f8c8d;
+    --rose: #b76e79;
+    --rose-light: #fbe9ee;
+    --gold: #d4a017;
+    --blue: #2471a3;
+    --blue-light: #eef5fb;
+    --green: #6b8e6b;
+    --green-light: #f1f7ef;
+    --teal: #1d9e75;
+  }
+  * { margin:0; padding:0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Sans HK", "Microsoft JhengHei", "PingFang HK", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.75;
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+  }
+  .wrapper { max-width: 620px; width:100%; padding: 18px 16px 110px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #eef5fb 0%, #f7f2ee 55%, #fbe9ee 100%);
+    border-radius: 20px; padding: 32px 22px 26px; text-align: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .badge-top {
+    display:inline-block; background: var(--rose); color:#fff; font-size:12px;
+    font-weight:700; letter-spacing:2px; padding:5px 14px; border-radius:20px;
+  }
+  .hero h1 { font-size: 30px; font-weight: 900; margin: 14px 0 4px; letter-spacing:1px; color:#1c3550; }
+  .hero .en { font-size: 12.5px; font-weight:700; letter-spacing:2px; color:var(--rose); }
+  .hero .sub { font-size: 14px; color: var(--sub); margin-top: 10px; margin-bottom: 16px; }
+
+  /* Two plans */
+  .plans { display:flex; gap:12px; margin-top:6px; flex-wrap:wrap; }
+  .plan {
+    flex:1 1 240px; background:#fff; border:2px solid #e6e9ec; border-radius:16px;
+    padding:18px 14px; text-align:center; box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .plan.best { border-color: var(--rose); background: #fffafb; }
+  .plan .pname { font-size:13px; font-weight:800; letter-spacing:3px; color:var(--sub); }
+  .plan .pprice { font-size:38px; font-weight:900; color:var(--rose); line-height:1.15; margin:6px 0 2px; }
+  .plan.best .pprice { color:var(--rose); }
+  .plan .pmeta { font-size:13.5px; color:var(--text); line-height:1.6; }
+  .plan .pmeta b { color:#1c3550; }
+  .plan .pavg {
+    margin-top:10px; display:inline-block; background:var(--rose-light); color:var(--rose);
+    font-size:14px; font-weight:800; padding:6px 14px; border-radius:12px;
+  }
+  .plan .ptag {
+    display:inline-block; margin-top:8px; font-size:11.5px; font-weight:700;
+    background:var(--green-light); color:var(--green); padding:4px 10px; border-radius:10px;
+  }
+
+  /* Section */
+  .card { background: var(--card); border-radius: 16px; padding: 20px 18px; margin-top: 14px;
+          box-shadow: 0 2px 14px rgba(0,0,0,0.05); }
+  .card h2 { font-size: 19px; font-weight: 800; color:#1c3550; margin-bottom: 12px;
+             display:flex; align-items:center; gap:8px; }
+  .card h2 .ico { font-size: 22px; }
+  ul.list { list-style:none; }
+  ul.list li { padding: 9px 0 9px 26px; position: relative; border-bottom: 1px dashed #eee; font-size: 15px; }
+  ul.list li:last-child { border-bottom: none; }
+  ul.list li::before {
+    content:'✓'; position:absolute; left:0; top:9px; color: var(--green); font-weight:900; font-size:15px;
+  }
+  .steps { counter-reset:s; }
+  .steps li { padding: 10px 0 10px 34px; position:relative; border-bottom:1px dashed #eee; font-size:15px; }
+  .steps li:last-child { border-bottom:none; }
+  .steps li::before {
+    counter-increment:s; content:counter(s); position:absolute; left:0; top:10px;
+    width:22px; height:22px; border-radius:50%; background:var(--blue); color:#fff;
+    font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center;
+  }
+  .steps li b { color:#1c3550; }
+
+  /* Four categories */
+  .cats { display:grid; gap:10px; }
+  .cat { background: var(--blue-light); border-radius:12px; padding:12px 14px; }
+  .cat .ct { font-size:14.5px; font-weight:800; color:var(--blue); margin-bottom:5px; }
+  .cat .ci { font-size:13.5px; color:var(--text); line-height:1.85; }
+  .cat .ci span { display:inline-block; background:#fff; border-radius:8px; padding:2px 9px; margin:2px 3px 2px 0; }
+
+  .giftbox {
+    background: var(--green-light); border-radius:14px; padding:16px 16px; margin-top:14px;
+    border:1.5px solid #dcecd6;
+  }
+  .giftbox h3 { font-size:16px; font-weight:800; color:var(--green); margin-bottom:8px; }
+  .giftbox p { font-size:14.5px; line-height:1.8; }
+  .giftbox p b { color:#1c3550; }
+
+  .math { background:#fffaf3; border:1.5px solid #f0e0c0; border-radius:14px; padding:16px 18px; margin-top:14px; }
+  .math table { width:100%; border-collapse:collapse; font-size:14.5px; }
+  .math td { padding:6px 0; }
+  .math td:last-child { text-align:right; font-weight:700; }
+  .math tr.hi td { color: var(--rose); font-weight:800; font-size:16px; border-top:1px dashed #e0d0b0; padding-top:10px; }
+
+  /* Ladder */
+  .ladder { display:grid; gap:10px; }
+  .rung { display:flex; align-items:center; gap:12px; background:#fff; border-radius:12px;
+          padding:13px 14px; box-shadow:0 2px 8px rgba(0,0,0,0.04); }
+  .rung .lv { flex-shrink:0; width:34px; height:34px; border-radius:50%; display:flex;
+              align-items:center; justify-content:center; font-size:13px; font-weight:900; color:#fff; }
+  .rung.a .lv { background: var(--teal); }
+  .rung.b .lv { background: var(--blue); }
+  .rung.c .lv { background: #7f77dd; }
+  .rung .rt { font-size:14.5px; font-weight:800; color:#1c3550; }
+  .rung .rd { font-size:13px; color:var(--sub); line-height:1.6; }
+
+  /* Stores */
+  .stores { display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
+  .store { flex:1 1 240px; background:#fff; border-radius:14px; padding:16px 16px;
+           box-shadow:0 2px 14px rgba(0,0,0,0.05); }
+  .store h3 { font-size:16px; font-weight:800; color:#1c3550; margin-bottom:8px; }
+  .store p { font-size:13.5px; color: var(--sub); line-height:1.7; }
+
+  .terms { font-size:12.5px; color:#95a5a6; line-height:1.8; margin-top:16px; }
+
+  /* Sticky CTA */
+  .cta-bar {
+    position: fixed; left:0; right:0; bottom:0; background:#fff;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.10); padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    display:flex; align-items:center; justify-content:center; gap:12px; z-index:50;
+  }
+  .cta-bar .info { font-size:12.5px; color: var(--sub); line-height:1.4; }
+  .cta-bar .info b { display:block; font-size:15px; color:#1c3550; }
+  .btn {
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    background:#25D366; color:#fff; text-decoration:none; font-size:17px; font-weight:800;
+    padding:14px 26px; border-radius:30px; white-space:nowrap;
+  }
+  .btn.blue { background: var(--blue); }
+  .foot { text-align:center; font-size:12px; color:#a9b0b3; margin-top:20px; letter-spacing:1px; }
+  .foot a { color: var(--blue); text-decoration:none; }
+
+  @media (max-width: 420px) {
+    .hero h1 { font-size: 25px; }
+    .plan .pprice { font-size: 32px; }
+    .cta-bar .info { display:none; }
+    .btn { width:100%; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="hero">
+    <div class="badge-top">四大類自選 · 兩店通用</div>
+    <h1>星光自選格</h1>
+    <div class="en">StarLight Beauty · Pick-Your-Own Grid</div>
+    <div class="sub">四大類各揀 1 樣 ＝ 1 次完整療程 · 60–75 分鐘</div>
+
+    <div class="plans">
+      <div class="plan">
+        <div class="pname">輕 盈 版</div>
+        <div class="pprice">$1,988</div>
+        <div class="pmeta">20 格 → <b>5 次</b><br>有效期 5 個月</div>
+        <div class="pavg">平均 $398／次</div>
+      </div>
+      <div class="plan best">
+        <div class="pname">長 情 版</div>
+        <div class="pprice">$3,588</div>
+        <div class="pmeta">40 格 <b>送 4 格</b> → <b>11 次</b><br>有效期 12 個月</div>
+        <div class="pavg">平均 $326／次</div>
+        <div class="ptag">比輕盈版平 18%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="ico">🎲</span>點樣玩？</h2>
+    <ol class="steps">
+      <li>每次扣 <b>4 格</b>：清潔 1 樣 ＋ 導入 1 樣 ＋ 人手 1 樣 ＋ 儀器 1 樣</li>
+      <li>每次 60–75 分鐘，可按<b>當日皮膚狀態</b>再配過，唔使一早定死</li>
+      <li>每次最多用 6 格（想做多啲都可以，先同我講）</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2><span class="ico">🧩</span>四大類 · 25 個項目</h2>
+    <div class="cats">
+      <div class="cat">
+        <div class="ct">🧼 清潔項目</div>
+        <div class="ci"><span>Aqua Peel</span><span>魔法泡泡潔面</span><span>聲波剷皮儀</span><span>人手鉗清</span><span>無痛矽針</span></div>
+      </div>
+      <div class="cat">
+        <div class="ct">💧 導入項目</div>
+        <div class="ci"><span>保濕精華</span><span>抗衰精華</span><span>美白精華</span><span>修復精華</span><span>緊緻精華</span><span>收毛孔精華</span><span>NMN 精華</span></div>
+      </div>
+      <div class="cat">
+        <div class="ct">🤲 人手項目</div>
+        <div class="ci"><span>人手 SPA 按臉</span><span>磁叉按臉</span><span>排毒刮沙（臉／眼）</span><span>玉石按摩（面／眼）</span><span>頭部經絡按摩</span><span>肩頸筋膜按摩</span></div>
+      </div>
+      <div class="cat">
+        <div class="ct">⚙️ 儀器項目</div>
+        <div class="ci"><span>射頻緊緻（眼／面／頸）</span><span>冰錘收毛孔</span><span>純露注氧</span></div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--sub);margin-top:12px;">
+      💡 今日乾就揀保濕、攰就揀肩頸 —— 每次可以按當日需要重新配。</p>
+  </div>
+
+  <div class="giftbox">
+    <h3>🎁 每次再送你（唔計格）</h3>
+    <p><b>LED 光療 ＋ 保濕面膜</b> —— 敷面膜時同步做，唔佔額外時間。<br>
+      想針對你嘅皮膚揀更高效嘅面膜，加 <b>$50</b> 升級就得。</p>
+  </div>
+
+  <div class="math">
+    <table>
+      <tr><td>單項參考價</td><td>$120 – $320／項</td></tr>
+      <tr><td>4 項分開做</td><td>約 $600 – $800</td></tr>
+      <tr><td>輕盈版每次</td><td>$398</td></tr>
+      <tr class="hi"><td>長情版每次</td><td>$326（約五折）</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2><span class="ico">🪜</span>邊款 PLAN 啱我？</h2>
+    <div class="ladder">
+      <div class="rung a">
+        <div class="lv">1</div>
+        <div>
+          <div class="rt">星光自選格</div>
+          <div class="rd">想先試吓、慢慢養習慣 · 四大類自己配</div>
+        </div>
+      </div>
+      <div class="rung b">
+        <div class="lv">2</div>
+        <div>
+          <div class="rt">擴張優惠 · 買 4 送 1</div>
+          <div class="rd">想認真改善皮膚 · 中價療程 ＋ 多項加送</div>
+        </div>
+      </div>
+      <div class="rung c">
+        <div class="lv">3</div>
+        <div>
+          <div class="rt">星光美療通行證</div>
+          <div class="rd">想做貴價星級療程（PDRN／水光／奢華 SPA）</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--sub);margin-top:12px;">
+      💡 三款內容唔同，可以逐級升級 —— 用完自選格再上擴張優惠，之後再升通行證。</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="ico">📍</span>兩店資料</h2>
+    <div class="stores">
+      <div class="store">
+        <h3>🏠 屯門店</h3>
+        <p>屯門工業中心 C 座<br>近輕鐵建安站</p>
+      </div>
+      <div class="store">
+        <h3>🌿 荔枝角療癒工作室</h3>
+        <p>荔枝角青山道 497 號<br>時來工業大厦 5 樓 12 室<br>荔枝角站 C 出口步行 3 分鐘</p>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--sub);margin-top:12px;">
+      營業時間：朝 9 晚 10 · 彈性預約 · 恕不接受即日預約
+    </p>
+  </div>
+
+  <div class="terms">
+    📌 條款：每次扣 4 格（四大類各 1 樣），每次約 60–75 分鐘；
+    輕盈版有效期 5 個月、長情版 12 個月，由開卡日起計；
+    兩店通用，任何時段都用得；每次最多用 6 格；
+    限本人使用，不設退款及轉讓；面膜升級 $50／次（自選）；
+    到期未用之格數不設補償，建議按時預約。
+    如有爭議，StarLight Beauty 保留最終決定權。
+  </div>
+
+  <div class="foot">
+    <a href="expansion.html">擴張優惠 · 買 4 送 1</a> ·
+    <a href="lkc-price.html">荔枝角價目表</a> ·
+    <a href="tm-price.html">屯門價目表</a> ·
+    <a href="index.html">返回官網</a>
+    <div style="margin-top:10px;">StarLight Beauty · 美於外 · 療於內</div>
+  </div>
+</div>
+
+<div class="cta-bar">
+  <div class="info">
+    <b>星光自選格 $1,988 起</b>
+    四大類自選 · 兩店通用
+  </div>
+  <a class="btn" href="https://wa.me/85260828181?text=%E4%BD%A0%E5%A5%BD%20Yuki%EF%BC%81%E6%88%91%E6%83%B3%E7%9D%87%E4%B8%8B%E3%80%8C%E6%98%9F%E5%85%89%E8%87%AA%E9%81%B8%E6%A0%BC%E3%80%8D%E5%98%85%E8%A9%B3%E6%83%85%20%E2%98%BA" target="_blank" rel="noopener">
+    💬 WhatsApp 查詢
+  </a>
+</div>
+
+</body>
+</html>
