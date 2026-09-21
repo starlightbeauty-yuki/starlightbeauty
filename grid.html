@@ -76,7 +76,8 @@
   ul.list li::before {
     content:'✓'; position:absolute; left:0; top:9px; color: var(--green); font-weight:900; font-size:15px;
   }
-  .steps { counter-reset:s; }
+  /* list-style:none 一定要有 —— 唔係 <ol> 會出「1. 2. 3.」同下面 ::before 圓圈雙重編號 */
+  .steps { counter-reset:s; list-style:none; margin:0; }
   .steps li { padding: 10px 0 10px 34px; position:relative; border-bottom:1px dashed #eee; font-size:15px; }
   .steps li:last-child { border-bottom:none; }
   .steps li::before {
