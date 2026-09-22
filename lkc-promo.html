@@ -89,10 +89,11 @@
     color: var(--sub);
     margin-bottom: 28px;
   }
+  /* 用 column 排版（瀑布流）：海報有 4:5 同 1:1 兩種比例，
+     唔可以用 grid + 固定 aspect-ratio，否則 4:5 海報會被切走上下文字 */
   .promo-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    column-count: 2;
+    column-gap: 14px;
   }
   .promo-card {
     background: var(--card);
@@ -102,6 +103,11 @@
     border: 1px solid rgba(0,0,0,0.04);
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
+    display: block;
+    margin: 0 0 14px 0;
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
   }
   .promo-card:hover {
     transform: translateY(-3px);
@@ -111,8 +117,6 @@
     width: 100%;
     height: auto;
     display: block;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
   }
 
   /* Footer */
@@ -127,7 +131,7 @@
   .footer a { color: var(--blue); text-decoration: none; }
 
   @media (max-width: 500px) {
-    .promo-grid { grid-template-columns: 1fr; }
+    .promo-grid { column-count: 1; }
   }
 </style>
 </head>
@@ -148,64 +152,76 @@
   <div class="gallery-subtitle">荔枝角店專屬優惠 · 長按圖片可儲存分享</div>
   
   <div class="promo-grid">
-    <div class="promo-card" style="position:relative;">
+    <div class="promo-card">
+      <img src="promo-images/p04_rose_moisture.jpg" alt="玫瑰保濕套餐 · 新客單次體驗價 $298（原價 $560）" loading="lazy">
+    </div>
+    <div class="promo-card">
+      <img src="promo-images/p33_rose_package.jpg" alt="玫瑰保濕套餐 $1,830／5 次（4 個月）· $2,980／10 次（8 個月）" loading="lazy">
+    </div>
+    <div class="promo-card">
+      <img src="promo-images/p22_new_customer_888.jpg" alt="星光雙選套票 $888／6 格 · 新客專屬 · 屯門荔枝角適用" loading="lazy">
+    </div>
+    <div class="promo-card">
+      <img src="promo-images/p29_grid_price.jpg" alt="星光自選格 價目：輕盈版 $1,988／20 格、長情版 $3,588／44 格" loading="lazy">
+    </div>
+    <div class="promo-card">
+      <img src="promo-images/p30_grid_items.jpg" alt="星光自選格 · 四大類 25 個項目一覽" loading="lazy">
+    </div>
+    <div class="promo-card">
+      <img src="promo-images/p31_expansion_1.jpg" alt="擴張優惠 買 4 送 1 $2,088 · 每次固定送 4 項＋選送 1 項" loading="lazy">
+    </div>
+    <div class="promo-card">
+      <img src="promo-images/p32_expansion_2.jpg" alt="擴張優惠 買 4 送 1 $2,088 · 7 款可選療程＋加送 1 次奢華人手 SPA FACIAL" loading="lazy">
+    </div>
+    <div class="promo-card">
+      <img src="promo-images/p13_sakura_facial.jpg" alt="桃花灸 SPA Facial · 單次 $598（體驗價 $420）· 5 次套組 $1,950" loading="lazy">
+    </div>
+    <div class="promo-card">
       <img src="promo-images/p02_pregnancy_lash.jpg" alt="孕睫術" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
-      <img src="promo-images/p04_rose_moisture.jpg" alt="玫瑰保濕面部 $298" loading="lazy">
-    </div>
-    <div class="promo-card" style="position:relative;">
+    <div class="promo-card">
       <img src="promo-images/p06_baby_face_needle.jpg" alt="嬰兒針" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
+    <div class="promo-card">
       <img src="promo-images/p07_inimini_micro.jpg" alt="INIMINI 超極微針" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
+    <div class="promo-card">
       <img src="promo-images/p08_peel_to_grow.jpg" alt="Peel to Grow" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
+    <div class="promo-card">
       <img src="promo-images/p09_smts_info.jpg" alt="SMTS 療程介紹" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
+    <div class="promo-card">
       <img src="promo-images/p10_smts_price.jpg" alt="SMTS 療程價目" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
+    <div class="promo-card">
       <img src="promo-images/p11_nadpdrn_repair.jpg" alt="NAD+ & PDRN 極緻修復" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
+    <div class="promo-card">
       <img src="promo-images/p12_exosome_repair.jpg" alt="外泌體修復 Exosomes" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
-      <img src="promo-images/p13_sakura_facial.jpg" alt="櫻花 SPA Facial" loading="lazy">
-    </div>
-    <div class="promo-card" style="position:relative;">
+    <div class="promo-card">
       <img src="promo-images/p14_nmn_antiaging.jpg" alt="NMN 逆齡抗衰老" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
-      <img src="promo-images/p16_buy2get1free.jpg" alt="買2送1" loading="lazy">
-    </div>
-    <div class="promo-card" style="position:relative;">
+    <div class="promo-card">
       <img src="promo-images/p17_oxygen_bubble.jpg" alt="氧氣泡泡清潔 + 免費肩頸按摩" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
+    <div class="promo-card">
       <img src="promo-images/p18_dalton_detox.jpg" alt="Dalton 排毒療程" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
+    <div class="promo-card">
       <img src="promo-images/p19_eye_treatment.jpg" alt="眼週護理" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
-      <img src="promo-images/p20_stamp_rewards.jpg" alt="印戳獎賞 Stamp Rewards" loading="lazy">
+    <div class="promo-card">
+      <img src="promo-images/p20_stamp_rewards_lkc.jpg" alt="印花換好禮（荔枝角）· 消費滿 $1,000 得 1 個印花 · 儲 5 個換 2 次 LED 光療" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
-      <img src="promo-images/p22_new_customer_888.jpg" alt="2026 新客體驗優惠 $888/3次" loading="lazy">
+    <div class="promo-card">
+      <img src="promo-images/p25_topup_sharing.jpg" alt="2026 儲值好分享 · 儲值 $5,000 享醫美級補水修復面膜 30 片" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
-      <img src="promo-images/p25_topup_sharing.jpg" alt="充值分享 SMTS 等" loading="lazy">
+    <div class="promo-card">
+      <img src="promo-images/p26_topup_details.jpg" alt="2026 儲值好分享 · 有效期 6 個月 · 每次可選贈送項目（五選一）" loading="lazy">
     </div>
-    <div class="promo-card" style="position:relative;">
-      <img src="promo-images/p26_topup_dice.jpg" alt="充值抽獎" loading="lazy">
-    </div>
-    <div class="promo-card" style="position:relative;">
+    <div class="promo-card">
       <img src="promo-images/p28_bestie_group.jpg" alt="閨密同行優惠" loading="lazy">
     </div>
   </div>
