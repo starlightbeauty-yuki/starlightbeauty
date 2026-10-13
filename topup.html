@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 儲值好分享 — StarLight Beauty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdfaf6;
+    --card: #ffffff;
+    --text: #3d3535;
+    --sub: #8c7b74;
+    --gold: #c4a97d;
+    --gold-deep: #b8934e;
+    --gold-light: #f6efe2;
+    --teal: #128c7e;
+    --teal-light: #eaf6f3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Sans HK", "Microsoft JhengHei", "PingFang HK", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .wrapper { max-width: 600px; width: 100%; padding: 20px 16px 50px; }
+
+  /* Header */
+  .page-head { text-align: center; padding: 18px 12px 14px; }
+  .page-head .shop-name {
+    font-family: 'Alex Brush', cursive;
+    font-size: 2.2em;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .page-head .store {
+    font-size: 0.85em;
+    color: var(--sub);
+    letter-spacing: 0.12em;
+    margin-top: 2px;
+  }
+  .page-head h1 {
+    font-size: 1.55em;
+    color: #4a3f3a;
+    font-weight: 800;
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+  }
+  .page-head .sub {
+    font-size: 0.85em;
+    color: var(--sub);
+    margin-top: 4px;
+  }
+
+  /* Hero 金額 */
+  .hero {
+    background: linear-gradient(150deg, #fffdf9, #f7efe1);
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    padding: 22px 20px;
+    text-align: center;
+    margin: 16px 0 6px;
+    box-shadow: 0 6px 22px rgba(196,169,125,0.22);
+    position: relative;
+  }
+  .hero .kicker {
+    font-size: 0.76em;
+    letter-spacing: 0.28em;
+    color: var(--gold-deep);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .hero .amount {
+    font-size: 2.9em;
+    font-weight: 800;
+    color: var(--gold-deep);
+    line-height: 1.1;
+    margin: 6px 0 2px;
+  }
+  .hero .amount .cur { font-size: 0.5em; font-weight: 700; vertical-align: 0.35em; }
+  .hero .amount-desc {
+    font-size: 0.92em;
+    color: #6b5a3e;
+    font-weight: 700;
+  }
+  .hero .val-tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.72em;
+    color: #fff;
+    background: linear-gradient(135deg, var(--gold), #d9bc80);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* Note */
+  .note {
+    background: var(--gold-light);
+    border: 1px solid rgba(196,169,125,0.5);
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 0.78em;
+    color: #6b5a3e;
+    margin: 14px 0 4px;
+    line-height: 1.6;
+  }
+  .note b { color: var(--gold-deep); font-weight: 700; }
+
+  /* Section label */
+  .sec-label {
+    font-size: 0.82em;
+    color: var(--sub);
+    letter-spacing: 0.08em;
+    margin: 22px 4px 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+  }
+  .sec-label::before, .sec-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196,169,125,0.6), transparent);
+  }
+
+  /* 五大禮遇 */
+  .rights { display: grid; gap: 10px; margin-top: 12px; }
+  .right-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--card);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    border-left: 4px solid var(--gold);
+  }
+  .right-item .ico {
+    font-size: 1.5em;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+  .right-item .txt h4 {
+    font-size: 0.98em;
+    color: #4a3f3a;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .right-item .txt p {
+    font-size: 0.78em;
+    color: var(--sub);
+    line-height: 1.55;
+  }
+  .right-item .txt b { color: var(--gold-deep); }
+
+  /* 贈送項目 chips */
+  .chips {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .chip {
+    background: var(--teal-light);
+    border: 1px solid rgba(18,140,126,0.28);
+    border-radius: 12px;
+    padding: 11px 12px;
+    font-size: 0.84em;
+    font-weight: 700;
+    color: var(--teal);
+    text-align: center;
+  }
+  .chip.wide { grid-column: 1 / -1; }
+  .gift-note {
+    margin-top: 10px;
+    font-size: 0.76em;
+    color: var(--sub);
+    text-align: center;
+  }
+
+  /* 條款 */
+  .terms {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-top: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    font-size: 0.78em;
+    color: var(--sub);
+    line-height: 1.85;
+  }
+  .terms li { margin-left: 18px; }
+  .terms b { color: #4a3f3a; }
+
+  /* CTA */
+  .cta-wrap { margin-top: 24px; }
+  .cta-btn {
+    display: block;
+    background: var(--gold-deep);
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    border-radius: 14px;
+    font-size: 1.02em;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 12px;
+    box-shadow: 0 4px 16px rgba(184,147,78,0.3);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(184,147,78,0.42); }
+  .cta-btn.green { background: #27ae60; box-shadow: 0 4px 16px rgba(39,174,96,0.3); }
+  .cta-btn.teal { background: var(--teal); box-shadow: 0 4px 16px rgba(18,140,126,0.3); }
+  .cta-sub {
+    text-align: center;
+    font-size: 0.7em;
+    color: #bbb;
+    margin-top: 8px;
+  }
+
+  .footer-note {
+    text-align: center;
+    font-size: 0.7em;
+    color: #ccc;
+    margin-top: 22px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="page-head">
+    <div class="shop-name">✦ StarLight Beauty ✦</div>
+    <div class="store">屯門 · 荔枝角　兩店都可以使用</div>
+    <h1>2026 儲值好分享</h1>
+    <div class="sub">一次儲值 · 全期回贈 · 家人朋友共享</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="kicker">Save &amp; Share</div>
+    <div class="amount"><span class="cur">HK$</span>5,000</div>
+    <div class="amount-desc">儲值即享 5 大禮遇</div>
+    <span class="val-tag">⏳ 有效期 6 個月</span>
+  </div>
+
+  <div class="note">
+    💡 儲值 <b>HK$5,000</b> 即解鎖全部會籍禮遇，<b>屯門 · 荔枝角 兩店都可以使用</b>，儲值額更可與家人朋友共享。
+  </div>
+
+  <!-- 五大禮遇 -->
+  <div class="sec-label">儲值 5 大禮遇</div>
+  <div class="rights">
+    <div class="right-item">
+      <span class="ico">💧</span>
+      <div class="txt">
+        <h4>醫美級補水修復面膜 30 片</h4>
+        <p>每月領 <b>5 片</b>，6 個月合共 <b>30 片</b>，隨時補水修復。</p>
+      </div>
+    </div>
+    <div class="right-item">
+      <span class="ico">💰</span>
+      <div class="txt">
+        <h4>療程正價 85 折</h4>
+        <p>所有療程一律 <b>八五折</b>，長期做更抵。</p>
+      </div>
+    </div>
+    <div class="right-item">
+      <span class="ico">👨‍👩‍👧</span>
+      <div class="txt">
+        <h4>與家人朋友共享儲值額</h4>
+        <p>儲值額可攤分共用，一家人／好朋友一齊靚更划算。</p>
+      </div>
+    </div>
+    <div class="right-item">
+      <span class="ico">🎁</span>
+      <div class="txt">
+        <h4>每次贈送自選療程（5 選 1）</h4>
+        <p>每次到店額外贈送一項療程，下欄任你揀。</p>
+      </div>
+    </div>
+    <div class="right-item">
+      <span class="ico">⏳</span>
+      <div class="txt">
+        <h4>有效期 6 個月</h4>
+        <p>6 個月內靈活使用，唔怕趕。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 贈送項目 -->
+  <div class="sec-label">每次贈送・5 選 1</div>
+  <div class="chips">
+    <div class="chip">眼部排毒刮沙</div>
+    <div class="chip">頭部舒緩按摩</div>
+    <div class="chip">肩頸筋膜放鬆</div>
+    <div class="chip">LED 光療</div>
+    <div class="chip wide">升級面膜</div>
+  </div>
+  <p class="gift-note">每次到店可額外選其中一項，療程免費贈送、不另收費。</p>
+
+  <!-- 條款 -->
+  <div class="sec-label">計劃須知</div>
+  <ul class="terms">
+    <li>儲值金額：<b>HK$5,000</b></li>
+    <li>有效期：<b>6 個月</b>（由儲值日起計）</li>
+    <li>適用分店：<b>屯門 · 荔枝角</b>（兩店都可以使用）</li>
+    <li>儲值額可與<b>家人 / 朋友共享</b>，次數自由攤分</li>
+    <li>所有療程享<b>正價 85 折</b>優惠</li>
+    <li>每次到店額外贈送<b>自選療程 1 項（5 選 1）</b></li>
+    <li>面膜每月領 5 片，合共 30 片</li>
+  </ul>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <a href="booking.html" class="cta-btn green">📅 網上即時預約系統</a>
+    <a href="https://wa.me/85260828181" class="cta-btn">📲 WhatsApp 6082 8181 查詢 / 儲值</a>
+    <p class="cta-sub">24 小時自助預約 · 即時確認 · 一經預約當日只接你一位</p>
+  </div>
+
+  <p class="footer-note">
+    StarLight Beauty © 2026 · 儲值計劃最終解釋權歸本店所有<br>
+    屯門：屯門工業中心 C 座（近輕鐵建安站）　·　荔枝角：青山道 497 號時來工業大廈 5 樓 12 室
+  </p>
+
+</div>
+</body>
+</html>

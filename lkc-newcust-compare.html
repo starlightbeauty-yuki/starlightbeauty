@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4 款新客優惠大比拼 — StarLight Beauty 荔枝角</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fdfaf6; --card:#fff; --text:#3d3535; --sub:#8c7b74;
+    --rose:#d4948a; --rose-light:#fdf2f3; --gold:#c4a97d; --gold-light:#f6efe2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Noto Sans HK","Microsoft JhengHei","PingFang HK",sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.7;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+  .wrapper{max-width:640px;width:100%;padding:20px 16px 50px;}
+
+  .page-head{text-align:center;padding:18px 12px 8px;}
+  .page-head .shop-name{font-family:'Alex Brush',cursive;font-size:2.2em;color:var(--gold);line-height:1;}
+  .page-head .store{font-size:.85em;color:var(--sub);letter-spacing:.12em;margin-top:2px;}
+  .page-head h1{font-size:1.5em;color:#4a3f3a;font-weight:800;margin-top:8px;letter-spacing:.04em;}
+  .page-head .sub{font-size:.82em;color:var(--sub);margin-top:4px;}
+
+  .note{background:var(--gold-light);border:1px solid rgba(196,169,125,.5);
+    border-radius:14px;padding:11px 16px;font-size:.76em;color:#6b5a3e;margin:12px 0 4px;line-height:1.6;}
+  .note b{color:var(--rose);font-weight:700;}
+
+  /* 對比表 */
+  .table-scroll{margin-top:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  table.cmp{width:100%;min-width:660px;border-collapse:separate;border-spacing:0;
+    background:var(--card);border-radius:16px;overflow:hidden;
+    box-shadow:0 2px 12px rgba(0,0,0,.05);}
+  table.cmp th,table.cmp td{padding:12px 9px;text-align:center;font-size:.76em;border-bottom:1px solid #f0eae2;vertical-align:middle;}
+  table.cmp thead th{background:#4a3f3a;color:#fff;font-weight:700;line-height:1.4;}
+  table.cmp thead th .tag{display:block;font-size:.72em;font-weight:500;color:#f3d9b8;margin-top:3px;letter-spacing:.03em;}
+  table.cmp thead th.col1{background:#fff;color:#b9a98f;font-size:.76em;font-weight:600;text-align:left;width:64px;}
+  table.cmp tbody th{background:var(--rose-light);color:#7a564f;font-weight:700;text-align:left;font-size:.74em;white-space:nowrap;padding-left:10px;}
+  table.cmp td .price{font-size:1.2em;font-weight:800;color:var(--rose);line-height:1.1;}
+  table.cmp td .price small{font-size:.6em;color:var(--sub);font-weight:600;}
+  table.cmp td .ok{color:#3d7a4f;font-weight:700;}
+  table.cmp tbody tr:last-child th,table.cmp tbody tr:last-child td{border-bottom:none;}
+  .win{position:relative;}
+  .win::after{content:"★ 最平每次";position:absolute;top:5px;right:5px;
+    font-size:.56em;background:var(--gold);color:#fff;padding:2px 6px;border-radius:10px;font-weight:700;letter-spacing:.02em;}
+  .trial::after{content:"★ 試玩首選";position:absolute;top:5px;right:5px;
+    font-size:.56em;background:var(--rose);color:#fff;padding:2px 6px;border-radius:10px;font-weight:700;letter-spacing:.02em;}
+  .hlrow{background:#fffbf4 !important;}
+
+  /* 場景卡 */
+  .sec-label{font-size:.82em;color:var(--sub);letter-spacing:.08em;margin:22px 4px 6px;
+    display:flex;align-items:center;gap:8px;}
+  .sec-label::before,.sec-label::after{content:'';flex:1;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(196,169,125,.6),transparent);}
+  .scene{background:var(--card);border-radius:16px;padding:14px 18px;margin-top:12px;
+    box-shadow:0 2px 12px rgba(0,0,0,.04);border-left:4px solid var(--gold);}
+  .scene .q{font-weight:700;color:#4a3f3a;font-size:.92em;}
+  .scene .a{font-size:.8em;color:var(--sub);margin-top:4px;line-height:1.6;}
+  .scene .a b{color:var(--rose);font-weight:700;}
+  .scene.s1{border-left-color:var(--rose);}
+  .scene.s2{border-left-color:#d9a7b0;}
+  .scene.s3{border-left-color:#b98e5e;}
+  .scene.s4{border-left-color:var(--gold);}
+
+  /* CTA */
+  .cta-wrap{margin-top:24px;}
+  .cta-btn{display:block;background:var(--rose);color:#fff;text-align:center;padding:15px;
+    border-radius:14px;font-size:1.02em;font-weight:700;text-decoration:none;margin-top:12px;
+    box-shadow:0 4px 16px rgba(212,148,138,.3);transition:transform .15s,box-shadow .15s;}
+  .cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,148,138,.4);}
+  .cta-btn.green{background:#27ae60;box-shadow:0 4px 16px rgba(39,174,96,.3);}
+  .cta-btn.teal{background:#128c7e;box-shadow:0 4px 16px rgba(18,140,126,.3);}
+  .cta-sub{text-align:center;font-size:.7em;color:#bbb;margin-top:8px;}
+  .footer-note{text-align:center;font-size:.7em;color:#ccc;margin-top:22px;line-height:1.6;}
+
+  .backlink{display:inline-block;margin-top:14px;font-size:.78em;color:var(--gold);
+    text-decoration:none;font-weight:700;}
+  .backlink:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="page-head">
+    <div class="shop-name">✦ StarLight Beauty ✦</div>
+    <div class="store">荔枝角店 · LAI CHI KOK</div>
+    <h1>4 款新客優惠・邊款啱你？</h1>
+    <div class="sub">價格 · 好處 · 選擇考慮 一目了然</div>
+  </div>
+
+  <div class="note">
+    💡 以下 4 款均為<b>新客限定</b>（每項優惠每人限用一次）。只有「奢華人手 SPA FACIAL 新客價」因地區而異：
+    屯門 $199 ／ 荔枝角 <b>$299</b>。本頁為荔枝角價。其餘三款兩店通用。
+  </div>
+
+  <div class="table-scroll">
+    <table class="cmp">
+      <thead>
+        <tr>
+          <th class="col1">比較項目</th>
+          <th class="trial">奢華人手<br>SPA FACIAL<span class="tag">單次體驗</span></th>
+          <th>玫瑰保濕<br>套餐<span class="tag">玫瑰補水</span></th>
+          <th>新客限定<br>$688／2 次<span class="tag">進階試玩</span></th>
+          <th class="win">新客三部曲<br>$888／3 次<span class="tag">慳到盡</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hlrow">
+          <th>新客價</th>
+          <td><span class="price">$299<small>／次</small></span></td>
+          <td><span class="price">$298<small>／次</small></span></td>
+          <td><span class="price">$688<small>／2次</small></span></td>
+          <td><span class="price">$888<small>／3次</small></span></td>
+        </tr>
+        <tr>
+          <th>平均每次</th>
+          <td>$299</td>
+          <td>$298</td>
+          <td>$344／次</td>
+          <td><b class="ok">$296／次</b></td>
+        </tr>
+        <tr>
+          <th>到訪次數</th>
+          <td>1 次</td>
+          <td>1 次</td>
+          <td>2 次</td>
+          <td>3 次</td>
+        </tr>
+        <tr>
+          <th>有效期</th>
+          <td>單次</td>
+          <td>單次</td>
+          <td>1 個月</td>
+          <td>2 個月</td>
+        </tr>
+        <tr>
+          <th>每次內容</th>
+          <td>皇牌人手<br>SPA 1 項</td>
+          <td>5 步玫瑰療程<br>＋贈送 3 選 1</td>
+          <td>面部 3 選 1<br>＋贈送 3 選 1</td>
+          <td>Facial 5 選 1<br>＋贈送 5 選 1</td>
+        </tr>
+        <tr>
+          <th>每次時長</th>
+          <td>約 60 分鐘</td>
+          <td>約 60 分鐘</td>
+          <td>約 90 分鐘</td>
+          <td>約 90 分鐘</td>
+        </tr>
+        <tr>
+          <th>總值／慳到</th>
+          <td>原價 $780<br><b class="ok">慳 62%</b></td>
+          <td>原價 $560<br><b class="ok">慳 47%</b></td>
+          <td>總值逾 $1,100<br><b class="ok">慳逾 $400</b></td>
+          <td>總值逾 $2,000<br><b class="ok">慳逾 $1,100</b></td>
+        </tr>
+        <tr class="hlrow">
+          <th>最啱你如果…</th>
+          <td>想平試、<br>零門檻體驗</td>
+          <td>想重點補水、<br>玫瑰療癒放鬆</td>
+          <td>想試兩款、<br>短期建立習慣</td>
+          <td>想認真養膚、<br>選擇最多最平</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-label">咁我應該點揀？</div>
+
+  <div class="scene s1">
+    <div class="q">🅰️ 我想平嘢試下先，唔想 commitment</div>
+    <div class="a">→ 揀 <b>奢華人手 SPA FACIAL $299</b>：全人手淋巴按摩、60 分鐘，係入門試玩首選，零壓力體驗星級 facial。</div>
+  </div>
+  <div class="scene s2">
+    <div class="q">🅱️ 我想重點補水、要玫瑰香氣療癒感</div>
+    <div class="a">→ 揀 <b>玫瑰保濕套餐 $298</b>：5 步玫瑰保濕療程由清潔到鎖水，仲額外贈送 3 選 1，最啱乾燥／缺水肌。</div>
+  </div>
+  <div class="scene s3">
+    <div class="q">🅲️ 我想試多兩款療程，睇下邊樣啱自己</div>
+    <div class="a">→ 揀 <b>新客限定 $688／2 次</b>：每次面部 3 選 1 ＋ 免費贈送 3 選 1，2 次到訪共 4 項，一個月內試勻唔同組合。</div>
+  </div>
+  <div class="scene s4">
+    <div class="q">🅳️ 我認真想養好塊面，要慳到盡、選擇多</div>
+    <div class="a">→ 揀 <b>新客三部曲 $888／3 次</b>：每次 Facial 5 選 1 ＋ 贈送 5 選 1，平均 <b>$296／次</b> 係四款最平，兩個月慢慢養膚。</div>
+  </div>
+
+  <a class="backlink" href="lkc-newcust.html">← 返去新客優惠一覽</a>
+
+  <div class="cta-wrap">
+    <a href="booking.html" class="cta-btn green">📅 網上即時預約系統</a>
+    <a href="https://wa.me/85260828181" class="cta-btn">📲 WhatsApp 6082 8181 預約</a>
+    <a href="https://chat.whatsapp.com/JDiHz9AQUV7GQrxQAiekll" class="cta-btn teal">👥 加入九龍區 WhatsApp 社群</a>
+    <p class="cta-sub">24 小時自助預約 · 即時確認 · 一經預約當日只接你一位</p>
+  </div>
+
+  <p class="footer-note">
+    首次到店專享 · 每項優惠每人限用一次<br>
+    荔枝角：青山道 497 號時來工業大廈 5 樓 12 室（荔枝角站 C 出口步行 3 分鐘）　·　StarLight Beauty © 2026
+  </p>
+
+</div>
+</body>
+</html>

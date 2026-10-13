@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新客優惠一覽 — StarLight Beauty 屯門</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdfaf6;
+    --card: #ffffff;
+    --text: #3d3535;
+    --sub: #8c7b74;
+    --rose: #d4948a;
+    --rose-light: #fdf2f3;
+    --gold: #c4a97d;
+    --gold-light: #f6efe2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Sans HK", "Microsoft JhengHei", "PingFang HK", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .wrapper { max-width: 600px; width: 100%; padding: 20px 16px 50px; }
+
+  /* Header */
+  .page-head {
+    text-align: center;
+    padding: 18px 12px 14px;
+  }
+  .page-head .shop-name {
+    font-family: 'Alex Brush', cursive;
+    font-size: 2.2em;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .page-head .store {
+    font-size: 0.85em;
+    color: var(--sub);
+    letter-spacing: 0.12em;
+    margin-top: 2px;
+  }
+  .page-head h1 {
+    font-size: 1.55em;
+    color: #4a3f3a;
+    font-weight: 800;
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+  }
+  .page-head .sub {
+    font-size: 0.85em;
+    color: var(--sub);
+    margin-top: 4px;
+  }
+
+  /* Note */
+  .note {
+    background: var(--gold-light);
+    border: 1px solid rgba(196,169,125,0.5);
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 0.78em;
+    color: #6b5a3e;
+    margin: 14px 0 4px;
+    line-height: 1.6;
+  }
+  .note b { color: var(--rose); font-weight: 700; }
+  .cmp-link {
+    display: block;
+    text-align: center;
+    background: linear-gradient(135deg, var(--gold), #d9bc80);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9em;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 14px;
+    margin: 12px 0 2px;
+    box-shadow: 0 4px 14px rgba(196,169,125,0.35);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cmp-link:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(196,169,125,0.45); }
+  .cmp-link.packs { background: linear-gradient(135deg, #7d9a72, #9db893); box-shadow: 0 4px 14px rgba(125,154,114,0.3); }
+  .cmp-link.packs:hover { box-shadow: 0 6px 18px rgba(125,154,114,0.4); }
+
+  /* Section label */
+  .sec-label {
+    font-size: 0.82em;
+    color: var(--sub);
+    letter-spacing: 0.08em;
+    margin: 20px 4px 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sec-label::before, .sec-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196,169,125,0.6), transparent);
+  }
+
+  /* Promo card */
+  .promo-card {
+    display: block;
+    background: var(--card);
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-top: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    border-left: 4px solid var(--rose);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .promo-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(212,148,138,0.18);
+  }
+  .promo-card .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 0.62em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .badge.new { background: var(--rose); }
+  .badge.limit { background: var(--gold); }
+  .badge.all { background: #9aa7b0; }
+  .store-tag {
+    font-size: 0.66em;
+    color: var(--sub);
+    background: #f1ece6;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .promo-card h3 {
+    font-size: 1.12em;
+    color: #4a3f3a;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .promo-card .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .promo-card .price {
+    font-size: 1.9em;
+    font-weight: 800;
+    color: var(--rose);
+    line-height: 1;
+  }
+  .promo-card .price .cur { font-size: 0.55em; font-weight: 600; }
+  .promo-card .price .unit { font-size: 0.42em; color: var(--sub); font-weight: 600; margin-left: 2px; }
+  .promo-card .orig {
+    font-size: 0.78em;
+    color: #bbb;
+    text-decoration: line-through;
+  }
+  .promo-card .desc {
+    font-size: 0.8em;
+    color: var(--sub);
+    line-height: 1.6;
+  }
+  .promo-card .foot-row {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.74em;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .promo-card .foot-row .arrow { transition: transform 0.15s; }
+  .promo-card:hover .foot-row .arrow { transform: translateX(4px); }
+
+  /* CTA */
+  .cta-wrap { margin-top: 24px; }
+  .cta-btn {
+    display: block;
+    background: var(--rose);
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    border-radius: 14px;
+    font-size: 1.02em;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 12px;
+    box-shadow: 0 4px 16px rgba(212,148,138,0.3);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,148,138,0.4); }
+  .cta-btn.green { background: #27ae60; box-shadow: 0 4px 16px rgba(39,174,96,0.3); }
+  .cta-btn.teal { background: #128c7e; box-shadow: 0 4px 16px rgba(18,140,126,0.3); }
+  .cta-sub {
+    text-align: center;
+    font-size: 0.7em;
+    color: #bbb;
+    margin-top: 8px;
+  }
+
+  .footer-note {
+    text-align: center;
+    font-size: 0.7em;
+    color: #ccc;
+    margin-top: 22px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="page-head">
+    <div class="shop-name">✦ StarLight Beauty ✦</div>
+    <div class="store">屯門店 · TUEN MUN</div>
+    <h1>新客專享優惠一覽</h1>
+    <div class="sub">首次到店 · 限時優惠 · 大部分兩店通用</div>
+  </div>
+
+  <!-- NOTE -->
+  <div class="note">
+    💡 以下優惠大部分<b>兩店通用</b>；唯獨「奢華人手 SPA FACIAL 新客價」因分店而異：
+    屯門 <b>$199</b> ／ 荔枝角 <b>$299</b>。本頁為屯門價。
+  </div>
+
+  <a href="tm-newcust-compare.html" class="cmp-link">📊 4 款新客優惠大比拼・邊款啱你？</a>
+  <a href="tm-packages.html" class="cmp-link packs">🎫 睇套票優惠（套票一覽）→</a>
+
+  <div class="sec-label">新客優惠 LIST</div>
+
+  <!-- 1. SPA FACIAL -->
+  <a class="promo-card" href="promo-images/p36_spa_facial_newcust.jpg" style="border-left-color:var(--rose);">
+    <div class="top">
+      <span class="badge new">🔥 新客專享</span>
+      <span class="store-tag">屯門限定價</span>
+    </div>
+    <h3>奢華人手 SPA FACIAL</h3>
+    <div class="price-row">
+      <span class="price"><span class="cur">$</span>199<span class="unit">／次</span></span>
+      <span class="orig">原價 $680</span>
+    </div>
+    <div class="desc">液體黃金玫瑰精華油 · 全人手淋巴按摩 · 療程約 60 分鐘（預留 90 分鐘）。每人限用一次。</div>
+    <div class="foot-row"><span>查看海報</span><span class="arrow">→</span></div>
+  </a>
+
+  <!-- 2. 玫瑰保濕套餐 -->
+  <a class="promo-card" href="promo-images/p04_rose_moisture.jpg" style="border-left-color:var(--rose);">
+    <div class="top">
+      <span class="badge new">🌸 新客專享</span>
+      <span class="store-tag">兩店通用</span>
+    </div>
+    <h3>玫瑰保濕套餐</h3>
+    <div class="price-row">
+      <span class="price"><span class="cur">$</span>298<span class="unit">／次</span></span>
+      <span class="orig">原價 $560</span>
+    </div>
+    <div class="desc">5 步玫瑰保濕療程（卸妝洗臉 · 去角質霜 · 保濕聲波導入 · 玫瑰保濕按臉 · 玫瑰保濕面膜）約 60 分鐘，額外贈送 3 選 1（額外精華導入／玉石全面刮沙排毒按摩／耳燭及頭部舒緩按摩）。每人限用一次。</div>
+    <div class="foot-row"><span>查看海報</span><span class="arrow">→</span></div>
+  </a>
+
+  <!-- 3. $688/2次 -->
+  <a class="promo-card" href="promo-images/p37_688_newcust.jpg" style="border-left-color:var(--gold);">
+    <div class="top">
+      <span class="badge limit">⭐ 新客限定</span>
+      <span class="store-tag">兩店通用</span>
+    </div>
+    <h3>新客限定優惠 $688／2 次</h3>
+    <div class="price-row">
+      <span class="price"><span class="cur">$</span>688<span class="unit">／2次</span></span>
+      <span class="orig">每次約 90 分鐘</span>
+    </div>
+    <div class="desc">每次到訪：面部療程 3 選 1（皇牌人手 SPA／Aqua Peel／膠原槍）＋ 免費贈送 3 選 1（眼部排毒刮沙／磁叉按臉／眼部膠原槍）。2 次到訪共享 4 項療程，有效期一個月。</div>
+    <div class="foot-row"><span>查看海報</span><span class="arrow">→</span></div>
+  </a>
+
+  <!-- 3. $888/3次 -->
+  <a class="promo-card" href="promo-images/p38_888_newcust.jpg" style="border-left-color:var(--gold);">
+    <div class="top">
+      <span class="badge limit">⭐ 新客限定</span>
+      <span class="store-tag">兩店通用</span>
+    </div>
+    <h3>新客三部曲 $888／3 次</h3>
+    <div class="price-row">
+      <span class="price"><span class="cur">$</span>888<span class="unit">／3次</span></span>
+      <span class="orig">每次約 90 分鐘</span>
+    </div>
+    <div class="desc">每次到訪：Facial 5 選 1（皇牌人手 SPA／Aqua Peel／膠原槍／百草純露注氧／排毒袪水腫）＋ 免費贈送 5 選 1（膠原槍眼部／耳燭／肚燭／刮沙排毒／肩頸按摩）。3 次到訪，有效期兩個月。</div>
+    <div class="foot-row"><span>查看海報</span><span class="arrow">→</span></div>
+  </a>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <a href="booking.html" class="cta-btn green">📅 網上即時預約系統</a>
+    <a href="https://wa.me/85260828181" class="cta-btn">📲 WhatsApp 6082 8181 預約</a>
+    <a href="https://chat.whatsapp.com/ITTB2VrVvOF7Pkcko4ONRn" class="cta-btn teal">👥 加入屯門 WhatsApp 社群</a>
+    <p class="cta-sub">24 小時自助預約 · 即時確認 · 一經預約當日只接你一位</p>
+  </div>
+
+  <p class="footer-note">
+    首次到店專享 · 每項優惠每人限用一次<br>
+    屯門：屯門工業中心 C 座（近輕鐵建安站）　·　StarLight Beauty © 2026
+  </p>
+
+</div>
+</body>
+</html>

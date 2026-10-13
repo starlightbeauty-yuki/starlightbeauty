@@ -116,6 +116,7 @@ body {
   .card.price::before { background: linear-gradient(180deg, #6a9dc7, #8bb8d9); }
   .card.spa::before { background: linear-gradient(180deg, #b76e79, #d4848e); }
   .card.promo::before { background: linear-gradient(180deg, #e8a87f, #d4948a); }
+  .card.bojing::before { background: linear-gradient(180deg, #e06363, #f08a8a); }
 
 /* Icon */
 .icon {
@@ -127,6 +128,7 @@ body {
 }
 .card.price .icon { background: #eef5fb; }
 .card.spa .icon { background: #fce4e8; }
+  .card.bojing .icon { background: #fde8e8; }
 
 /* Content */
 .info { flex:1; min-width:0; }
@@ -279,7 +281,7 @@ body {
 <div class="cards">
 
   <!-- 開幕優惠橫幅 -->
-<a class="opening-banner" href="lkc-299.html" target="_blank">
+<a class="opening-banner" href="lkc-newcust.html" target="_blank">
   <div class="s-badge">🎉 現已開幕</div>
   <div class="s-icon">🏢</div>
   <div class="s-info">
@@ -300,15 +302,36 @@ body {
     <div class="s-arrow">▶</div>
   </a>
 
-  <!-- 星光自選格 -->
-  <a class="card price" href="grid.html" target="_blank">
-    <div class="icon">🎴</div>
+  <!-- 新客限定優惠 系統入口 -->
+  <a class="card spa" href="lkc-newcust.html" target="_blank">
+    <div class="icon">💫</div>
     <div class="info">
-      <div class="title">星光自選格</div>
-      <div class="desc">四大類各揀 1 樣 ＝ 1 次療程<br>$1,988 起 · 兩店通用</div>
+      <div class="title">新客限定優惠 <span class="badge hot">🔥 最抵入門</span></div>
+      <div class="desc">$299 奢華人手 SPA · $688 限定優惠 · $888 新客三部曲<br>首次體驗專享價 · 一次過試勻療程</div>
     </div>
     <div class="arrow">▶</div>
   </a>
+
+  <!-- 套票優惠 系統入口 -->
+  <a class="card price" href="lkc-packages.html" target="_blank">
+    <div class="icon">🎫</div>
+    <div class="info">
+      <div class="title">套票優惠 · 長用更着數 <span class="badge blue">💎 慳得最多</span></div>
+      <div class="desc">星光自選格 · 擴張優惠買4送1 · 星光美療通行證<br>多款套票靈活選 · 兩店通用</div>
+    </div>
+    <div class="arrow">▶</div>
+  </a>
+
+  <!-- 紅外撥筋系列 最新療程 -->
+  <a class="card bojing" href="bojing.html" target="_blank">
+    <div class="icon">🌡️</div>
+    <div class="info">
+      <div class="title">紅外撥筋系列 <span class="badge new">🆕 最新療程</span></div>
+      <div class="desc">痛感低 · 遠紅外線溫熱 · 通經絡穴位 · 效果維持耐<br>4 款療程 $196 體驗起 · 兩店通用</div>
+    </div>
+    <div class="arrow">▶</div>
+  </a>
+
   <a class="card price" href="lkc-price.html" target="_blank">
     <div class="icon">💰</div>
     <div class="info">
@@ -318,22 +341,12 @@ body {
     <div class="arrow">▶</div>
   </a>
 
-  <!-- $299 SPA (荔枝角) -->
-  <a class="card spa" href="lkc-299.html" target="_blank">
-    <div class="icon">💎</div>
+  <!-- 印花換好禮 -->
+  <a class="card price" href="stamp.html" target="_blank">
+    <div class="icon">🎟️</div>
     <div class="info">
-      <div class="title">$299 奢華人手 SPA Facial <span class="badge hot">🔥 新客限定</span></div>
-      <div class="desc">60分鐘液體黃金玫瑰精華油按摩 · 首次體驗專享（原價 $630）</div>
-    </div>
-    <div class="arrow">▶</div>
-  </a>
-
-  <!-- Promo Gallery 荔枝角 -->
-  <a class="card promo" href="lkc-promo.html" target="_blank">
-    <div class="icon" style="background:#fdf2f3;font-size:1.8em;">🎁</div>
-    <div class="info">
-      <div class="title">🎁 專屬優惠推廣</div>
-      <div class="desc">最新優惠推廣圖片 · 長按可儲存分享</div>
+      <div class="title">🎟️ 印花換好禮 <span class="badge new">🆕 會員禮遇</span></div>
+      <div class="desc">消費滿 $1,000 得 1 個印花 · 儲起可換療程<br>荔枝角：儲滿 5 個換 2 次 LED 光療 · 有效期 12 個月</div>
     </div>
     <div class="arrow">▶</div>
   </a>

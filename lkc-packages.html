@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>套票優惠一覽 — StarLight Beauty 荔枝角</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --text: #2c3e50;
+    --sub: #7f8c8d;
+    --blue: #2980b9;
+    --gold: #d4a017;
+    --gold-light: #fbf4e3;
+    /* 套票語意色（全站統一：套票＝綠色） */
+    --green: #7d9a72;
+    --green-light: #f0f5ee;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Sans HK", "Microsoft JhengHei", "PingFang HK", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .wrapper { max-width: 600px; width: 100%; padding: 20px 16px 50px; }
+
+  /* Header */
+  .page-head { text-align: center; padding: 18px 12px 14px; }
+  .page-head .shop-name {
+    font-family: 'Alex Brush', cursive;
+    font-size: 2.2em;
+    color: var(--blue);
+    line-height: 1;
+  }
+  .page-head .store {
+    font-size: 0.85em; color: var(--sub);
+    letter-spacing: 0.12em; margin-top: 2px;
+  }
+  .page-head h1 {
+    font-size: 1.55em; color: #2c3e50; font-weight: 800;
+    margin-top: 8px; letter-spacing: 0.04em;
+  }
+  .page-head .sub { font-size: 0.85em; color: var(--sub); margin-top: 4px; }
+
+  /* Note */
+  .note {
+    background: var(--gold-light);
+    border: 1px solid rgba(212,160,23,0.45);
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 0.78em;
+    color: #6b5a3e;
+    margin: 14px 0 4px;
+    line-height: 1.6;
+  }
+  .note b { color: var(--blue); font-weight: 700; }
+
+  /* 分類說明雙欄 */
+  .type-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 14px 0 2px;
+  }
+  .type-box {
+    border-radius: 14px; padding: 12px 14px;
+    font-size: 0.72em; line-height: 1.55;
+    border: 1.5px solid transparent;
+  }
+  .type-box .tt { font-weight: 800; font-size: 1.14em; display: block; margin-bottom: 3px; }
+  .type-box .td { color: #7d6d66; }
+  .type-box.single { background: #fdf3f2; border-color: rgba(192,57,43,0.4); }
+  .type-box.single .tt { color: var(--rose, #c0392b); }
+  .type-box.pack { background: var(--green-light); border-color: rgba(125,154,114,0.5); }
+  .type-box.pack .tt { color: var(--green); }
+  .type-box.pack .td b { color: var(--green); }
+
+  .cmp-link {
+    display: block; text-align: center;
+    background: linear-gradient(135deg, var(--blue), #4aa3df);
+    color: #fff; font-weight: 700; font-size: 0.9em;
+    letter-spacing: 0.03em; text-decoration: none;
+    padding: 12px; border-radius: 14px; margin: 12px 0 2px;
+    box-shadow: 0 4px 14px rgba(41,128,185,0.3);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cmp-link:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(41,128,185,0.4); }
+  .cmp-link.packs { background: linear-gradient(135deg, #7d9a72, #9db893); box-shadow: 0 4px 14px rgba(125,154,114,0.35); }
+  .cmp-link.packs:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(125,154,114,0.45); }
+
+  /* Section label */
+  .sec-label {
+    font-size: 0.82em; color: var(--sub); letter-spacing: 0.08em;
+    margin: 20px 4px 6px; display: flex; align-items: center; gap: 8px;
+  }
+  .sec-label::before, .sec-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(125,154,114,0.5), transparent);
+  }
+
+  /* 總結表 */
+  .table-scroll {
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    background: var(--card);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.74em; min-width: 430px; }
+  thead th {
+    background: var(--gold-light); color: #6b5a3e; font-weight: 700;
+    text-align: left; padding: 10px 12px; white-space: nowrap;
+  }
+  tbody td { padding: 10px 12px; border-top: 1px solid #eef1f4; vertical-align: middle; }
+  tbody tr:nth-child(even) { background: #fafcfd; }
+  tbody td.name { font-weight: 700; color: #2c3e50; }
+  tbody td.price { font-weight: 800; color: var(--green); white-space: nowrap; }
+  tbody td.avg { color: var(--sub); white-space: nowrap; }
+  tbody tr.off td { color: #b9c2c9; }
+  tbody tr.off td.price { color: #b9c2c9; }
+  .st-tag {
+    display: inline-block; font-size: 0.9em; padding: 2px 9px;
+    border-radius: 10px; font-weight: 700; white-space: nowrap;
+  }
+  .st-tag.tm { background: var(--gold-light); color: #a8873f; }
+  .st-tag.all { background: #eaf2f8; color: #2980b9; }
+
+  /* Promo card */
+  .promo-card {
+    display: block; background: var(--card); border-radius: 16px;
+    padding: 18px 20px; margin-top: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    border-left: 4px solid var(--green);
+    text-decoration: none; color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .promo-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(125,154,114,0.2); }
+  .promo-card.disabled {
+    border-left-color: #cfd6db; opacity: 0.9; cursor: default; background: #f7f9fb;
+  }
+  .promo-card.disabled:hover { transform: none; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+  .promo-card .top {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin-bottom: 6px;
+  }
+  .badge {
+    display: inline-block; font-size: 0.62em; padding: 4px 12px;
+    border-radius: 20px; font-weight: 700; letter-spacing: 0.05em;
+    color: #fff; white-space: nowrap;
+  }
+  .badge.pack { background: var(--green); }
+  .badge.grey { background: #b8c2c9; }
+  .store-tag {
+    font-size: 0.66em; color: var(--sub); background: #eef1f4;
+    padding: 3px 10px; border-radius: 12px; font-weight: 600; white-space: nowrap;
+  }
+  .promo-card h3 { font-size: 1.12em; color: #2c3e50; font-weight: 700; margin-bottom: 4px; }
+  .promo-card .price-row {
+    display: flex; align-items: baseline; gap: 8px;
+    flex-wrap: wrap; margin-bottom: 6px;
+  }
+  .promo-card .price { font-size: 1.9em; font-weight: 800; color: var(--green); line-height: 1; }
+  .promo-card .price .cur { font-size: 0.55em; font-weight: 600; }
+  .promo-card .price .unit { font-size: 0.42em; color: var(--sub); font-weight: 600; margin-left: 2px; }
+  .promo-card .orig { font-size: 0.78em; color: #98a4ad; font-weight: 600; }
+  .promo-card .desc { font-size: 0.8em; color: var(--sub); line-height: 1.6; }
+
+  /* 價位階梯 */
+  .tier-list { margin: 10px 0 6px; display: flex; flex-direction: column; gap: 6px; }
+  .tier {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 10px; background: var(--green-light);
+    border-radius: 10px; padding: 8px 12px;
+  }
+  .tier .t-price { font-size: 0.95em; font-weight: 800; color: var(--green); white-space: nowrap; }
+  .tier .t-meta { font-size: 0.7em; color: #7d6d66; text-align: right; line-height: 1.45; }
+  .tier.best { background: linear-gradient(135deg, #e6f1f9, #fbf4e3); box-shadow: 0 0 0 1.5px rgba(212,160,23,0.5) inset; }
+  .tier.best .t-price { color: #a8873f; }
+
+  .promo-card .foot-row {
+    margin-top: 10px; display: flex; align-items: center;
+    justify-content: space-between; font-size: 0.74em;
+    color: var(--green); font-weight: 700;
+  }
+  .promo-card .foot-row .arrow { transition: transform 0.15s; }
+  .promo-card:hover .foot-row .arrow { transform: translateX(4px); }
+
+  /* CTA */
+  .cta-wrap { margin-top: 24px; }
+  .cta-btn {
+    display: block; background: var(--blue); color: #fff;
+    text-align: center; padding: 15px; border-radius: 14px;
+    font-size: 1.02em; font-weight: 700; text-decoration: none;
+    margin-top: 12px; box-shadow: 0 4px 16px rgba(41,128,185,0.28);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(41,128,185,0.38); }
+  .cta-btn.green { background: #27ae60; box-shadow: 0 4px 16px rgba(39,174,96,0.3); }
+  .cta-btn.teal { background: #128c7e; box-shadow: 0 4px 16px rgba(18,140,126,0.3); }
+  .cta-sub { text-align: center; font-size: 0.7em; color: #aab6bf; margin-top: 8px; }
+
+  .footer-note {
+    text-align: center; font-size: 0.7em; color: #b3bec7;
+    margin-top: 22px; line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="page-head">
+    <div class="shop-name">✦ StarLight Beauty ✦</div>
+    <div class="store">荔枝角療癒工作室 · LAI CHI KOK</div>
+    <h1>套票優惠一覽</h1>
+    <div class="sub">單次優惠 vs 套票優惠 · 一眼分清楚</div>
+  </div>
+
+  <!-- 分類說明 -->
+  <div class="type-grid">
+    <div class="type-box single">
+      <span class="tt">💫 單次優惠</span>
+      <span class="td">試一次、零壓力<br>適合第一次體驗</span>
+    </div>
+    <div class="type-box pack">
+      <span class="tt">🎫 套票優惠</span>
+      <span class="td">預付多次、<b>平均每次更平</b><br>本頁</span>
+    </div>
+  </div>
+
+  <a href="lkc-newcust.html" class="cmp-link">💫 睇單次優惠（新客優惠一覽）→</a>
+  <a href="lkc-packages-compare.html" class="cmp-link packs">📊 套票大比拼・優點＋點揀一睇就明 →</a>
+
+  <div class="note">
+    💡 本頁全部係 <b>套票優惠</b>（預付多次、平均每次更抵）。<br>
+    ⚠️ 荔枝角店<b>不設光學儀器</b>，故「高能量儀器」及「激光脫毛」套票<b>僅於屯門店提供</b>，下列以淺色標示。
+  </div>
+
+  <!-- 總結表 -->
+  <div class="sec-label">📋 套票一覽（左右滑動睇晒）</div>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>套票</th><th>價格</th><th>次數</th><th>平均每次</th><th>適用店</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="name">共享套票 6 次</td><td class="price">$3,600</td><td>6 次</td><td class="avg">$600</td><td><span class="st-tag all">兩店通用</span></td></tr>
+        <tr><td class="name">共享套票 8 次</td><td class="price">$4,400</td><td>8 次</td><td class="avg">$550</td><td><span class="st-tag all">兩店通用</span></td></tr>
+        <tr><td class="name">共享套票 10 次</td><td class="price">$5,000</td><td>10 次</td><td class="avg">$500</td><td><span class="st-tag all">兩店通用</span></td></tr>
+        <tr><td class="name">共享套票 12 次</td><td class="price">$5,400</td><td>12 次</td><td class="avg">$450</td><td><span class="st-tag all">兩店通用</span></td></tr>
+        <tr><td class="name">星光自選格 輕盈</td><td class="price">$1,988</td><td>5 次（20 格）</td><td class="avg">$398</td><td><span class="st-tag all">兩店通用</span></td></tr>
+        <tr><td class="name">星光自選格 長情</td><td class="price">$3,588</td><td>11 次（44 格）</td><td class="avg">$326</td><td><span class="st-tag all">兩店通用</span></td></tr>
+        <tr><td class="name">擴張優惠 買 4 送 1</td><td class="price">$2,088</td><td>5 次</td><td class="avg">$418</td><td><span class="st-tag all">兩店通用</span></td></tr>
+        <tr><td class="name">星光美療通行證</td><td class="price">$2,088</td><td>4 次</td><td class="avg">$522</td><td><span class="st-tag all">兩店通用</span></td></tr>
+        <tr class="off"><td class="name">高能量儀器任你做</td><td class="price">$6,000</td><td>10 次</td><td class="avg">$600</td><td><span class="st-tag tm">屯門獨家</span></td></tr>
+        <tr class="off"><td class="name">激光脫毛 LASER</td><td class="price">$2,600</td><td>10 次</td><td class="avg">$260</td><td><span class="st-tag tm">屯門限定</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-label">🎫 套票優惠（本店適用）</div>
+
+  <!-- 共享套票 -->
+  <a class="promo-card" href="promo-images/p28_bestie_group.jpg" style="border-left-color:var(--gold);">
+    <div class="top">
+      <span class="badge pack">🎫 套票優惠</span>
+      <span class="store-tag">兩店通用</span>
+    </div>
+    <h3>共享套票（4 款價格任你揀）</h3>
+    <div class="price-row">
+      <span class="price"><span class="cur">$</span>3,600<span class="unit">起</span></span>
+      <span class="orig">每次可任選 $970 以下療程</span>
+    </div>
+    <div class="desc">👭 <b>全店唯一可與朋友／家人共用的套票</b> — 次數自由分享，可約埋一齊做（先後進行），唔使分開買。次數越多、額外療程折扣越低，另送 <b>細胞機導入</b>。</div>
+    <div class="tier-list">
+      <div class="tier">
+        <span class="t-price">$3,600／6 次</span>
+        <span class="t-meta">平均 $600／次<br>有效期 4 個月 · 額外療程 8 折</span>
+      </div>
+      <div class="tier">
+        <span class="t-price">$4,400／8 次</span>
+        <span class="t-meta">平均 $550／次<br>有效期 6 個月 · 額外療程 7 折</span>
+      </div>
+      <div class="tier">
+        <span class="t-price">$5,000／10 次</span>
+        <span class="t-meta">平均 $500／次<br>有效期 8 個月 · 額外療程 6 折</span>
+      </div>
+      <div class="tier best">
+        <span class="t-price">$5,400／12 次</span>
+        <span class="t-meta">平均 $450／次・最抵<br>有效期 10 個月 · 額外療程 5 折</span>
+      </div>
+    </div>
+    <div class="foot-row"><span>查看海報</span><span class="arrow">→</span></div>
+  </a>
+
+  <!-- 星光自選格 -->
+  <a class="promo-card" href="promo-images/p39_grid_selfselect.jpg" style="border-left-color:var(--green);">
+    <div class="top">
+      <span class="badge pack">🎫 套票優惠</span>
+      <span class="store-tag">兩店通用</span>
+    </div>
+    <h3>星光自選格（2 款任你揀）</h3>
+    <div class="price-row">
+      <span class="price"><span class="cur">$</span>1,988<span class="unit">起</span></span>
+      <span class="orig">四大類各揀 1 樣 ＝ 1 次療程</span>
+    </div>
+    <div class="desc">自己配、自己話事！每次到訪＝四大類（面部／眼部／身體／加配）各揀 1 樣，共 4 項，60–75 分鐘。每次仲包 <b>卸妝洗面＋修眉＋LED 光療＋保濕面膜</b>（唔計格），不限時段、兩店通用（荔枝角一樣做）。</div>
+    <div class="tier-list">
+      <div class="tier">
+        <span class="t-price">輕盈 $1,988／20 格</span>
+        <span class="t-meta">＝ 5 次 · 平均 $398／次<br>有效期 5 個月</span>
+      </div>
+      <div class="tier best">
+        <span class="t-price">長情 $3,588／44 格</span>
+        <span class="t-meta">40 送 4 ＝ 11 次 · 平均 $326／次<br>有效期 10 個月・最抵</span>
+      </div>
+    </div>
+    <div class="foot-row"><span>查看海報</span><span class="arrow">→</span></div>
+  </a>
+
+  <!-- 擴張優惠 -->
+  <a class="promo-card" href="promo-images/p40_expansion.jpg" style="border-left-color:var(--green);">
+    <div class="top">
+      <span class="badge pack">🎫 套票優惠</span>
+      <span class="store-tag">兩店通用</span>
+    </div>
+    <h3>擴張優惠 · 買 4 送 1</h3>
+    <div class="price-row">
+      <span class="price"><span class="cur">$</span>2,088<span class="unit">／5次</span></span>
+      <span class="orig">平均每次 $418 · 送 1 次奢華人手 SPA</span>
+    </div>
+    <div class="desc">買 4 次送 1 次 <b>奢華人手 SPA FACIAL</b>，即 5 次療程。每次固定送 <b>AQUA PEEL 深層清潔＋LED 光療＋肩頸按摩＋眼部及面部祛水腫刮痧</b>，另可任選 1 款療程，兩店通用（荔枝角一樣做）。</div>
+    <div class="foot-row"><span>查看海報</span><span class="arrow">→</span></div>
+  </a>
+
+  <!-- 星光美療通行證 -->
+  <a class="promo-card" href="promo-images/p41_pass.jpg" style="border-left-color:var(--green);">
+    <div class="top">
+      <span class="badge pack">🎫 套票優惠</span>
+      <span class="store-tag">兩店通用</span>
+    </div>
+    <h3>星光美療通行證（星級 UPGRADE）</h3>
+    <div class="price-row">
+      <span class="price"><span class="cur">$</span>2,088<span class="unit">／4次</span></span>
+      <span class="orig">平均每次 $522 · 總值高達 $4,900</span>
+    </div>
+    <div class="desc">星級貴價療程任選 4 次（含 PDRN 三文魚 DNA 再生修復、韓國玻尿酸水光、植物肉毒維 C、皇牌奢華 SPA、膠原緊緻、法國膠原導入）。每次加送耳燭／肚燭／頭部舒緩按摩／肩頸筋膜／保濕手膜 任選 1 項，有效期 3 個月，兩店通用（荔枝角一樣做）。</div>
+    <div class="foot-row"><span>查看海報</span><span class="arrow">→</span></div>
+  </a>
+
+  <div class="sec-label">🚫 屯門限定套票</div>
+
+  <!-- 高能量儀器（屯門限定） -->
+  <div class="promo-card disabled">
+    <div class="top">
+      <span class="badge grey">🚫 屯門限定</span>
+      <span class="store-tag">本店不適用</span>
+    </div>
+    <h3>高能量儀器 任你做</h3>
+    <div class="price-row">
+      <span class="price"><span class="cur">$</span>6,000<span class="unit">／10次</span></span>
+      <span class="orig">平均每次 $600</span>
+    </div>
+    <div class="desc">
+      10 次高能量儀器療程，每次自選一款：<b>7D Hifu</b>／<b>黃金微針射頻</b>／<b>Laser</b>。<br>
+      📍 荔枝角店不設光學儀器，如欲購買請到屯門店。
+    </div>
+  </div>
+
+  <!-- 激光脫毛（屯門限定） -->
+  <div class="promo-card disabled">
+    <div class="top">
+      <span class="badge grey">🚫 屯門限定</span>
+      <span class="store-tag">本店不適用</span>
+    </div>
+    <h3>LASER HAIR REMOVAL 激光脫毛</h3>
+    <div class="price-row">
+      <span class="price"><span class="cur">$</span>2,600<span class="unit">／10次</span></span>
+      <span class="orig">單次體驗 $260 · 有效期 12 個月</span>
+    </div>
+    <div class="desc">
+      每次任選 <b>1 ＋ 1</b> 部位（細位 + 大位）。<br>
+      📍 荔枝角店不設光學儀器，如欲購買請到屯門店。
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <a href="booking.html" class="cta-btn green">📅 網上即時預約系統</a>
+    <a href="https://wa.me/85260828181" class="cta-btn">📲 WhatsApp 6082 8181 預約／查詢</a>
+    <a href="https://chat.whatsapp.com/JDiHz9AQUV7GQrxQAiekll" class="cta-btn teal">👥 加入九龍區 WhatsApp 社群</a>
+    <p class="cta-sub">24 小時自助預約 · 即時確認 · 一經預約當日只接你一位</p>
+  </div>
+
+  <p class="footer-note">
+    套票優惠以預付方式購買 · 各套票有效期以海報為準<br>
+    荔枝角：青山道 497 號 時來工業大廈 5 樓 12 室（荔枝角站 C 出口）　·　StarLight Beauty © 2026
+  </p>
+
+</div>
+</body>
+</html>

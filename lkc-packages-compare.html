@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6 款套票優惠大比拼 — StarLight Beauty 荔枝角</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fdfaf6; --card:#fff; --text:#3d3535; --sub:#8c7b74;
+    --rose:#d4948a; --rose-light:#fdf2f3; --gold:#c4a97d; --gold-light:#f6efe2;
+    --blue:#2980b9; --green:#7d9a72; --green-light:#eef3ec;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Noto Sans HK","Microsoft JhengHei","PingFang HK",sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.7;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+  .wrapper{max-width:680px;width:100%;padding:20px 16px 50px;}
+
+  .page-head{text-align:center;padding:18px 12px 8px;}
+  .page-head .shop-name{font-family:'Alex Brush',cursive;font-size:2.2em;color:var(--gold);line-height:1;}
+  .page-head .store{font-size:.85em;color:var(--blue);letter-spacing:.12em;margin-top:2px;font-weight:700;}
+  .page-head h1{font-size:1.5em;color:#4a3f3a;font-weight:800;margin-top:8px;letter-spacing:.04em;}
+  .page-head .sub{font-size:.82em;color:var(--sub);margin-top:4px;}
+
+  .note{background:var(--gold-light);border:1px solid rgba(196,169,125,.5);
+    border-radius:14px;padding:11px 16px;font-size:.76em;color:#6b5a3e;margin:12px 0 4px;line-height:1.6;}
+  .note b{color:var(--rose);font-weight:700;}
+
+  /* 對比表 */
+  .table-scroll{margin-top:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  table.cmp{width:100%;min-width:620px;border-collapse:separate;border-spacing:0;
+    background:var(--card);border-radius:16px;overflow:hidden;
+    box-shadow:0 2px 12px rgba(0,0,0,.05);}
+  table.cmp th,table.cmp td{padding:11px 10px;font-size:.76em;border-bottom:1px solid #f0eae2;vertical-align:top;text-align:left;}
+  table.cmp thead th{background:#4a3f3a;color:#fff;font-weight:700;line-height:1.4;text-align:center;white-space:nowrap;}
+  table.cmp thead th:first-child{background:#fff;color:#b9a98f;font-size:.76em;font-weight:600;text-align:left;}
+  table.cmp tbody th{background:var(--green-light);color:#5a6e50;font-weight:700;text-align:left;font-size:.82em;white-space:nowrap;padding-left:10px;width:120px;}
+  table.cmp td .price{font-size:1.05em;font-weight:800;color:var(--green);line-height:1.15;display:block;}
+  table.cmp td .price small{font-size:.62em;color:var(--sub);font-weight:600;}
+  table.cmp td .avg{font-size:.82em;color:#8c7b74;margin-top:2px;display:block;}
+  table.cmp td .pros{font-size:.92em;color:#4a4038;line-height:1.5;}
+  table.cmp td .pros b{color:var(--gold);font-weight:700;}
+  table.cmp td .fit{font-size:.92em;color:var(--sub);line-height:1.5;}
+  .st-tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.82em;font-weight:700;white-space:nowrap;}
+  .st-tag.tm{background:rgba(196,169,125,.18);color:#9a7d45;}
+  .st-tag.all{background:rgba(125,154,114,.18);color:#5a6e50;}
+  .st-tag.off{background:rgba(41,128,185,.16);color:var(--blue);}
+  table.cmp tbody tr:last-child th,table.cmp tbody tr:last-child td{border-bottom:none;}
+
+  /* 場景卡 */
+  .sec-label{font-size:.82em;color:var(--sub);letter-spacing:.08em;margin:24px 4px 6px;
+    display:flex;align-items:center;gap:8px;}
+  .sec-label::before,.sec-label::after{content:'';flex:1;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(196,169,125,.6),transparent);}
+  .scene{background:var(--card);border-radius:16px;padding:14px 18px;margin-top:12px;
+    box-shadow:0 2px 12px rgba(0,0,0,.04);border-left:4px solid var(--gold);}
+  .scene .q{font-weight:700;color:#4a3f3a;font-size:.92em;}
+  .scene .a{font-size:.8em;color:var(--sub);margin-top:4px;line-height:1.6;}
+  .scene .a b{color:var(--green);font-weight:700;}
+  .scene.s1{border-left-color:var(--gold);}
+  .scene.s2{border-left-color:#b98e5e;}
+  .scene.s3{border-left-color:#d9a7b0;}
+  .scene.s4{border-left-color:var(--green);}
+  .scene.s5{border-left-color:#c9a45e;}
+  .scene.s6{border-left-color:var(--rose);}
+
+  /* CTA */
+  .cta-wrap{margin-top:24px;}
+  .cta-btn{display:block;background:var(--green);color:#fff;text-align:center;padding:15px;
+    border-radius:14px;font-size:1.02em;font-weight:700;text-decoration:none;margin-top:12px;
+    box-shadow:0 4px 16px rgba(125,154,114,.3);transition:transform .15s,box-shadow .15s;}
+  .cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(125,154,114,.4);}
+  .cta-btn.green{background:#27ae60;box-shadow:0 4px 16px rgba(39,174,96,.3);}
+  .cta-btn.teal{background:#128c7e;box-shadow:0 4px 16px rgba(18,140,126,.3);}
+  .cta-sub{text-align:center;font-size:.7em;color:#bbb;margin-top:8px;}
+  .footer-note{text-align:center;font-size:.7em;color:#ccc;margin-top:22px;line-height:1.6;}
+
+  .backlink{display:inline-block;margin-top:16px;font-size:.78em;color:var(--gold);
+    text-decoration:none;font-weight:700;}
+  .backlink:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="page-head">
+    <div class="shop-name">✦ StarLight Beauty ✦</div>
+    <div class="store">荔枝角店 · LAI CHI KOK</div>
+    <h1>6 款套票・邊款啱你？</h1>
+    <div class="sub">價格 · 優點 · 點揀 一目了然</div>
+  </div>
+
+  <div class="note">
+    💡 本頁全部為<b>套票優惠</b>（預付多次、平均每次更抵）。「高能量儀器」及「激光脫毛」為<b>屯門限定</b>（荔枝角不設光學儀器），如欲購買請到屯門店；其餘兩店通用。想先試一次可睇<b>單次優惠</b>。
+  </div>
+
+  <div class="table-scroll">
+    <table class="cmp">
+      <thead>
+        <tr>
+          <th>套票</th>
+          <th>價格 ／ 次數</th>
+          <th>核心優點</th>
+          <th>最啱你如果…</th>
+          <th>適用店</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>高能量儀器<br>任你做</th>
+          <td><span class="price">$6,000<small>／10次</small></span><span class="avg">平均 $600／次</span></td>
+          <td class="pros"><b>★ 抗老緊緻</b><br>3 款高能量儀器任揀（7D Hifu／黃金微針／Laser），每次自選一款，針對輪廓、凹凸洞、美白。</td>
+          <td class="fit">想做儀器抗老、試高能量療程，追求緊緻輪廓。</td>
+          <td><span class="st-tag tm">屯門獨家</span></td>
+        </tr>
+        <tr>
+          <th>激光脫毛<br>LASER</th>
+          <td><span class="price">$2,600<small>／10次</small></span><span class="avg">平均 $260／次</span></td>
+          <td class="pros"><b>★ 脫毛最平</b><br>每次任選 1＋1 部位（細位＋大位），有效期 12 個月，單次體驗都係 $260。</td>
+          <td class="fit">想脫毛、長期打理身體部位，要平要耐。</td>
+          <td><span class="st-tag tm">屯門限定</span></td>
+        </tr>
+        <tr>
+          <th>共享套票<br>（4 款）</th>
+          <td><span class="price">$3,600<small>起</small></span><span class="avg">$450–600／次</span></td>
+          <td class="pros"><b>★ 全店唯一可共用</b><br>可與朋友／家人共用同一套票，可約埋一齊做；送細胞機導入，次數越多折扣越低。</td>
+          <td class="fit">想同朋友家人一齊、咪各自買；想有彈性分享。</td>
+          <td><span class="st-tag all">兩店通用</span></td>
+        </tr>
+        <tr>
+          <th>星光<br>自選格</th>
+          <td><span class="price">$1,988<small>起</small></span><span class="avg">$326–398／次</span></td>
+          <td class="pros"><b>★ 自由配搭</b><br>每次四大類（面／眼／身／加配）各揀 1 樣，包卸妝洗面＋修眉＋LED＋保濕面膜（唔計格）。</td>
+          <td class="fit">想每次唔同組合、自己話事；要包基本護理。</td>
+          <td><span class="st-tag all">兩店通用</span></td>
+        </tr>
+        <tr>
+          <th>擴張優惠<br>買 4 送 1</th>
+          <td><span class="price">$2,088<small>／5次</small></span><span class="avg">平均 $418／次</span></td>
+          <td class="pros"><b>★ 最易入手</b><br>送 1 次奢華人手 SPA，每次固定加送 AQUA PEEL＋LED＋肩頸＋刮痧，平均 $418 超抵入門。</td>
+          <td class="fit">想平靚正入門、送 SPA 體驗、穩陣試勻基本療程。</td>
+          <td><span class="st-tag all">兩店通用</span></td>
+        </tr>
+        <tr>
+          <th>星光美療<br>通行證</th>
+          <td><span class="price">$2,088<small>／4次</small></span><span class="avg">平均 $522／次</span></td>
+          <td class="pros"><b>★ 星級 UPGRADE</b><br>貴價療程任選（PDRN／水光／肉毒維C 等），每次加送 5 選 1，總值高達 $4,900。</td>
+          <td class="fit">想試貴價星級療程、進階養膚、要高質感。</td>
+          <td><span class="st-tag all">兩店通用</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-label">咁我應該點揀？</div>
+
+  <div class="scene s1">
+    <div class="q">🅰️ 我想做抗老緊緻、試高能量儀器</div>
+    <div class="a">→ <b>高能量儀器任你做 $6,000／10次</b>：7D Hifu、黃金微針、Laser 三款高能量療程任揀。⚠️ 荔枝角不設光學儀器，<b>請到屯門店選購</b>。</div>
+  </div>
+  <div class="scene s2">
+    <div class="q">🅱️ 我想脫毛、長期打理身體部位</div>
+    <div class="a">→ <b>激光脫毛 $2,600／10次</b>：每次任選 1＋1 部位，平均 $260／次、有效期 12 個月。⚠️ 僅屯門店，<b>請到屯門選購</b>。</div>
+  </div>
+  <div class="scene s3">
+    <div class="q">🅲️ 我想同朋友／家人一齊、套票可共用</div>
+    <div class="a">→ 揀 <b>共享套票 $3,600 起</b>：全店唯一可共用套票，可約埋一齊做、次數自由攤分，另送細胞機導入。最啱姊妹淘／情侶，<b>兩店都做到</b>。</div>
+  </div>
+  <div class="scene s4">
+    <div class="q">🅳️ 我想每次自由配搭、唔同組合</div>
+    <div class="a">→ 揀 <b>星光自選格 $1,988 起</b>：四大類各揀 1 樣＝1 次療程，仲包卸妝洗面＋修眉＋LED＋保濕面膜（唔計格），最自由，<b>荔枝角一樣做</b>。</div>
+  </div>
+  <div class="scene s5">
+    <div class="q">🅴️ 我想平靚正入門、送 SPA 體驗</div>
+    <div class="a">→ 揀 <b>擴張優惠 買 4 送 1 $2,088／5次</b>：送 1 次奢華人手 SPA，每次固定加送 4 項，平均 $418 易入手，<b>兩店通用</b>。</div>
+  </div>
+  <div class="scene s6">
+    <div class="q">🅵️ 我想試貴價星級療程、進階養膚</div>
+    <div class="a">→ 揀 <b>星光美療通行證 $2,088／4次</b>：PDRN、韓國水光、植物肉毒維 C 等星級療程任選，每次加送 5 選 1，總值高達 $4,900，<b>兩店通用</b>。</div>
+  </div>
+
+  <a class="backlink" href="lkc-packages.html">← 返去套票優惠一覽</a>
+
+  <div class="cta-wrap">
+    <a href="booking.html" class="cta-btn green">📅 網上即時預約系統</a>
+    <a href="https://wa.me/85260828181" class="cta-btn">📲 WhatsApp 6082 8181 預約</a>
+    <a href="https://chat.whatsapp.com/JDiHz9AQUV7GQrxQAiekll" class="cta-btn teal">👥 加入九龍區 WhatsApp 社群</a>
+    <p class="cta-sub">24 小時自助預約 · 即時確認 · 一經預約當日只接你一位</p>
+  </div>
+
+  <p class="footer-note">
+    套票優惠 · 預付多次平均每次更抵<br>
+    荔枝角：青山道 497 號時來工業大廈 5 樓 12 室（荔枝角站 C 出口）　·　StarLight Beauty © 2026
+  </p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>印花換好禮 — StarLight Beauty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdfaf6;
+    --card: #ffffff;
+    --text: #3d3535;
+    --sub: #8c7b74;
+    --gold: #c4a97d;
+    --gold-deep: #b8934e;
+    --gold-light: #f6efe2;
+    --teal: #128c7e;
+    --teal-light: #eaf6f3;
+    --rose: #c98a97;
+    --rose-light: #fbeff2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Sans HK", "Microsoft JhengHei", "PingFang HK", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .wrapper { max-width: 600px; width: 100%; padding: 20px 16px 50px; }
+
+  /* Header */
+  .page-head { text-align: center; padding: 18px 12px 14px; }
+  .page-head .shop-name {
+    font-family: 'Alex Brush', cursive;
+    font-size: 2.2em;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .page-head .store {
+    font-size: 0.85em;
+    color: var(--sub);
+    letter-spacing: 0.12em;
+    margin-top: 2px;
+  }
+  .page-head h1 {
+    font-size: 1.55em;
+    color: #4a3f3a;
+    font-weight: 800;
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+  }
+  .page-head .sub {
+    font-size: 0.85em;
+    color: var(--sub);
+    margin-top: 4px;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(150deg, #fffdf9, #f7efe1);
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    padding: 22px 20px;
+    text-align: center;
+    margin: 16px 0 6px;
+    box-shadow: 0 6px 22px rgba(196,169,125,0.22);
+    position: relative;
+  }
+  .hero .kicker {
+    font-size: 0.76em;
+    letter-spacing: 0.24em;
+    color: var(--gold-deep);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .hero .amount {
+    font-size: 2.6em;
+    font-weight: 800;
+    color: var(--gold-deep);
+    line-height: 1.1;
+    margin: 6px 0 2px;
+  }
+  .hero .amount .cur { font-size: 0.5em; font-weight: 700; vertical-align: 0.35em; }
+  .hero .amount-desc {
+    font-size: 0.92em;
+    color: #6b5a3e;
+    font-weight: 700;
+  }
+  .hero .val-tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.72em;
+    color: #fff;
+    background: linear-gradient(135deg, var(--gold), #d9bc80);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* Note */
+  .note {
+    background: var(--gold-light);
+    border: 1px solid rgba(196,169,125,0.5);
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 0.78em;
+    color: #6b5a3e;
+    margin: 14px 0 4px;
+    line-height: 1.6;
+  }
+  .note b { color: var(--gold-deep); font-weight: 700; }
+
+  /* Section label */
+  .sec-label {
+    font-size: 0.82em;
+    color: var(--sub);
+    letter-spacing: 0.08em;
+    margin: 22px 4px 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+  }
+  .sec-label::before, .sec-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196,169,125,0.6), transparent);
+  }
+
+  /* 兩店兌換禮遇 */
+  .stores { display: grid; gap: 12px; margin-top: 12px; }
+  .store-box {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 16px 16px 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    border-top: 4px solid var(--gold);
+  }
+  .store-box .sb-name {
+    font-size: 1.02em;
+    font-weight: 800;
+    color: #4a3f3a;
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .store-box .sb-name .pin { color: var(--gold-deep); }
+  .reward {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px dashed rgba(196,169,125,0.45);
+  }
+  .reward:last-child { border-bottom: none; }
+  .reward .r-stamp {
+    font-size: 0.8em;
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(135deg, var(--gold), #d9bc80);
+    border-radius: 20px;
+    padding: 5px 12px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+  .reward .r-txt { font-size: 0.82em; color: #5b4f47; font-weight: 600; line-height: 1.45; }
+  .reward .r-txt b { color: var(--gold-deep); }
+
+  /* 條款 */
+  .terms {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-top: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    font-size: 0.78em;
+    color: var(--sub);
+    line-height: 1.85;
+  }
+  .terms li { margin-left: 18px; }
+  .terms b { color: #4a3f3a; }
+
+  /* CTA */
+  .cta-wrap { margin-top: 24px; }
+  .cta-btn {
+    display: block;
+    background: var(--gold-deep);
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    border-radius: 14px;
+    font-size: 1.02em;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 12px;
+    box-shadow: 0 4px 16px rgba(184,147,78,0.3);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(184,147,78,0.42); }
+  .cta-btn.green { background: #27ae60; box-shadow: 0 4px 16px rgba(39,174,96,0.3); }
+  .cta-sub {
+    text-align: center;
+    font-size: 0.7em;
+    color: #bbb;
+    margin-top: 8px;
+  }
+
+  .footer-note {
+    text-align: center;
+    font-size: 0.7em;
+    color: #ccc;
+    margin-top: 22px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="page-head">
+    <div class="shop-name">✦ StarLight Beauty ✦</div>
+    <div class="store">屯門 · 荔枝角　兩店都可以使用</div>
+    <h1>印花換好禮</h1>
+    <div class="sub">Stamp &amp; Redeem Rewards · 消費儲印花 · 儲滿換療程</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="kicker">Stamp &amp; Redeem</div>
+    <div class="amount"><span class="cur">HK$</span>1,000</div>
+    <div class="amount-desc">每次消費滿 $1,000 即獲 1 個印花</div>
+    <span class="val-tag">⏳ 印花有效期 12 個月</span>
+  </div>
+
+  <div class="note">
+    💡 每次消費滿 <b>HK$1,000</b> 即獲 <b>1 個印花</b>，儲起印花即可換療程。快速累積、超值回饋、療程任選 —— 屯門、荔枝角兩店各有禮遇。
+  </div>
+
+  <!-- 兩店兌換禮遇 -->
+  <div class="sec-label">兩店兌換禮遇</div>
+  <div class="stores">
+    <div class="store-box">
+      <div class="sb-name"><span class="pin">🏠</span> 屯門店</div>
+      <div class="reward">
+        <span class="r-stamp">儲滿 5 個</span>
+        <span class="r-txt">換 <b>1 次 彩光嫩膚療程</b></span>
+      </div>
+      <div class="reward">
+        <span class="r-stamp">儲滿 10 個</span>
+        <span class="r-txt">換 <b>任選面部療程 1 次</b></span>
+      </div>
+    </div>
+    <div class="store-box">
+      <div class="sb-name"><span class="pin">🏢</span> 荔枝角店</div>
+      <div class="reward">
+        <span class="r-stamp">儲滿 5 個</span>
+        <span class="r-txt">換 <b>2 次 LED 光療</b></span>
+      </div>
+      <div class="reward">
+        <span class="r-stamp">儲滿 10 個</span>
+        <span class="r-txt">換 <b>任選面部療程 1 次</b></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 條款 -->
+  <div class="sec-label">印花須知</div>
+  <ul class="terms">
+    <li>累積方式：每次消費滿 <b>HK$1,000</b> 即獲 <b>1 個印花</b></li>
+    <li>有效期：印花 <b>12 個月</b>內有效（由蓋印日起計）</li>
+    <li>屯門店：儲滿 <b>5 個</b>換 1 次彩光嫩膚療程；儲滿 <b>10 個</b>換任選面部療程 1 次</li>
+    <li>荔枝角店：儲滿 <b>5 個</b>換 2 次 LED 光療；儲滿 <b>10 個</b>換任選面部療程 1 次</li>
+    <li>印花卡請向店員索取，蓋印方可累積</li>
+    <li>印花不可轉讓、不可兌換現金，亦不可與其他優惠同時使用</li>
+    <li>優惠及條款以店內公告為準，本店保留最終解釋權</li>
+  </ul>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <a href="booking.html" class="cta-btn green">📅 網上即時預約系統</a>
+    <a href="https://wa.me/85260828181" class="cta-btn">📲 WhatsApp 6082 8181 查詢 / 索取印花卡</a>
+    <p class="cta-sub">24 小時自助預約 · 即時確認 · 一經預約當日只接你一位</p>
+  </div>
+
+  <p class="footer-note">
+    StarLight Beauty © 2026 · 印花優惠最終解釋權歸本店所有<br>
+    屯門：屯門工業中心 C 座（近輕鐵建安站）　·　荔枝角：青山道 497 號時來工業大廈 5 樓 12 室
+  </p>
+
+</div>
+</body>
+</html>
