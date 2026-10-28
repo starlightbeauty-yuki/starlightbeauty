@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="noindex, nofollow">
+    <title>StarLight Beauty 療程後意見問卷</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #E8C964;
+            --gold-dark: #B8941F;
+            --cream: #FFF9F0;
+            --dark: #2C2C2C;
+            --gray: #888;
+            --gray-light: #E0E0E0;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, #FFF9F0 0%, #F7E7CE 100%);
+            min-height: 100vh;
+            color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px 16px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 480px;
+            background: #FFFFFF;
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(212, 175, 55, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            padding: 32px 24px 28px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.05));
+        }
+
+        .store-name {
+            font-family: 'Alex Brush', cursive;
+            font-size: 42px;
+            color: #FFF;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            line-height: 1.2;
+        }
+
+        .header-subtitle {
+            font-size: 15px;
+            color: rgba(255,255,255,0.9);
+            margin-top: 8px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .header-decoration {
+            font-size: 20px;
+            margin-top: 6px;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            height: 4px;
+            background: var(--gray-light);
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transition: width 0.4s ease;
+            width: 25%;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 12px;
+            color: var(--gray);
+            padding: 10px 0 6px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Form Body */
+        .form-body {
+            padding: 24px 24px 32px;
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-title {
+            font-size: 17px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--dark);
+        }
+
+        .question-hint {
+            font-size: 13px;
+            color: var(--gray);
+            margin-bottom: 16px;
+        }
+
+        /* Branch Selection */
+        .branch-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .branch-option {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-size: 15px;
+        }
+
+        .branch-option:hover {
+            border-color: var(--gold-light);
+            background: #FFFBF0;
+        }
+
+        .branch-option.selected {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, #FFF9F0, #FFFBF0);
+            box-shadow: 0 2px 12px rgba(212, 175, 55, 0.15);
+        }
+
+        .branch-option .radio-dot {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gray-light);
+            border-radius: 50%;
+            margin-right: 12px;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.25s ease;
+        }
+
+        .branch-option.selected .radio-dot {
+            border-color: var(--gold);
+        }
+
+        .branch-option.selected .radio-dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        .branch-icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Input Fields */
+        .input-field {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Noto Sans TC', sans-serif;
+            transition: all 0.25s ease;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        textarea.input-field {
+            min-height: 100px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        /* Star Rating */
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 12px 0;
+        }
+
+        .star {
+            font-size: 36px;
+            color: var(--gray-light);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .star:hover, .star.active {
+            color: var(--gold);
+            transform: scale(1.15);
+        }
+
+        .rating-label {
+            text-align: center;
+            font-size: 14px;
+            color: var(--gold-dark);
+            min-height: 20px;
+            margin-top: 4px;
+        }
+
+        /* Multi-select Chips */
+        .chip-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .chip {
+            padding: 10px 18px;
+            border: 2px solid var(--gray-light);
+            border-radius: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            user-select: none;
+        }
+
+        .chip:hover {
+            border-color: var(--gold-light);
+        }
+
+        .chip.selected {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #FFF;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        /* NPS Scale */
+        .nps-scale {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nps-btn {
+            width: 36px;
+            height: 36px;
+            border: 2px solid var(--gray-light);
+            border-radius: 50%;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFF;
+            color: var(--dark);
+        }
+
+        .nps-btn:hover {
+            border-color: var(--gold-light);
+            transform: scale(1.1);
+        }
+
+        .nps-btn.selected {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: #FFF;
+            transform: scale(1.1);
+        }
+
+        .nps-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 10px;
+            padding: 0 4px;
+        }
+
+        /* Offer Selection */
+        .offer-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .offer-option {
+            padding: 14px 16px;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-size: 14px;
+        }
+
+        .offer-option:hover {
+            border-color: var(--gold-light);
+            background: #FFFBF0;
+        }
+
+        .offer-option.selected {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, #FFF9F0, #FFFBF0);
+            box-shadow: 0 2px 12px rgba(212, 175, 55, 0.15);
+        }
+
+        .offer-option .offer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .offer-option .radio-dot {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gray-light);
+            border-radius: 50%;
+            margin-right: 10px;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.25s ease;
+        }
+
+        .offer-option.selected .radio-dot {
+            border-color: var(--gold);
+        }
+
+        .offer-option.selected .radio-dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        .offer-label {
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .offer-price {
+            color: var(--gold-dark);
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        .offer-desc {
+            font-size: 13px;
+            color: var(--gray);
+            margin-left: 30px;
+            line-height: 1.5;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #FFF;
+            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #F5F5F5;
+            color: var(--gray);
+        }
+
+        .btn-secondary:hover {
+            background: #EAEAEA;
+        }
+
+        /* Thank You Page */
+        .thank-you {
+            display: none;
+            text-align: center;
+            padding: 40px 24px;
+        }
+
+        .thank-you.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .thank-you-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .thank-you-title {
+            font-family: 'Alex Brush', cursive;
+            font-size: 36px;
+            color: var(--gold-dark);
+            margin-bottom: 8px;
+        }
+
+        .thank-you-message {
+            font-size: 15px;
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .coupon-card {
+            background: linear-gradient(135deg, #FFF9F0, #F7E7CE);
+            border: 2px dashed var(--gold);
+            border-radius: 16px;
+            padding: 24px 20px;
+            margin: 0 auto 24px;
+            max-width: 360px;
+            position: relative;
+            text-align: left;
+        }
+
+        .coupon-label {
+            font-size: 13px;
+            color: var(--gold-dark);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .coupon-code {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gold-dark);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .coupon-offer-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+
+        .coupon-offer-detail {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+
+        .coupon-expiry {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--gold-light);
+        }
+
+        .booking-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #FFF;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+            transition: all 0.25s ease;
+        }
+
+        .booking-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .footer-note {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 20px;
+        }
+
+        /* Required asterisk */
+        .required {
+            color: #E0A800;
+            margin-left: 2px;
+        }
+
+        /* Error message */
+        .error-msg {
+            color: #E57373;
+            font-size: 13px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .error-msg.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <!-- Header -->
+    <div class="header">
+        <div class="store-name">StarLight Beauty</div>
+        <div class="header-decoration">✨</div>
+        <div class="header-subtitle">療程後意見問卷</div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-text" id="progressText">Step 1 / 4</div>
+
+    <!-- Form Body -->
+    <div class="form-body">
+
+        <!-- Step 1: 分店 & 療程 -->
+        <div class="step active" id="step1">
+            <div class="input-group">
+                <label class="question-title">邊間分店做療程？<span class="required">*</span></label>
+                <div class="question-hint">揀返你今日去嘅分店</div>
+                <div class="branch-options" id="branchOptions">
+                    <div class="branch-option" data-value="屯門">
+                        <div class="radio-dot"></div>
+                        <span class="branch-icon">🏠</span>
+                        <span>屯門 · 德榮工業大廈</span>
+                    </div>
+                    <div class="branch-option" data-value="荔枝角">
+                        <div class="radio-dot"></div>
+                        <span class="branch-icon">💎</span>
+                        <span>荔枝角 · 時來工業大廈</span>
+                    </div>
+                </div>
+                <div class="error-msg" id="branchError">請揀返分店</div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">做咗邊種療程？（可多選）</label>
+                <div class="chip-group" id="treatmentChips">
+                    <div class="chip" data-value="FACIAL">✨ FACIAL</div>
+                    <div class="chip" data-value="頭療">💆 頭療</div>
+                    <div class="chip" data-value="身體療程">🧖 身體療程</div>
+                    <div class="chip" data-value="遠紅外線撥筋">🔥 遠紅外線撥筋</div>
+                    <div class="chip" data-value="采耳">👂 采耳</div>
+                    <div class="chip" data-value="美睫及紋繡">👁️ 美睫及紋繡</div>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="nextStep(1)">下一步 →</button>
+            </div>
+        </div>
+
+        <!-- Step 2: 滿意度 -->
+        <div class="step" id="step2">
+            <div class="input-group">
+                <label class="question-title">整體滿意度<span class="required">*</span></label>
+                <div class="question-hint">你對今次療程嘅整體評分</div>
+                <div class="star-rating" id="starRating">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <div class="rating-label" id="ratingLabel"></div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">最滿意嘅部分？（可多選）</label>
+                <div class="chip-group" id="satisfactionChips">
+                    <div class="chip" data-value="服務態度">😊 服務態度</div>
+                    <div class="chip" data-value="環境舒適度">🌸 環境舒適度</div>
+                    <div class="chip" data-value="療程效果">✨ 療程效果</div>
+                    <div class="chip" data-value="性價比">💰 性價比</div>
+                    <div class="chip" data-value="專業技術">🙌 專業技術</div>
+                    <div class="chip" data-value="時間安排">⏰ 時間安排</div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">有冇邊度可以做得更好？</label>
+                <textarea class="input-field" id="improvement" placeholder="你嘅意見對我哋好重要～"></textarea>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="prevStep(2)">← 上一步</button>
+                <button class="btn btn-primary" onclick="nextStep(2)">下一步 →</button>
+            </div>
+        </div>
+
+        <!-- Step 3: 推薦意願 -->
+        <div class="step" id="step3">
+            <div class="input-group">
+                <label class="question-title">你會唔會推薦俾朋友？<span class="required">*</span></label>
+                <div class="question-hint">0 = 唔會，10 = 一定會</div>
+                <div class="nps-scale" id="npsScale">
+                    <div class="nps-btn" data-value="0">0</div>
+                    <div class="nps-btn" data-value="1">1</div>
+                    <div class="nps-btn" data-value="2">2</div>
+                    <div class="nps-btn" data-value="3">3</div>
+                    <div class="nps-btn" data-value="4">4</div>
+                    <div class="nps-btn" data-value="5">5</div>
+                    <div class="nps-btn" data-value="6">6</div>
+                    <div class="nps-btn" data-value="7">7</div>
+                    <div class="nps-btn" data-value="8">8</div>
+                    <div class="nps-btn" data-value="9">9</div>
+                    <div class="nps-btn" data-value="10">10</div>
+                </div>
+                <div class="nps-labels">
+                    <span>唔會推薦</span>
+                    <span>一定推薦</span>
+                </div>
+                <div class="error-msg" id="npsError">請揀返一個分數</div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">想留低嘅說話（選填）</label>
+                <textarea class="input-field" id="feedback" placeholder="任何想同我哋講嘅說話～"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">聯絡電話 / WhatsApp<span class="required">*</span></label>
+                <input type="tel" class="input-field" id="contact" placeholder="請填寫聯絡電話，方便送出驚喜優惠">
+                <div class="error-msg" id="contactError">請填寫聯絡電話</div>
+                <div class="error-msg" id="duplicateMsg" style="color:#E0A800;">⚠️ 你近7日內已填寫過問卷啦，唔需要再填～</div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="prevStep(3)">← 上一步</button>
+                <button class="btn btn-primary" onclick="nextStep(3)">下一步 →</button>
+            </div>
+        </div>
+
+        <!-- Step 4: 專屬優惠揀擇 -->
+        <div class="step" id="step4">
+            <div class="input-group">
+                <label class="question-title">🎁 揀返你嘅專屬優惠<span class="required">*</span></label>
+                <div class="question-hint">完成問卷即送！體驗券將於下次預約時以實體券形式發放，不限本人使用</div>
+                <div class="offer-options" id="offerOptions">
+                    <div class="offer-option" data-value="A">
+                        <div class="offer-header">
+                            <div class="radio-dot"></div>
+                            <span class="offer-label">A. 香薰人手面部護理一次</span>
+                            <span class="offer-price">$299</span>
+                        </div>
+                        <div class="offer-desc">
+                            75分鐘 · 適用於屯門／荔枝角店
+                        </div>
+                    </div>
+                    <div class="offer-option" data-value="B">
+                        <div class="offer-header">
+                            <div class="radio-dot"></div>
+                            <span class="offer-label">B. 髗骶睡眠頭療一次</span>
+                            <span class="offer-price">$299</span>
+                        </div>
+                        <div class="offer-desc">
+                            60分鐘 · 適用於屯門／荔枝角店
+                        </div>
+                    </div>
+                    <div class="offer-option" data-value="C">
+                        <div class="offer-header">
+                            <div class="radio-dot"></div>
+                            <span class="offer-label">C. 耳目舒爽SPA 采耳一次</span>
+                            <span class="offer-price">$160</span>
+                        </div>
+                        <div class="offer-desc">
+                            45分鐘 · 適用於屯門／荔枝角店
+                        </div>
+                    </div>
+                    <div class="offer-option" data-value="DISCOUNT50">
+                        <div class="offer-header">
+                            <div class="radio-dot"></div>
+                            <span class="offer-label">D. $50 折扣券</span>
+                            <span class="offer-price">$50 OFF</span>
+                        </div>
+                        <div class="offer-desc">
+                            下次預約任何正價療程使用
+                        </div>
+                    </div>
+                </div>
+                <div class="error-msg" id="offerError">請揀返一個專屬優惠</div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="prevStep(4)">← 上一步</button>
+                <button class="btn btn-primary" onclick="submitForm()">確認並提交 🎁</button>
+            </div>
+        </div>
+
+        <!-- Thank You Page -->
+        <div class="thank-you" id="thankYou">
+            <div class="thank-you-icon">🎉</div>
+            <div class="thank-you-title">Thank You!</div>
+            <div class="thank-you-message">
+                多謝你嘅寶貴意見！💖<br>
+                你嘅每一個建議都令我哋做得更好～<br><br>
+                作為感謝，以下係你揀嘅專屬優惠 👇
+            </div>
+
+            <div class="coupon-card">
+                <div class="coupon-label">✨ 專屬優惠 ✨</div>
+                <div class="coupon-code" id="couponCode">SLB-XXXX</div>
+                <div class="coupon-offer-title" id="offerTitle"></div>
+                <div class="coupon-offer-detail" id="offerDetail"></div>
+                <div class="coupon-expiry" id="couponExpiry"></div>
+            </div>
+
+            <a href="https://tinyurl.com/24hxqxsw" class="booking-btn" id="bookingBtn">立即預約下次療程 →</a>
+
+            <div class="footer-note">
+                StarLight Beauty ✨<br>
+                屯門 · 荔枝角<br>
+                <span style="font-size:11px;opacity:0.8;">屯門：震寰路3號德榮工業大廈4樓B06室<br>荔枝角：青山道497號時來工業大廈5樓12室（荔枝角站C出口步行2分鐘）</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // ===== State =====
+    const formData = {
+        branch: '',
+        treatments: [],
+        rating: 0,
+        satisfaction: [],
+        improvement: '',
+        nps: null,
+        feedback: '',
+        contact: '',
+        selectedOffer: '',
+        submittedAt: ''
+    };
+
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    // ===== Branch Selection =====
+    document.querySelectorAll('.branch-option').forEach(option => {
+        option.addEventListener('click', () => {
+            document.querySelectorAll('.branch-option').forEach(o => o.classList.remove('selected'));
+            option.classList.add('selected');
+            formData.branch = option.dataset.value;
+            document.getElementById('branchError').classList.remove('show');
+        });
+    });
+
+    // ===== Treatment Chips =====
+    document.querySelectorAll('#treatmentChips .chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            chip.classList.toggle('selected');
+            updateChipSelection('treatmentChips', 'treatments');
+        });
+    });
+
+    // ===== Satisfaction Chips =====
+    document.querySelectorAll('#satisfactionChips .chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            chip.classList.toggle('selected');
+            updateChipSelection('satisfactionChips', 'satisfaction');
+        });
+    });
+
+    function updateChipSelection(containerId, dataKey) {
+        const selected = [];
+        document.querySelectorAll('#' + containerId + ' .chip.selected').forEach(c => {
+            selected.push(c.dataset.value);
+        });
+        formData[dataKey] = selected;
+    }
+
+    // ===== Contact input validation =====
+    document.getElementById('contact').addEventListener('input', () => {
+        if (document.getElementById('contact').value.trim()) {
+            document.getElementById('contactError').classList.remove('show');
+        }
+        // 清除重複提示（如果之前顯示過）
+        const dupMsg = document.getElementById('duplicateMsg');
+        if (dupMsg) dupMsg.classList.remove('show');
+    });
+
+    // ===== 電話號碼重複檢查（Step 3 → Step 4 時觸發） =====
+    function checkDuplicatePhone() {
+        const phone = formData.contact.trim().replace(/\s|-/g, '');
+        if (!phone) return Promise.resolve(false);
+
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyHkElydfFYDygWeKQ5adUbOfizXHObxISqXPXMQga5ml-_BATfiT2WPXe_cYQoRfpnBw/exec';
+
+        return fetch(GOOGLE_SCRIPT_URL + '?phone=' + encodeURIComponent(phone))
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 'ok' && result.hasResponded === true) {
+                    // 顯示重複提示
+                    const dupMsg = document.getElementById('duplicateMsg');
+                    if (dupMsg) dupMsg.classList.add('show');
+                    return true;
+                }
+                return false;
+            })
+            .catch(() => false);
+    }
+
+    // ===== Star Rating =====
+    const ratingLabels = ['', '有待改善 😔', '一般 😐', '幾好 🙂', '好滿意 😊', '超滿意 🥰'];
+    document.querySelectorAll('.star').forEach(star => {
+        star.addEventListener('click', () => {
+            const value = parseInt(star.dataset.value);
+            formData.rating = value;
+            document.querySelectorAll('.star').forEach((s, i) => {
+                if (i < value) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+            document.getElementById('ratingLabel').textContent = ratingLabels[value];
+        });
+    });
+
+    // ===== NPS Scale =====
+    document.querySelectorAll('.nps-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.nps-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            formData.nps = parseInt(btn.dataset.value);
+            document.getElementById('npsError').classList.remove('show');
+        });
+    });
+
+    // ===== Offer Selection =====
+    const offerDetails = {
+        'A': {
+            title: 'A. 香薰人手面部護理一次',
+            detail: '超優惠價 $299（原價另議）<br>75分鐘 · 適用於屯門／荔枝角店',
+            expiry: '有效期至 2026-12-31 · 不限本人使用<br>體驗券將於下次預約時以實體券形式發放'
+        },
+        'B': {
+            title: 'B. 髗骶睡眠頭療一次',
+            detail: '超優惠價 $299（原價另議）<br>60分鐘 · 適用於屯門／荔枝角店',
+            expiry: '有效期至 2026-12-31 · 不限本人使用<br>體驗券將於下次預約時以實體券形式發放'
+        },
+        'C': {
+            title: 'C. 耳目舒爽SPA 采耳一次',
+            detail: '超優惠價 $160（原價另議）<br>45分鐘 · 適用於屯門／荔枝角店',
+            expiry: '有效期至 2026-12-31 · 不限本人使用<br>體驗券將於下次預約時以實體券形式發放'
+        },
+        'DISCOUNT50': {
+            title: 'D. $50 折扣券',
+            detail: '下次預約任何正價療程即時使用',
+            expiry: '有效期至 2026-12-31 · 不限本人使用'
+        }
+    };
+
+    document.querySelectorAll('.offer-option').forEach(option => {
+        option.addEventListener('click', () => {
+            document.querySelectorAll('.offer-option').forEach(o => o.classList.remove('selected'));
+            option.classList.add('selected');
+            formData.selectedOffer = option.dataset.value;
+            document.getElementById('offerError').classList.remove('show');
+        });
+    });
+
+    // ===== Navigation =====
+    function nextStep(step) {
+        if (step === 1) {
+            if (!formData.branch) {
+                document.getElementById('branchError').classList.add('show');
+                return;
+            }
+        }
+        if (step === 2) {
+            if (formData.rating === 0) {
+                alert('請俾個整體滿意度評分～');
+                return;
+            }
+        }
+        if (step === 3) {
+            if (formData.nps === null) {
+                document.getElementById('npsError').classList.add('show');
+                return;
+            }
+            formData.feedback = document.getElementById('feedback').value.trim();
+            formData.contact = document.getElementById('contact').value.trim();
+            if (!formData.contact) {
+                document.getElementById('contactError').classList.add('show');
+                return;
+            }
+            // 檢查電話號碼是否已填過問卷
+            checkDuplicatePhone().then(isDuplicate => {
+                if (isDuplicate) {
+                    // 已填過 → 提示客人跳轉預約系統
+                    const goBooking = confirm(
+                        '😊 你近7日內已填過問卷啦！唔需要再填～\n\n' +
+                        '多謝你嘅支持！💖\n\n' +
+                        '按「確定」可以去線上預約系統 👇'
+                    );
+                    if (goBooking) {
+                        window.open('https://tinyurl.com/24hxqxsw', '_blank');
+                    }
+                    return; // 不繼續到下一步
+                }
+                // 未填過 → 正常進入 Step 4
+                document.getElementById('step' + step).classList.remove('active');
+                currentStep = step + 1;
+                document.getElementById('step' + currentStep).classList.add('active');
+                updateProgress();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            return; // 等待 API 回應後再決定是否繼續
+        }
+
+        // Save text inputs before leaving step
+        if (step === 2) {
+            formData.improvement = document.getElementById('improvement').value.trim();
+        }
+
+        document.getElementById('step' + step).classList.remove('active');
+        currentStep = step + 1;
+        document.getElementById('step' + currentStep).classList.add('active');
+        updateProgress();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function prevStep(step) {
+        document.getElementById('step' + step).classList.remove('active');
+        currentStep = step - 1;
+        document.getElementById('step' + currentStep).classList.add('active');
+        updateProgress();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateProgress() {
+        const percentage = (currentStep / totalSteps) * 100;
+        document.getElementById('progressFill').style.width = percentage + '%';
+        document.getElementById('progressText').textContent = 'Step ' + currentStep + ' / ' + totalSteps;
+    }
+
+    // ===== Submit =====
+    function submitForm() {
+        if (!formData.selectedOffer) {
+            document.getElementById('offerError').classList.add('show');
+            return;
+        }
+
+        formData.submittedAt = new Date().toISOString();
+
+        // ===== 先查 API 確認是否已填過（防重複提交） =====
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyHkElydfFYDygWeKQ5adUbOfizXHObxISqXPXMQga5ml-_BATfiT2WPXe_cYQoRfpnBw/exec';
+        const phoneClean = formData.contact.trim().replace(/\s|-/g, '');
+
+        // 禁用提交按鈕，避免重複點擊
+        const submitBtn = document.querySelector('#step4 .btn-primary');
+        submitBtn.disabled = true;
+        submitBtn.textContent = '檢查中...';
+
+        fetch(GOOGLE_SCRIPT_URL + '?phone=' + encodeURIComponent(phoneClean))
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 'ok' && result.hasResponded === true) {
+                    // 已填過問卷 → 提示客人 + 跳轉預約系統
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '確認並提交 🎁';
+                    const goBooking = confirm(
+                        '😊 你近7日內已填過問卷啦！唔需要再填～\n\n' +
+                        '多謝你嘅支持！💖\n\n' +
+                        '按「確定」可以去線上預約系統 👇'
+                    );
+                    if (goBooking) {
+                        window.open('https://tinyurl.com/24hxqxsw', '_blank');
+                    }
+                    return; // 不繼續提交
+                }
+                // 未填過 → 正常提交流程
+                doActualSubmit(GOOGLE_SCRIPT_URL);
+            })
+            .catch(err => {
+                console.warn('⚠️ API 查詢失敗，直接提交:', err);
+                // API 查不到就照提交（後端會再做一次檢查）
+                doActualSubmit(GOOGLE_SCRIPT_URL);
+            });
+    }
+
+    function doActualSubmit(GOOGLE_SCRIPT_URL) {
+        // Generate coupon code
+        const couponPrefix = {
+            '屯門': 'TM',
+            '荔枝角': 'LK'
+        };
+        const randomNum = Math.floor(1000 + Math.random() * 9000);
+        const couponCode = 'SLB' + (couponPrefix[formData.branch] || 'XX') + '-' + randomNum;
+        document.getElementById('couponCode').textContent = couponCode;
+
+        // Show offer details on thank-you page
+        const offer = offerDetails[formData.selectedOffer];
+        document.getElementById('offerTitle').innerHTML = offer.title;
+        document.getElementById('offerDetail').innerHTML = offer.detail;
+        document.getElementById('couponExpiry').innerHTML = offer.expiry;
+
+        // Save to localStorage
+        const allData = JSON.parse(localStorage.getItem('slb_questionnaires') || '[]');
+        allData.push({ ...formData, couponCode, offerType: formData.selectedOffer });
+        localStorage.setItem('slb_questionnaires', JSON.stringify(allData));
+
+        // Show Thank You
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.querySelector('.progress-bar').style.display = 'none';
+        document.querySelector('.progress-text').style.display = 'none';
+        document.getElementById('thankYou').classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // ===== Submit to Google Sheets =====
+        // GOOGLE_SCRIPT_URL 已經作為函數參數傳入，唔需要再宣告
+
+        if (GOOGLE_SCRIPT_URL) {
+            const submitData = new URLSearchParams();
+            submitData.append('branch', formData.branch);
+            submitData.append('treatments', formData.treatments.join(', '));
+            submitData.append('rating', formData.rating);
+            submitData.append('satisfaction', formData.satisfaction.join(', '));
+            submitData.append('improvement', formData.improvement);
+            submitData.append('nps', formData.nps);
+            submitData.append('feedback', formData.feedback);
+            submitData.append('contact', formData.contact);
+            submitData.append('selectedOffer', formData.selectedOffer);
+            submitData.append('couponCode', couponCode);
+            submitData.append('submittedAt', formData.submittedAt);
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: submitData
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('提交結果:', result);
+                if (result.status === 'success') {
+                    console.log('優惠碼已記錄:', result.couponCode);
+                } else if (result.status === 'duplicate') {
+                    // 後端檢查到重複 → 顯示提示 + 跳轉預約
+                    console.warn('⚠️ 重複提交被後端拒絕:', result.message);
+                    const goBooking = confirm(
+                        '😊 你近7日內已填過問卷啦！唔需要再填～\n\n' +
+                        '多謝你嘅支持！💖\n\n' +
+                        '按「確定」可以去線上預約系統 👇'
+                    );
+                    if (goBooking) {
+                        window.open('https://tinyurl.com/24hxqxsw', '_blank');
+                    }
+                } else {
+                    console.error('❌ 伺服器回傳錯誤:', result.message);
+                }
+            })
+            .catch(err => {
+                console.error('❌ 提交失敗:', err);
+                // 顯示溫馨提示，避免客人以為失敗
+                const note = document.createElement('div');
+                note.style.cssText = 'background:#fff3cd;color:#856404;padding:12px 16px;border-radius:8px;margin-top:16px;font-size:14px;';
+                note.innerHTML = '⚠️ 網絡連線不穩定，資料可能未能即時記錄。<br>如有疑問，請直接 WhatsApp <strong>6082 8181</strong> 聯絡我們。';
+                document.getElementById('thankYou').appendChild(note);
+            });
+        }
+    }
+
+    // ===== Booking button =====
+    // 直接跳轉到預約系統（唔用 confirm 對話框，避免手機瀏覽器 block）
+    document.getElementById('bookingBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = 'https://tinyurl.com/24hxqxsw';
+    });
+</script>
+
+</body>
+</html>
