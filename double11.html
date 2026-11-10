@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StarLight Beauty 雙 11 寵粉限定｜$1,111/3次皇牌療程 + $111心動加購</title>
+<meta name="description" content="11.11–11.30 限定：$1,111／3 次皇牌療程（藍銅修護保濕・射頻緊緻提升・紅外全效舒顏撥筋・髗骶睡眠頭療・Hydro Peel 花酸煥膚，每次 5 揀 1 可重複），加購 $111／3 次十分鐘小項目。屯門・荔枝角兩店通用。">
+<style>
+:root { --rose:#c98a8a; --rose-dark:#a86a6a; --cream:#faf7f2; --gold:#b8985a; --red:#c03a4b; --red-dark:#8b1e2d; }
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body { font-family:-apple-system,BlinkMacSystemFont,"PingFang HK","PingFang TC","Microsoft JhengHei",sans-serif; background:var(--cream); color:#3a3430; line-height:1.6; }
+.wrap { max-width:520px; margin:0 auto; padding:0 18px 40px; }
+
+.header { text-align:center; padding:28px 20px 18px; }
+.brand { font-size:1.6em; font-weight:800; color:var(--rose-dark); letter-spacing:1px; }
+.tagline { font-size:0.8em; color:#b0a594; margin-top:2px; }
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, #8b1e2d 0%, #c03a4b 55%, #e87d8a 100%);
+  border-radius:18px; padding:26px 22px; margin:10px 0 20px;
+  color:#fff; text-align:center; position:relative; overflow:hidden;
+  box-shadow:0 8px 30px rgba(192,58,75,0.35);
+}
+.hero::before { content:"✦"; position:absolute; top:12px; left:16px; font-size:1.2em; opacity:0.6; }
+.hero::after { content:"✦"; position:absolute; bottom:14px; right:18px; font-size:1em; opacity:0.5; }
+.hero .badge {
+  display:inline-block; background:#ffe9b8; color:#7a2b12; font-weight:800;
+  font-size:0.72em; padding:4px 14px; border-radius:20px; letter-spacing:1px; margin-bottom:10px;
+}
+.hero h1 { font-size:1.5em; font-weight:900; letter-spacing:0.5px; }
+.hero .sub { font-size:0.85em; opacity:0.95; margin-top:6px; }
+.hero .period {
+  margin-top:14px; display:inline-block; background:rgba(255,255,255,0.16);
+  border:1px solid rgba(255,255,255,0.35); border-radius:10px; padding:6px 14px;
+  font-size:0.78em; font-weight:700;
+}
+
+/* Offer cards */
+.offer { background:#fff; border-radius:16px; padding:22px 20px; margin-bottom:16px; box-shadow:0 2px 14px rgba(0,0,0,0.06); border-top:4px solid var(--red); }
+.offer.addon { border-top-color:var(--gold); }
+.offer .price-line { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+.offer .price { font-size:2em; font-weight:900; color:var(--red); letter-spacing:0.5px; }
+.offer.addon .price { color:var(--gold); }
+.offer .per { font-size:0.95em; font-weight:700; color:#555; }
+.offer .orig { font-size:0.8em; color:#999; }
+.offer .orig b { color:var(--rose-dark); }
+.offer h2 { font-size:1.05em; margin-top:4px; color:#3a3430; }
+.offer .lead { font-size:0.85em; color:#777; margin-top:6px; }
+.pick { margin:14px 0 4px; padding:0; list-style:none; }
+.pick li {
+  padding:9px 12px; margin-bottom:7px; background:#fdf6f3; border-radius:10px;
+  font-size:0.88em; font-weight:600; display:flex; gap:8px; align-items:center;
+}
+.pick li::before { content:"✦"; color:var(--rose); font-size:0.8em; flex-shrink:0; }
+.offer.addon .pick li { background:#fbf8ef; }
+.offer.addon .pick li::before { color:var(--gold); }
+.rules { margin-top:12px; padding:12px 14px; background:#f7f2ea; border-radius:10px; font-size:0.78em; color:#6b6156; line-height:1.8; }
+.rules b { color:#4a4239; }
+.poster { margin-top:14px; text-align:center; }
+.poster img { width:100%; max-width:380px; border-radius:12px; box-shadow:0 4px 18px rgba(0,0,0,0.10); }
+
+/* CTA */
+.cta-row { display:flex; flex-direction:column; gap:10px; margin:22px 0 8px; }
+.cta {
+  display:block; text-align:center; text-decoration:none; font-weight:800;
+  padding:15px 20px; border-radius:28px; font-size:0.98em;
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.cta:active { transform:scale(0.98); }
+.cta-book { background:var(--rose); color:#fff; box-shadow:0 4px 16px rgba(201,138,138,0.4); }
+.cta-wa { background:#25d366; color:#fff; box-shadow:0 4px 16px rgba(37,211,102,0.35); }
+
+/* Terms */
+.terms { font-size:0.72em; color:#a89c8c; text-align:center; line-height:2; margin-top:16px; }
+
+.stores { margin-top:22px; background:#fff; border-radius:14px; padding:16px 18px; font-size:0.8em; color:#6b6156; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
+.stores b { color:#4a4239; }
+.stores .s-item { padding:8px 0; }
+.stores .s-item + .s-item { border-top:1px dashed #e8e0d4; }
+
+.footer { text-align:center; font-size:0.7em; color:#bfb8a8; margin-top:24px; line-height:2; }
+.footer a { color:var(--rose); text-decoration:none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">✨ StarLight Beauty</div>
+  <div class="tagline">美於外 · 療於內</div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="badge">🕯️ 一年一次 · 雙 11 寵粉限定</div>
+    <h1>$1,111 做 3 次皇牌療程</h1>
+    <div class="sub">單做總值高達 $2,340 · 加 $111 多 3 次心動小項目</div>
+    <div class="period">📅 售賣期 11.11 – 11.30 ｜ 限額發售 · 先到先得</div>
+  </div>
+
+  <!-- $1,111 主套票 -->
+  <div class="offer">
+    <div class="price-line">
+      <span class="price">$1,111</span>
+      <span class="per">／ 3 次</span>
+      <span class="orig">單做總值高達 <b>$2,340</b></span>
+    </div>
+    <h2>💫 皇牌療程 5 揀 1（可重複揀同款）</h2>
+    <div class="lead">每次到訪揀一款，鍾意邊款做邊款：</div>
+    <ul class="pick">
+      <li>藍銅修護保濕療程</li>
+      <li>射頻緊緻提升護理（面部）</li>
+      <li>紅外全效舒顏撥筋療程</li>
+      <li>髗骶睡眠頭療</li>
+      <li>Hydro Peel 花酸煥膚療程</li>
+    </ul>
+    <div class="rules">
+      <b>點樣用：</b>3 次須分 3 次到訪・每次約 60 分鐘<br>
+      <b>邊度用：</b>屯門・荔枝角兩店通用<br>
+      <b>點樣買：</b>下面預約或 WhatsApp 我，話我知想揀邊款
+    </div>
+    <div class="poster"><img src="promo-images/p42_double11_1111.jpg" alt="雙11 $1,111 皇牌療程 3 次套票" loading="lazy"></div>
+  </div>
+
+  <!-- $111 加購 -->
+  <div class="offer addon">
+    <div class="price-line">
+      <span class="price">$111</span>
+      <span class="per">／ 3 次</span>
+      <span class="orig">每次只係 <b>$37</b></span>
+    </div>
+    <h2>🎁 十分鐘心動加購（3 揀 1・可重複）</h2>
+    <div class="lead">配合完整療程使用，每次到訪加 10 分鐘：</div>
+    <ul class="pick">
+      <li>玉石全面按摩</li>
+      <li>眼部撥筋 ／ 面部撥筋</li>
+      <li>暖宮泥灸 ／ 薑艾膜</li>
+    </ul>
+    <div class="rules">
+      <b>點樣用：</b>配合完整療程使用・每次任選 1 項、可重複<br>
+      <b>有效期：</b>3 個月<br>
+      <b>邊度用：</b>屯門・荔枝角兩店通用<br>
+      <b>貼士：</b>做單次療程都可以加購，唔一定要買套票
+    </div>
+    <div class="poster"><img src="promo-images/p43_double11_111.jpg" alt="雙11 $111 十分鐘心動加購 3 次" loading="lazy"></div>
+  </div>
+
+  <div class="cta-row">
+    <a class="cta cta-book" href="booking.html">📅 立即網上預約</a>
+    <a class="cta cta-wa" href="https://wa.me/85260828181?text=%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%E9%9B%9911%E5%84%AA%E6%83%A0%EF%BC%88%241%2C111%EF%BC%8F%24111%EF%BC%89">💬 WhatsApp 查詢雙 11 優惠</a>
+  </div>
+
+  <div class="terms">
+    售賣期：2026.11.11 – 11.30・需提前預約・不設退款<br>
+    不可與其他優惠同時使用・名額有限，先到先得
+  </div>
+
+  <div class="stores">
+    <div class="s-item"><b>📍 屯門店</b><br>震寰路 3 號德榮工業大廈 4 樓 B06 室（屯門貝爾特酒店對面）<br>屯馬線屯門站 F 出口／輕鐵河田站步行約 3 分鐘</div>
+    <div class="s-item"><b>📍 荔枝角店</b><br>青山道 497 號時來工業大廈 5 樓 12 室<br>港鐵荔枝角站 C 出口步行約 3 分鐘</div>
+  </div>
+
+  <div class="footer">
+    📞 WhatsApp：<a href="https://wa.me/85260828181">+852 6082 8181</a><br>
+    © 2026 StarLight Beauty · 美於外 · 療於內
+  </div>
+
+</div>
+
+</body>
+</html>

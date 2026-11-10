@@ -617,6 +617,15 @@ const BRANCHES = [
 // Services data - 屯門價格 / 荔枝角價格
 const CATEGORIES = [
   {
+    id: 'double11',
+    name: '🕯️ 雙 11 限定（11.11–11.30）',
+    emoji: '🕯️',
+    items: [
+      { id:'d1', name:'雙 11・$1,111／3 次皇牌療程套票（首次到訪）', tmPrice:1111, otherPrice:1111, orig:2340, dur:'60min', noTrial:true, tag:'hot', tagText:'🕯️ 限額發售', desc:'藍銅修護保濕／射頻緊緻提升（面部）／紅外全效舒顏撥筋／髗骶睡眠頭療／Hydro Peel 花酸煥膚・每次 5 揀 1 可重複・3 次分 3 次到訪・兩店通用' },
+      { id:'d2', name:'雙 11・$111／3 次十分鐘心動加購（須配合完整療程）', tmPrice:111, otherPrice:111, dur:'10min', noTrial:true, tag:'new', tagText:'加購限定', desc:'玉石全面按摩／眼部・面部撥筋／暖宮泥灸・薑艾膜・每次 3 揀 1 可重複・有效期 3 個月' }
+    ]
+  },
+  {
     id: 'combo',
     name: '💎 皇牌組合',
     emoji: '💎',
@@ -629,8 +638,8 @@ const CATEGORIES = [
     name: '🔥 新客優惠',
     emoji: '🔥',
     items: [
-      { id:'p1', name:'奢華人手 SPA FACIAL', tmPrice:199, otherPrice:299, orig:680, dur:'60min', tag:'hot', tagText:'新客首選', desc:'液體黃金玫瑰精華油 · 全人手按摩' },
-      { id:'p2', name:'SPA + 頭肩頸雙重放鬆套餐', tmPrice:257, otherPrice:357, orig:738, dur:'90min', tag:'hot', tagText:'皇牌套餐', desc:'SPA面部 + 髗骶手法頭肩頸按摩' },
+      { id:'p1', name:'奢華人手 SPA FACIAL', tmPrice:199, otherPrice:199, orig:680, dur:'60min', tag:'hot', tagText:'新客首選', desc:'液體黃金玫瑰精華油 · 全人手按摩' },
+      { id:'p2', name:'SPA + 頭肩頸雙重放鬆套餐', tmPrice:257, otherPrice:257, orig:738, dur:'90min', tag:'hot', tagText:'皇牌套餐', desc:'SPA面部 + 髗骶手法頭肩頸按摩' },
       { id:'p4', name:'童頻凍齡針療程', tmTrial:476, otherTrial:476, tmPrice:680, otherPrice:680, dur:'60min' },
       { id:'p5', name:'NMN雕逆齡療程', tmTrial:476, otherTrial:476, tmPrice:680, otherPrice:680, dur:'60min' },
       { id:'p6', name:'全能修復療程', tmTrial:686, otherTrial:686, tmPrice:980, otherPrice:980, dur:'60min' },
